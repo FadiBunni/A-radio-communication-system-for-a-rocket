@@ -1,0 +1,87 @@
+\chapter{Introduction}
+
+\section{DanSTAR}
+Danish Student Association for Rocketry (DanSTAR)\cite{DanSTAR}, is a non-profit student organization with the goal of competing in rocket competitions around the world. The vision for the organization is to promote interest in rocket science and engineering, and to help student to develop the necessary skills, expertise and competences required by industries. At the time of writing this thesis, the organization consists of 35+ student-volunteers from across the whole spectrum of Technical University of Denmark (DTU). Through their driven mindsets and never ending persistence, the student of this organization have set themselves the ambitious goal, to design and build the best bi-liquid rocket, code-named \textit{Dragonfly}. This rocket will be the start of a competitive adventure for the organization, thus the organization has entered the competition \textit{Spaceport America Cup}, which will be held each year in June in USA in the New Mexico desert. 
+
+These student initiatives is driven by the necessity to demonstrate to other fellow student engineers, friends and families, DTU and to the outside industries, that the students of DanSTAR are capable of achieving more than what seems to be possible, thus inspiring others to join their journey.  
+
+In preparation for the upcoming competition Spaceport America Cub. DanSTAR has developed and built a fully functioning bi-liquid demonstration rocket engine and a test stand, on which the engine was mounted on and tested. This test stand is capable of testing engines up to 5kN thrust and is designed with 3 independent tanks, used for the fuel, the oxidizer and the pressurizing system. A more simplified system is used in the rocket.  
+
+The test stand has a on-board electronics system which is built to monitor and control the system, through commands sent to it from mission control. The author of this thesis has co-written a report titled \textit{Control system for a rocket engine test stand} explaining the design, implementation and testing of the electronics on the test stand.\cite{DanSTAR_test_stand} To be able to communication between the test stand and mission control a physical wire connection was used, this solution is easy to setup and implement, but for a actual rocket a different solution is needed.
+
+%%Link to the rules are good!
+
+The goal of Dragonfly, is to reach - not higher nor lower - but exactly a apogee of 30k ft or approximately 9144m and safely recover it again, in order for DanSTAR to obtain maximum flight points, depicted in the competition rules. This thesis, will try to give a solution, to a wireless point to point communication system, used to set up a live down-link connection between the rocket (9144m) and mission control on the ground, hence a telemetry system. 
+
+\newpage
+
+\section{Formulation of the problem}
+This radio telemetry system will consists of two subsystems, one inside the rock and another on the ground. These electronic systems are essentially the same homebuild PCB's, both includes the same key components; a microcontroller, multiple transceivers, multiple amplifiers and-pass filters and baluns. Since both PCB's has transceivers, they both can be set by the software in two states: a send state or a receive state. This means that the hardware can stay the same for both subsystems. This allows for different topology solutions; point to point connection or point to multipoint connection. Furthermore, since all transceivers can be set to either send or receive state, one can choose how many of the transceivers has to be in a given state, as long as there is at least one in receiving state and one in sending state. This gives DanSTAR the flexibility in choosing, between full down-link or a mix between down-link and up-link, by just changing the software code. Both set ups has their pros, cons and limitations, which will be discussed later. 
+
+%% TODO where should it be disscused, and remember to do so.
+
+The above described PCB's is designed in such a way, so that they can be stacked and connected to the rest of the avionics system in the rocket. Each sub-PCB will have 4 transceivers, both in the rocket and on the ground, this allows for up to 4 point connection to ground control - since each transceiver will be channel-locked to another transceiver.
+
+Because of the value of the rocket, which is estimated to be around 600.000kr.- (danish kroner) it is essential, to be able to receive live data from it while it is stationary on the launch pad and when it is in flight, such that if a rapid unplanned disassembly\cite{WikipediaRUD} occurs, DanSTAR will have important data saved on the ground. This data can later be analyzed, to construct a reasoning, about what actually happened to the rocket.
+
+\textit{Thus, the problem this thesis is trying to solve, is to present a possible solution on how DanSTAR can be given the opportunity to monitor and log the data from the rocket live, while it is stationary on the launch pad and in flight, approximately 9144 meters above ground, using a home-build telemetry system}
+
+\section{Scope and conditions}
+The scope of this thesis, is focusing on designing, building, implementing and testing a telemetry system for a rocket. Although, as described above, a stackable homemade PCB design is going to be used, but it is not necessary for this thesis to have the PCB optimally functioning, since the \textit{problem formulation} can be answered by building a prototype based solely on development boards and modules with the same transceivers as in the homemade stackable PCB design, which already are designed to work. This will reduce the amount of workload, thus allowing the author to stay within the given timeframe, for this thesis, to test the prototype system.
+
+In order to get the needed properties from a given antenna, it is requires to either simulate the antenna or to build one based on information from the internet or books. Most of the information found in books or the internet are based on empirical knowledge, where Amateur radio operators\cite{Ham} have build and tested, through trial and error, and found the best dimension for a given antenna. Although, one can use an anechoic chamber\cite{anechoic} for testing and defining the properties of a given antenna, but it is time consuming to set up, and hard to to find such a room for an average operator. For this thesis, we are going to use different programs to simulate and create the necessary dimensions to a given antenna, but some of the programs comes with drawbacks and limitations, and since they are mostly build by amateur radio operators, it is important to be critical and objective towards the results outputted from the programs. As described further above in this section, the only way to figure out if the antenna is working, compared to the data outputted from the simulation, is to physically test it. Although, DanSTAR has acquired a sponsorship with EKTOS \cite{EKTOS}, who are capable of testing antennas, it will not be a prioritized in this thesis. 
+
+The program 4nec2\cite{4nec2} will be used to simulate the antennas. This software is written by Arie Voors and is widely used in the radio amateurs world, since it is free and easy to work with - once you get the feeling for it. It is based on Numerical Electromagnics Code (NEC) software\cite{nec}, build for the US navy in 1981, and originally programmed in FORTRAN\cite{Fortran}. Since the 4nec2 software is a framework upon NEC, and written by one guy, it has some limitations, compared to modern modelling programs, among others Computer Simulation Technology (CST), made by Dassault Systemst\cite{Dassault}. These drawback are mainly not being able to create complex structures in the programs, especially for round shapes, but for simulation wise 4nec2 can still be used with great results. 
+
+Another software that is used in this thesis is, Yagi Calculator by John Drew\cite{yagical}. This is again, a software tool build by a amateur radio operator, which is free and easy to use. In this thesis, it will be used for creating the dimensions for a Yagi antenna, the dimensions will then be inputted in the 4nec2 software for simulations, in order to get the important properties. The drawback of this software, is that it is build and empirically tested for HF and VHF frequencies, although with positive results at UHF frequencies. Since, the frequency for the transceiver used in this thesis, is at 2.4 to 2.5ghz, which is UFH frequencies, it is therefore important to test the antenna to be absolutely sure it works.  
+
+% TODO- write about where to find more information about the two program futher down in the report, which is under Simulation section. 
+
+\section{Knowledge accumulated by others}
+As stated in the section above. The amateur radio frequency (RF) world, is sometimes a magical discipline, which most often requires empirical knowledge based on former peoples work, which again sometimes - but mostly not - based on unclassified research done by government institutions, primarily from the USA done in the 60's and 70's. This means that often, the sources used in this thesis is based on such type of knowledge tree, that requires having a heavily critical reasoning and objective mindset towards.
+
+Most of the information pool used in this thesis, comes from these books: \textit{The American Raddio Relay League (ARRL) - Antenna Book}\cite{ARRL}, \textit{Introduction to RF Propagation by John S. Seybold}\cite{RFpropagation},\textit{Transceiver and system Design for Digital Communication by Scott R. Bullock}\cite{TransceiverBook}, \textit{Modern antenna design by Thomas A. Milligan}\cite{modernantenna} and from important websites such as: \url{http://www.antenna-theory.com/}[Accessed: 03.03.2019], \url{http://www.iw5edi.com/ham-radio/?accessories,78}[Accessed: 03.03.2019 ] and \url{	https://www.dxzone.com/dx12598/2-4ghz-helix-antenna.html}Accessed: 03.03.2019 ]. Furthermore, other websites sources, created by amateur radio operators, was also used, to figure out how to build different components needed for making  antennas functioning as wanted. These sources will be shown in the reference section.
+
+%TODO make sure that you actually did describe this in the Acknowledgements section,
+%TODO the below section is shit, please think of a new way of expressing that some of the knowledge you have also came from your friends at DanSTAR.
+
+%As described in the \textit{Acknowledgements} section. because of having dedicated fellow students at DanSTAR. The following section, describing how the antennas are mounted in the rocket, was solely solved by DanSTAR members, which made it possible for the author of this thesis to focus on other important parts in the project.
+
+\section{Target audience}
+The targeted audience for this thesis, is mainly towards DanSTAR members, who consists of mostly bachelor student, but also a few master students. Moreover, this thesis will be publicly available on DanSTAR's website\cite{DanSTAR}, which usually is visited by people who are interested in rocket engineering and science. Since DanSTAR also has a publicly available blog\cite{DanSTARblog} on Ingeniøren\cite{Ingenioeren}, where DanSTAR is required to post at a monthly interval, it will be no surprise to have this thesis shared on that platform, where hundred of tech-oriented people reads the newspaper \textit{Ingeniøren}.    
+
+\section{Thesis Outline}
+The content of the proceeding chapters, is structured in the following way:
+
+%TODO remember to update this, whenever anything in the thesis structure is changed.
+
+\textbf{Chapter 2 - Theory}
+This chapter, is an introduction to the theory of how a general template for a telemetry system setup looks like and what type of equations and phenomenons is at play when calculating the Link Budget.It also, showcases the theory behind antennas and their properties and the laws governing them, such as polarization and wave propagation. furthermore, this section describes shortly the theory about the packet structure, modulation and demodulation, ShockBurst\texttrademark and MultiCeiver\texttrademark for the transceivers, that is stated in the datasheet\cite{nrf24l01+}. lastly, a short description explaining the theory of RF PCB design and common design rules. 
+
+\textbf{Chapter 3 - Calculations}
+After describing the Link Budget, this section will explain the calculation for each element within the link budget sheet, such that a partial conclusion can be made. Moreover, this chapter will look into the calculation of the dimensions on the antennas, using both a software program and formulas found in books and on the internet. 
+
+\textbf{Chapter 4 - Simulations}
+Once the link budget has been calculated and the antennas has been dimensioned, it will then be possible to start simulating all antennas. This chapter will, showcase the use of 4nec2 simulation program for all the antenna candidates used in the rocket and on the ground (mission control).    
+
+\textbf{Chapter 5 - Design and production}
+This chapter describes, the design and production of the antennas, and possible mounting methods in the rocket. Additionally, it will showcase the setup of the electronics development board, which will be used inside the avionics compartment in the rocket and on the ground (mission control). 
+
+\textbf{Chapter 6 - Code implementation}
+This section, is about how the code is implemented in the microcontroller used to control the transceivers. It will explain, the possible, and only necessary, functions that exists in the library, to program the transceiver in different mode, hence the MultiCeiver\texttrademark and Shockburst\texttrademark\cite{nrf24l01+}, described in the datasheet and in the theory section.  
+
+\textbf{Chapter 7 - Test and results}
+This Chapter covers the test and results of antenna range, on a open area, to see the received signal from point A to point B, but also point A to multipoints, thus defining the range of the telemetry system.
+
+\textbf{Chapter 8 - Discussion}
+This section, will discuss the \textit{calculation}, \textit{simulation}, compared to the \textit{Design and production} section and the \textit{Test and result} section
+
+\textbf{Chapter 9 - Future work}
+These chapter present some recommendation for upgrades to the system, for the next generation of DanSTAR students.
+
+\textbf{Chapter 10 - Conclusion}
+These chapters will draw the conclusion and present some recommendation for upgrades to the system, for the next generation of DanSTAR students.
+
+
+
+

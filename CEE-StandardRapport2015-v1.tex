@@ -1,0 +1,63 @@
+\documentclass[a4paper,11pt,dvipsnames,twoside,openany]{memoir} %openright if a more "booklike report is wished
+
+\input{preamble}
+\input{files/info}
+
+\begin{document}
+
+%%%%% FRONTPAGE %%%%%
+\include{files/frontpage}
+
+%%%%% FRONT MATTER %%%%%
+\frontmatter 
+%\newpage\thispagestyle{empty}\mbox{}	 % Creates blank page
+\include{files/quote}
+\include{files/preface}
+\include{files/acknowledgements}
+\include{files/sponsors_and_partners}
+\include{files/abstract} 
+\include{files/symbols} 
+
+%%%%% ToC & FIXME %%%%%
+\tableofcontents*
+
+\newpage
+
+\listoffigures*
+
+\newpage
+
+\listoftables*
+
+%%%%% MAIN MATTER %%%%%%
+\mainmatter
+%\include{files/}
+\renewcommand{\lastpageofpart}{\lastpageref{pagesLTS.arabic}}
+\include{files/introduction}
+\include{files/theory}
+\include{files/calculations}
+\include{files/simulations}
+\include{files/design_production}
+\include{files/code_implementation}
+\include{files/test}
+\include{files/discussion}
+\include{files/futurework}
+\include{files/conclusion}
+
+
+%%%%% BIBLIOGRAPHY %%%%% 
+\begingroup
+	\raggedright
+	\bibliography{bibtex/litteratur}
+\endgroup
+
+%%%%% APPENDICES %%%%%
+%\newpage\thispagestyle{empty}\mbox{}
+\begin{appendices}
+	\include{appendices/A}
+	\include{appendices/B}
+\end{appendices}
+
+\include{files/backpage}
+	
+\end{document}

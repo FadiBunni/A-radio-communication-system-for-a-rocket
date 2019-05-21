@@ -1,0 +1,322 @@
+%%%% Guide til bibtex og litteratur.bib %%%%
+
+% Alle kilder angives efter Harvard-metoden og vil i rapporten fremstaa med [FORFATTER, AAR] eller mere praecist [EFTERNAVN, AAR].
+
+% Nederst findes eksempler paa kildeangivelser af typerne manual, book, article, techreport og misc.
+	% - Manual bruges ved henvisninger fra internettet, idet \url-funktionen findes her
+	% - Book bruges ved helt almindelige boeger
+	% - Article bruges ved artikler og udgivelser
+	% - Techreport kan bruges ved mindre udgivelser, hvor kun titel, forfatter og AAR er noedvendig eller tilgaengelig
+	% - Misc kan bruges ved det, der falder udenfor de andre kategorier - interview, forelaesninger, foredrag osv. 
+
+% Hvis der er flere forfattere paa en kilde, SKAL de listes med 'and' imellem dem - ogsaa ved 3 og derover (f.eks. FORFATTER 1 and FORFATTER 2 and FORFATTER 3). NAAR kildelisten bygges i rapporten, vil der ved 2 forfattere komme til at staa [EFTERNAVN 1 og EFTERNAVN 2, AAR] og ved 3 forfattere og derover komme til at staa [EFTERNAVN 1 et. al, AAR]. 
+
+% Ved almindelige forfatternavne skal der vaere ét saet tuborg-parenteser ved Author (f.eks. author = {H. C. Andersen}). Ved andre navne (f.eks. virksomheder, hjemmesider, grupper, raad, naevn osv.) skal der vaere 2 saet tuborg-parenteser ved Author (f.eks. author = {{Dansk Standard}}). Begrundelse: med 2 saet tuborg-parenteser skrives hele parentesen ud som forfatter, [Dansk Standard, AAR]. Alternativt ville der i eksemplet bare komme til at staa [Standard, AAR].
+
+
+%-----------------------------------------------------%
+%%%%%%%%%%%%%%%%% Online %%%%%%%%%%%%%%%%%%%%
+
+
+@online{WikipediaRUD,
+    author = {{"Wikipedia, the free encyclopedia"}},
+    title = {Rapid unplanned disassembly},
+    howpublished  = {\url{https://en.wiktionary.org/wiki/rapid_unplanned_disassembly}},
+    note = "[Online; accessed 26.12.2018]"
+}
+
+@online{Fortran,
+    author = {{"Wikipedia, the free encyclopedia"}},
+    title = {Fortran},
+    howpublished  = {\url{https://da.wikipedia.org/wiki/Fortran}},
+    note = "[Online; accessed 26.12.2018]"
+}
+
+@online{Ham,
+    author = {{"Wikipedia, the free encyclopedia"}},
+    title = {Amateur radio operator},
+    howpublished  = {\url{https://en.wikipedia.org/wiki/Amateur_radio_operator}},
+    note = "[Online; accessed 26.12.2018]"
+}
+
+@online{anechoic,
+    author = {{"Wikipedia, the free encyclopedia"}},
+    title = {Anechoic chamber},
+    howpublished  = {\url{https://en.wikipedia.org/wiki/Anechoic_chamber}},
+    note = "[Online; accessed 26.12.2018]"
+}
+
+@online{FrequencyBand,
+    author = {{"Wikipedia, the free encyclopedia"}},
+    title = {Radio frequency},
+    howpublished  = {\url{https://en.wikipedia.org/wiki/Radio_frequency}},
+    note = "[Online; accessed 10.05.2018]"
+}
+
+@online{ITU,
+    author = {{"Wikipedia, the free encyclopedia"}},
+    title = {International telecommunication Union},
+    howpublished  = {\url{https://en.wikipedia.org/wiki/International_Telecommunication_Union}},
+    note = "[Online; accessed 10.05.2018]"
+}
+
+@online{ISM,
+    author = {{"Wikipedia, the free encyclopedia"}},
+    title = {ISM band},
+    howpublished  = {\url{https://en.wikipedia.org/wiki/ISM_band}},
+    note = "[Online; accessed 12.05.2018]"
+}
+
+@online{Two-ray,
+    author = {{"Wikipedia, the free encyclopedia"}},
+    title = {Two-ray ground-reflection model},
+    howpublished  = {\url{https://en.wikipedia.org/wiki/Two-ray_ground-reflection_model}},
+    note = "[Online; accessed 12.05.2018]"
+}
+
+@online{specular,
+    author = {{"Wikipedia, the free encyclopedia"}},
+    title = {Specular reflection},
+    howpublished  = {\url{https://en.wikipedia.org/wiki/Specular_reflection}},
+    note = "[Online; accessed 12.05.2018]"
+}
+
+@online{FesnelZone,
+    author = {{"Wikipedia, the free encyclopedia"}},
+    title = {Fesnel Zone},
+    howpublished  = {\url{https://en.wikipedia.org/wiki/Fresnel_zone}},
+    note = "[Online; accessed 12.05.2018]"
+}
+
+@online{Huygens,
+    author = {{"Wikipedia, the free encyclopedia"}},
+    title = {Huygens–Fresnel principle},
+    howpublished  = {\url{https://en.wikipedia.org/wiki/Huygens-Fresnel_principle}},
+    note = "[Online; accessed 14.05.2018]"
+}
+
+@online{DopplerShift,
+    author = {{"Wikipedia, the free encyclopedia"}},
+    title = {Doppler effect},
+    howpublished  = {\url{https://en.wikipedia.org/wiki/Doppler_effect}},
+    note = "[Online; accessed 15.05.2018]"
+}
+
+@online{DanSTAR,
+    author = "Danish Student Association for Rocketry",
+    howpublished  = {\url{https://www.danstar.dk/}},
+    note = "[Online; accessed 25.12.2018]",
+}
+
+@online{4nec2,
+    author = {"Arie Voors"},
+    title = {4Nec2},
+    howpublished  = {\url{https://www.qsl.net/4nec2/}},
+    note = "[Online; accessed 26.12.2018]"
+}
+
+@online{yagical,
+    author = {"John Drew"},
+    title = {yagi calculator},
+    howpublished  = {\url{http://www.vk5dj.com/yagi.html}},
+    note = "[Online; accessed 26.12.2018]"
+}
+
+@online{Dassault,
+    author = {{"Dassault Systems"}},
+    howpublished  = {\url{https://www.3ds.com/}},
+    note = "[Online; accessed 26.12.2018]"
+}
+
+@online{nec,
+    author = {"Jerry Burke and A"},
+    title = {4Nec2},
+    howpublished  = {\url{https://www.nec2.org/}},
+    note = "[Online; accessed 27.12.2018]"
+}
+
+@online{EverythingRF,
+    author = {"EverythingRF"},
+    howpublished  = {\url{https://www.everythingrf.com/community/what-is-the-difference-between-dbi-and-dbd}},
+    note = "[Online; accessed 06.05.2019]"
+}
+
+@online{electronicsnotes,
+    author = {"electronicsnotes"},
+    howpublished  = {\url{https://www.electronics-notes.com/articles/antennas-propagation/propagation-overview/basics.php}},
+    note = "[Online; accessed 10.05.2019]"
+}
+
+@online{DanSTARblog,
+    author = {"DanSTAR"},
+    publisher={Ingeniøren},
+    howpublished  = {\url{https://ing.dk/blogs/raketbyggerne-dtu}},
+    note = "[Online; accessed 27.12.2018]"
+}
+
+@online{Ingenioeren,
+    author = {"Ingeniøren"},
+    howpublished  = {\url{https://ing.dk/}},
+    note = "[Online; accessed 27.12.2018]"
+}
+
+@online{DanSTAR_test_stand,
+	author={Fadi Bunni and Daniel Storgaard},
+	year={2018},
+	title={control-system for a rocket engine test stand},
+	howpublished = {\url{https://www.danstar.dk/wp-content/uploads/2017/Filer/Academic_&_technical_notes/Control_system_for_a_rocket_engine_test_stand.pdf}},
+	note = "[Online; accessed 25.12.2018]"
+}
+
+@online{nrf24l01+,
+	author={Nordic},
+	year={2008},
+	title={nRF24L01+ Single Chip 2.4Ghz Transceiver},
+	howpublished = {\url{https://www.sparkfun.com/datasheets/Components/SMD/nRF24L01Pluss_Preliminary_Product_Specification_v1_0.pdf}},
+	note = "[Online; accessed 28.12.2018]"
+}
+
+@online{RFX2401C,
+	author={skyworksinc},
+	year={2017},
+	title={RFX2401C single chip PA/LNA},
+	howpublished = {\url{http://www.skyworksinc.com/uploads/documents/RFX2401C_204359B.pdf}},
+	note = "[Online; accessed 07.03.2019]"
+}
+
+@online{EKTOS,
+    author = {EKTOS},
+    howpublished  = {\url{https://www.ektos.dk/}},
+    note = "[Online; accessed 07.03.2019]"
+}
+
+%-----------------------------------------------------%
+%%%%%%%%%%%%%%%%% BOOKS %%%%%%%%%%%%%%%%%%%%
+
+@book{ARRL,
+	author={R. Dean Straw (N6BV), American Radio Relay League },
+	title={The ARRL Antenna Book},
+	year={2007},
+	publisher={American Radio Relay League, 21st edition},
+	isbn = {0-87259-987-6},
+	language={eng}
+}
+
+@book{RFpropagation,
+	author={John S. Seybold},
+	title={Introduction to RF propagation},
+	year={2005},
+	publisher={John Wiley & Sons, Inc., Hoboken, New Jersey},
+	isbn = {978-0-471-65596-1},
+	language={eng}
+}
+
+@book{modernantenna,
+	author={Thomas A. Milligan},
+	title={Modern Antenna Design},
+	year={2005},
+	publisher={John Wiley & Sons, Inc., Hoboken, New Jersey},
+	edition = {2. edition},
+	isbn = {978-0-471-45776-3},
+	language={eng}
+}
+
+@book{TransceiverBook,
+	author={Scott R. Bullock},
+	title={Transceiver and system Design for Digital Communication},
+	year={2017},
+	publisher={The Institution of Engineering and Technology, London, United Kingdom},
+	edition = {5. edition},
+	isbn = {78-1-78561-495-8},
+	language={eng}
+}
+
+@book{MobileCom,
+	author={Dr. William Lee},
+	title={Mobile Communications Engineering: Theory and Applications},
+	year={1997},
+	publisher={McGraw-Hill Education; 2 edition (October 22, 1997)},
+	edition = {2. edition},
+	isbn = {0070371032},
+	language={eng}
+}
+
+%-----------------------------------------------------%
+%%%%%%%%%%%%%%%%% article %%%%%%%%%%%%%%%%%%%%
+
+@online{ITU-R,
+	author={ITU-R},
+	title={ITU-R - Propagation by diffraction},
+	year={2018},
+	howpublished = {\url{https://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.526-14-201801-I!!PDF-E.pdf}},
+	publisher={ITU},
+	language={eng},
+	note = "[Online; accessed 14.05.2019]"
+}
+
+@online{ITUTerrain,
+	author={ITU-R},
+	title={ITU-R - Propagation data and prediction methods required for the design of terrestrial line-of-sight systems},
+	year={2017},
+	howpublished = {\url{https://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.530-17-201712-I!!PDF-E.pdf}},
+	publisher={ITU},
+	language={eng},
+	note = "[Online; accessed 14.05.2019]"
+}
+
+@online{ITUAtmosphere,
+	author={ITU-R},
+	title={ITU-R - Attenuation by atmospheric gases},
+	year={2001},
+	howpublished = {\url{https://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.676-11-201609-I!!PDF-E.pdf}},
+	publisher={ITU},
+	language={eng},
+	note = "[Online; accessed 16.05.2019]"
+}
+
+@online{ITURain,
+	author={ITU-R},
+	title={ITU-R - Propagation data and prediction methods required for the design of terrestrial line-of-sight systems},
+	year={2001},
+	howpublished = {\url{https://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.530-10-200111-S!!PDF-E.pdf}},
+	publisher={ITU},
+	language={eng},
+	note = "[Online; accessed 16.05.2019]"
+}
+
+@online{ITUCloud,
+	author={ITU-R},
+	title={ITU-R - Attenuation due to clouds and fog},
+	year={2012},
+	howpublished = {\url{https://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.840-5-201202-S!!PDF-E.pdf}},
+	publisher={ITU},
+	language={eng},
+	note = "[Online; accessed 16.05.2019]"
+}
+
+@online{Magis,
+	author={Rober Wilson},
+	title={Propagation Losses Through Common Building Materials 2.4 GHz vs 5 GHz},
+	year={2002},
+	howpublished = {\url{https://www.am1.us/wp-content/uploads/Documents/E10589_Propagation_Losses_2_and_5GHz.pdf}},
+	publisher={University of Southern California},
+	language={eng},
+	note = "[Online; accessed 15.05.2019]"
+}
+
+@online{ModernBuildings,
+	author={Rodriguez Larrad, Ignacio; Nguyen, Huan Cong; Jørgensen, Niels T.K.; Sørensen, Troels
+Bundgaard; Mogensen, Preben},
+	title={Radio Propagation into Modern Buildings},
+	year={2014},
+	howpublished = {\url{https://www.am1.us/wp-content/uploads/Documents/E10589_Propagation_Losses_2_and_5GHz.pdf}},
+	publisher={Vehicular Technology Conference (VTC Fall), 2014 IEEE 80th},
+	language={eng},
+	note = "[Online; accessed 15.05.2019]"
+}
+
+
+
+
+
+

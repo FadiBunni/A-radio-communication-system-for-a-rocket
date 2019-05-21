@@ -1,0 +1,943 @@
+\chapter{Theory}
+
+%What to call this?
+\section{General Rf theory}
+To fully understand the theory of radio communications, it is important to have the fundamental understanding of parameters used to describe and measure the performance of a radio system. The next subsections will clarify the relation between gain and losses, power levels and also a description of how to use these parameters.
+
+\subsection{Gain and loss}
+The figure 2.1 below show an example of an electrical circuit. When a signal is generated and passes the circuit it can be amplified, attenuated or in an ideal world no change will happen to the signal. The strength of the signal can be measured at different points A,B or C and earth. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{figures/GainLoss.PNG}
+\caption{Gain and loss}
+\end{figure}
+
+If the voltage level at B is greater than A then circuit 1 has provided an amplification to the original signal, a \textbf{Gain}. This gain is measured at the output of the whole circuit compared to the level at the input of the circuit.
+
+$$GAIN_1 = \frac{V_B}{V_A}$$
+
+If B is 10 Volts and A is 5 volts then circuit 1 will provide a Gain factor of 2 to the original signal, on the other hand if C was measured to be less than B, then circuit 2 will introduce a loss factor of 2:
+
+$$LOSS_2 = \frac{V_B}{V_C} = \frac{10}{5} = 2$$
+
+A general rule is to describe levels as \textbf{Gains} and not losses, such that the example above will be a gain factor of ½.
+
+$$GAIN_2 = \frac{V_C}{V_B} = \frac{5}{10} = \frac{1}{2}$$
+
+These principals applies to all radio communication system, the same goes for figure 2.2. The gain measure can be applied between any two points in a communication system, for example, the gain between the transmitter and receiver, in figure 2.2 is:
+
+$$GAIN = \frac{V_B}{V_A}$$
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.55]{figures/RadioCom.PNG}
+\caption{Gain for a complete radio link system}
+\end{figure}
+
+\subsection{Power level}
+
+Most radio systems measurements are made as measurement of power level, as seen below the equations for power are:
+
+\begin{equation}
+    P = V \cdot I
+\end{equation}
+\begin{equation}
+    P = \frac{V^2}{R}
+\end{equation}
+\begin{equation}
+    P = I^2 \cdot R
+\end{equation}
+
+where:\\
+
+P = power (in watts)\\
+V = voltage (in volts)\\
+I = current (in amperes)\\
+R = Load resistance (in ohm)\\
+
+Alexander Graham Bell invented a unit of measure for sound levels. The unit is known as \textbf{Bel}, where one tenth of a bel is called a \textbf{decibel}. This is based on the human ear which hears in a logarithmic manner, thus a level of 100 watts to the human ear would sound twice as loud as a level of 10 watts, and not 10 times. This unit of measure is now used as the foundation for measuring relative power levels in the fields of electronics, acoustics, optics and many others. For figure 2.2, the gain of the radio system becomes: 
+
+\begin{equation}
+    GAIN = log_{10}\Big(\frac{P_B}{P_A}\Big)bels = 10 \cdot log_{10}\Big(\frac{P_B}{P_A}\Big)decibels
+\end{equation}
+
+The unit dB always expresses the logarithmic measurement of a power ratio, thus it has a meaning only if a reference level is set. That is why the above equation is for a relative measurement, which is a measure of the power level at point B with reference to the power level at point A - B relative to A. For example if the input signal at point A is 10 watts and 100 watts at point B, then the system gain is: written as 10dB. 
+
+$$GAIN = 10 \cdot Log_{10}\Big(\frac{100}{10}\Big)$$
+$$= 10 \cdot 1$$
+$$= 10dB$$
+
+For radio communication system, measurements can be made at a single points in a system with reference to 1 watt or 1 milliwatt (measurement of absolute power), thus the equations then becomes:
+
+\begin{equation}
+    LEVEL_{dBm} = 10 \cdot log_{10}\Big(\frac{P}{1W}\Big)
+\end{equation}
+
+\begin{equation}
+    LEVEL_{dBW} = 10 \cdot log_{10}\Big(\frac{P}{1mW}\Big) = LEVEL_{dBm}-30dB
+\end{equation}
+
+\subsection{What is dB/dBi/dBd/dBW/dBm?}
+Since this thesis is targeted towards the next generation of students in DanSTAR, it is worth explaining what the differences are between dB, dBi, dBd, dBW and dBm, to be crystal clear about the units. 
+
+As explained in the section above dB is a logarithmic ratio of powers in reference to a given level. So saying $P_1 = 2 \cdot P_2$ is equivalent, to $\frac{P_1}{P_2}\overset{\Delta}{=} 3 dB$, because: 
+
+\begin{equation}
+    10 \cdot log_{10}\Big(\frac{P_1}{P_2}\Big)dB = 10 \cdot log_{10}(2)dB = 3dB
+\end{equation}
+
+dBi measures the gain over an isotropic antenna whereas dBd measures the gain over a half-wavelength dipole antenna, in section 2.5.1 \textit{Isotropic antenna)} and section 2.5.2 \textit{Directivity, efficiency and gain}, both units are explained in more details. What is important for now, is that a half-wavelength dipole antenna is estimated to have a gain of 2.15dBi, thus a 7.85 dBd means that the peak gain is 7.85 higher than a dipole antenna and 10 dB higher than a isotropic antenna, see figure 2.3 and the equation below:
+
+\begin{equation}
+    G(dBd) = G(dBi) - 2.15
+\end{equation}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.8]{figures/DBIvsDBD.PNG}
+\caption{dBi vs dBd \cite{EverythingRF}}
+\end{figure}
+
+Both units dBi and dBd can be treated just like dB, because both, in the end, measures the again of an antenna relative to an isotropic antenna where the directivity is 1, resulting in a gain of 0dB.  
+
+dBm and dBW is a logarithmic unit to measure powers. Since dB is a ratio of powers, dBm and dBW are both defined by forming the ratio of the power, relative to a reference power, which is 1W for dBW and 1mW for dBm, as formally explained in equation 2.5 and 2.6.  
+
+\subsection{How (not) to use dB/dBi/dBd/dBW/dBm in relation to each other}
+For clarity, this section is quite important for section 2.3 \textit{Link budget}, since the majority of the units are being used in the link budget.
+
+Consequently, two thing are okay: 
+
+Starting with a \textbf{power} (dBW and dBm) one can \textit{add} and \textit{subtract} ratios (db, dBi and dBd) as often as one desires with the end result of still having a power unit (dBW or dBm), although dBd needs to be converted to dBi unit, as shown in equation 2.8: 
+
+\begin{equation}
+\begin{split}
+    P_1 \cdot \frac{G_1}{L_1} = P_2 \Leftrightarrow 10 \cdot log_{10}\Big(P_1 \cdot \frac{\frac{G_1}{L_1}}{1W}\Big) = 10 \cdot log_{10} \frac{P_2}{1W}\\
+    \Leftrightarrow P_1|_{dBW} + G_1|_{dB} - L_1|_{dB} = P_2|_{dBW}
+\end{split}
+\end{equation}
+
+Subtracting \textbf{two powers} (dBW or dBm) which is equivalent to computing their \textbf{ratio} (dB):
+
+\begin{equation}
+\begin{split}
+    \frac{P_1}{P_2} \overset{\Delta}{=} 10 \cdot log_{10}\Big(\frac{P_1}{P_2}\Big) dB = 10 \cdot log_{10}\Big(\frac{P_1}{1W}\Big) - 10 \cdot log_{10}\Big(\frac{P_2}{1W}\Big) = P_1|_{dBW} - P_2|_{dBW}\\
+    = 10 \cdot log_{10}\Big(\frac{P_1}{1mW}\Big) - 10 \cdot log_{10}\Big(\frac{P_2}{1mW}\Big) = P_1|_{dBm} - P_2|_{dBm}
+\end{split}
+\end{equation}
+
+Both powers has to have the same unit, one can not mix between dBW and dBm. 
+
+The above equations can be abbreviated to a simple "okay-to-do" table:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|}
+\hline
+$dBW  \pm dBi = dBW$\\
+\hline
+$dBm \pm  dBi = dBm$ \\ 
+\hline
+$dBW  \pm  dB = dBW$ \\ 
+\hline
+$dBm \pm dB = dBm$ \\  
+\hline
+$dBW - dBW = dB$ \\
+\hline
+$dBm - dBm = dB$ \\
+\hline
+\end{tabular}
+\caption{What is allowed to do with the units dB/dBW/dBm/dBi}
+\label{table:1}
+\end{table}
+
+Consequentially, three things are not okay to do:
+
+One can never ever multiply dBW with dB. Example, an output power from a transceiver is $P_T = 10W$ with an antenna gain of $G_T = 10$ gives an effective radiated power of 100 dBW, this is not true since 100 dBW is practically 10 Gigawatts! Multiplication in linear scale becomes addition in logarithmic scale: 
+
+\begin{equation}
+\begin{split}
+    P_T \cdot G_T = 10W \cdot 10 = 100W \overset{\Delta}{=} 20dBW\\
+    \Leftrightarrow  P_T|_{dBW} + G_T|_{dBi} = 10dBW + 10dBi = 20dBW  
+\end{split}
+\end{equation}
+
+For equation 2.11 see also table 2.1 first row. 
+
+Furthermore, one can not add a bunch of power quantities in dBW or dBm! Adding powers in log scale means multiplying them in linear scale, for example:  
+
+\begin{equation}
+    10dBW + 3dBW + 6dBW \overset{\Delta}{=} 10W \cdot 2W \cdot 4W = 80W^3
+\end{equation}
+
+The above equation 2.12 does not make sense, since one can wonder what Watt cubed even means?
+
+Lastly, by now one can already deduce that power can not be measured in dB and gain/loss can not be measured in dBm or dBW. 
+
+\section{A general radio communication system}
+The general overview of any point-to-point radio communication system, is always the same. There is a sender (Tx) and a receiver (Rx), now a days the sender and receiver is build into one system, called a transceiver. Some transceivers has internal Power Amplifiers (PA) and internal Low Noise Amplifiers (LNA). The internal PA amplifies the signal when the transceiver is in transmitting mode, and the LNA filters the signal when the transceiver is in the receiving mode.
+
+On figure 2.4, both the transmitter and the receiver has an antenna. When the transmitter starts to transmit, an analog radio wave is generated from the transmitter that travels to the antenna to be amplified (in correct terms the antenna directs the radio wave), and then it propagates out through space. When the radio wave travels through space, it will encounter different phenomenons, which will introduce losses to the system. Once the radio wave has reached the receiver it will be detected by its antenna, thus the signal will travel to the chip and gets turned to a digital signal.
+
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.55]{figures/GeneralOverview.PNG}
+\caption{General overview of a point-to-point radio communication system}
+\end{figure}
+
+\subsection{RF propagation}
+Radio signals can travel over vast distances. However they are affected by the medium in which they travel through. Depending on which frequency band is used\cite{FrequencyBand}, some can propagate around the globe, whereas other radio signals may only travel over much shorter distances.
+
+There are many different factors that affect the way in which radio signals travels through a medium - since this thesis is about a radio communication system for a rocket that flies through the air, it is only the free-space propagation (atmosphere) medium that is considered. These factors can be various objects that may appear in the path. Furthermore, The radio wave may be subjected to reflection, refraction and diffraction. The received radio signal may also be a combination of several signal that have traveled by multiple paths, these multi-path signals will interfere with each other and cause constructive and destructive interference, meaning the signal might get stronger or weaker. Because the signals are propagating through different paths, some may be delayed causing the received signal to be distorted. It is therefore important to understand these factors, in order to get an idea about which one has the biggest affect on the radio signal. 
+
+There are a number of media in which RF propagates through, these are: 
+
+\begin{itemize}
+  \item \textbf{Free-space Propagation:} Also called Line-of-sight propagation (LOS). Here the radio signals will travel in free space, or away from any objects that may influence the propagation of the signal. Thus, it is only the distance from the source that affects the signal strength. This type of radio signal is seen with ordinary radio communication systems: HAM radio, cellular communication, satellites etc. As stated above, this medium the biggest factor in which this thesis is based on. 
+  \item \textbf{Ground wave propagation:} The signal travels above the ground and is modified by the type of ground or terrain over which it travel. For low frequency bands the radio wave tends to follow Earth's curvature, this allows for long range communication below horizon.  
+  \item \textbf{Ionospheric propagation:} Here the radio wave is reflected by the ionosphere (a region in the atmosphere where the air molecules have been ionized by the sun to allow for free electrons, starts around 60km) back to earth surface. The radio wave is reflected multiple times, causing a scattering of the original signal back to earth. This form of propagation can allow for short wave bands to reach the other side of the globe.
+  \item \textbf{Tropospheric propagation:} The radio wave is reflected by the troposphere (effects starts around 2km), due to higher air density and higher water vapour at lower altitudes, this results in higher refractive index compared to higher altitude, which in the end reflects the radio wave. Like the ionospheric propagation, the tropospheric propagation also result in a scattered pattern of the incoming radio wave. 
+\end{itemize}
+
+%%FOR more details read this book IDC technology etc..
+
+\subsection{Radio frequency bands}
+The radio spectrum extends from 3Hz to 3THz. In between this spectrum sub-band has been defined by the International Telecommunication Union (ITU)\cite{ITU}. Figure 2.5 depicts the radio spectrum in defined bands. In this thesis the Industrial, scientific and medical radio bands (ISM)\cite{ISM} is used, specifically the 2.4-2.5Ghz spectrum, since this spectrum is mostly open worldwide, allowing us to design one system that can be used both in USA and in Europe without any change to the hardware.   
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.8]{figures/radioSpectrum.PNG}
+\caption{Radio spectrum and sub-bands\cite{FrequencyBand}}
+\end{figure}
+
+\section{The basics of radio channel losses}
+It is important for a communication system to be designed for the intended environment and to predict with relative certainty, the performance of the system prior to fabrication and implementation. Insufficient planning can result in over-design and wanted resources or under-design and poor performance. Before planning the communication system, it is important to understand the essential parameters of each sub-link. Some of these parameters are given or chosen during the design process, while others has to be calculated, these include: Free-space attenuation, Multipath attenuation, Fresnel zone, Atmospheric attenuation, Rain attenuation, cloud attenuation and others. Figure 2.6 showcases some of these phenomenons, especially free-space and multipath attenuation. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.6]{figures/Multipath.PNG}
+\caption{Radio wave can propagate through multiple paths}
+\end{figure}
+
+Before looking into the theory of the detailed link budget, the theory of the above parameters will be clarified in the following sections.
+
+%Maybe Before looking into the theory of the antennas, the theory of the above parameters will be clarified in the following sections.
+
+\subsection{Free-space attenuation}
+When a radio wave propagated through space it will start to disperse in a spherical form, this dispersion or "spread out" of the radio beam will result in a loss. This loss is consistent and is tight to the wavelength, which means that it increases with frequency as the wavelength becomes shorter. This phenomenon is called free-space loss and is related to both the frequency and the slant range (direct path), which is the distance between the transmitter and receiver antenna. The free-space loss is derived by Friss transmission equation: 
+
+\begin{equation}
+    \frac{P_{Rx}}{P_{Tx}} = G_T \cdot G_R \Big( \frac{\lambda}{4 \cdot \pi \cdot d} \Big)^2
+\end{equation}
+
+Where:
+
+\begin{itemize}
+  \item $P_{Rx}$ is the power fed into the transmitting antenna input terminals.
+  \item $P_{Tx}$ is the power available at receiving antenna output terminals.
+  \item $G_T$ is the gain of the transmitting antenna.
+  \item $G_R$ is the gain of the Receiving antenna.
+  \item $d$ is the distance between the transceivers in meters.
+  \item $\lambda$ is the wavelength.
+\end{itemize}
+
+To derive the Path loss equation, it is assumed that the antennas are isotropic, which means they both have a gain of 1, resulting in:
+
+\begin{equation}
+    \frac{P_{Rx}}{P_{Tx}}|_{iso} =  \frac{\lambda^2}{4^2 \cdot \pi^2 \cdot d^2}
+\end{equation}
+
+% The path loss is a dB ratio of $\frac{P_{Tx}}{P_{Rx}}$, which gives: 
+
+% \begin{equation}
+%     \frac{P_{Tx}}{P_{Rx}}|_{iso} =  \frac{4^2 \cdot \pi^2 \cdot d^2}{\lambda^2}
+% \end{equation}
+
+Converting to dB:
+
+\begin{equation}
+    L_{fs,dB} =  10 \cdot log_{10}\Big(\frac{\lambda^2}{4^2 \cdot \pi^2 \cdot d^2}\Big) \Leftrightarrow 10 \cdot log_{10}\Big(\frac{\lambda}{4 \cdot \pi \cdot d}\Big)^2 \Leftrightarrow 20 \cdot log_{10}\Big(\frac{\lambda}{4 \cdot \pi \cdot d}\Big) 
+\end{equation}
+
+Since, $\lambda = \frac{f}{c}$, where f is the frequency and c is the speed of light (m/s), it is possible to substitute this in the final equation:
+
+\begin{equation}
+    L_{fs,dB} = 20 \cdot log_{10}\Big(\frac{c}{4 \cdot \pi \cdot d \cdot f}\Big) 
+\end{equation}
+
+What can be deduced from equation 2.16 is that doubling the output power from a transmitter does not equal to a doubling of the distance, in fact one has to quadruple the power before doubling of the distance occurs. A simple example is shown below:
+
+Assume $\lambda = 1$ and $L_{fs,dB} = 0$
+
+\begin{equation}
+    0 = 20 \cdot log_{10}\Big(\frac{1}{4 \cdot \pi \cdot d}\Big)
+\end{equation}
+
+solving for d:
+
+\begin{equation}
+    d = 1/(4*Pi) = 0.079578
+\end{equation}
+
+To reach double the distance, one has to multiply d by 2 and substitute it in equation 2.17:
+
+\begin{equation}
+   L_{fs,dB} = 20 \cdot log_{10}\Big(\frac{1}{4 \cdot \pi \cdot 2 \cdot 0.079578}\Big) = 6.02dB 
+\end{equation}
+
+From 0dB to 3dB is in linear form a doubling factor, whereas from 0dB to 6dB, as seen in equation 2.20, is in linear form a quadrupling factor.
+
+%% Write that in the section "calculation" we will go through this more in detail
+
+\subsubsection{Received signal strength indicator}
+Received signal strength indicator (RSSI), is the power (measured in dbm) received at the receiver end. RSSI can be deduced from Friss transmission equation, by simply solving for $P_{Rx}$, which yields the formula:
+
+\begin{equation}
+    P_{Rx} = P_{Tx} \cdot G_T \cdot G_R \Big( \frac{\lambda}{4 \cdot \pi \cdot d} \Big)^2
+\end{equation}
+
+The above equation can be used to figure out how good the received signal is, but also use the RSSI to track object. This can be done by pointing the receiver antenna towards the transmitter antenna, and if any RSSI is observed then one can confirm that the antennas are pointing towards each other. It is important to know that with this method mulitpath signals and other phenomenons are not excluded, which is why this method require a clear LOS path between the transmitter and receiver. Furthermore, the above equation does not include losses from PCB design or components, like band filters, balun and Low-noise amplifiers (LNA).    
+
+\subsection{Multipath attenuation}
+The above section 2.5.1 \textit{free-space attenuation} applies to the fact that the radio wave
+propagating in a direct path from the source to the receiver. This section, looks behind the theory of multipath, where the radio wave is propagating differently from the desired, or direct path. The amplitude, phase and angle-of-arrival of the multipath signal interfere with the amplitude, phase and angle-of-arrival for the direct signal. This interference can create error in the phase, amplitude or angle-of-arrival. As explained in section 2.3 \textit{RF propagation}. The amplitude can be larger of smaller depending on whether the multipath signal creates a constructive or destructive interference, see then next section. The problem with multipath is that the source signal travels in multiple paths, as seen on figure 2.6 and ends up interfering with itself at the receiving end. The reflected path has a reflection coefficient that determine the phase and the amplitude of the reflected signal, which is not the same as the direct path. Since the reflected path is longer than the direct path, it will produce a signal with a different amplitude phase at the receiving end. For example if the reflected signal is 180 out of phase from the direct path and the amplitude are the same, then the signal is canceled out which makes the receiver detecting little to no signal. Luckily, since the reflected signal takes a longer path it will also experience more free-space attenuation, which makes the amplitude of the reflected signal lower than the direct path, thus reducing the attenuation of the signal that is out of phase compared to the direct path. Figure 2.6 shows, that there are multiple parameters at play for calculating the total loss of a signal traveling towards the receiver. Therefore, it is generally hard to quantify the loss due to multipath. Since the rocket is constantly moving, multipath will constantly be changing, which in return will result in a variable channel loss. 
+
+The following next sub-sections will explain the key parameters that affects the rocket, but also when range test on the ground is conducted. 
+
+\subsubsection{Two-ray ground bounce multipath}
+The theory and formulas of this section is derived from what is written in the book \textit{Introduction to RF Propagation - John s. Seybold}\cite{RFpropagation} from page 164 to 173, it is highly recommended to read these pages. Wikipedia also has an article\cite{Two-ray} about how the two-ray ground bounce works, although the formula is derived differently but with the same final equation as from the book. 
+
+%%there many ground bounce multipath model 3-ray 4-ray 10-ray etc. 
+
+Since testing the radio communication system will be done on the ground, it is important to factor in near-earth propagation path. There are two key effects: ground reflection and path blockage and/or diffraction when part of the path is beyond line of sight. When the radio wave propagates near the earth's surface and parallel to it, severe fading can occur if the ground is reflective. 
+
+Below on figure 2.7 the two-ray ground bounce model can be observed. Consider a point-to-point radio link system that is operating close to earth's surface. For this example it is assumed that the ground is flat, smooth and reflective. This means that there is a "specular" ground reflection\cite{specular} from the ground plane. Specular reflection occurs if and only if the angle of the incidence equals to the angle of the angle of the departure at the reflection point (or the normal plane), thus $ø_1 = ø_2$. 
+
+\begin{figure}[h]
+%\centering
+\hspace{-0.5cm}
+\includegraphics[scale=0.6]{figures/TwoRay.PNG}
+\caption{Two-ray ground bounce model}
+\end{figure}
+
+On figure 2.7 it can be observed that:
+
+$$ø_1 = ø_2$$
+
+The slant range is:
+
+\begin{equation}
+  d_s = \sqrt{d^2 + (h_t - h_r)^2}= \sqrt{d^2 + \Delta h^2}
+\end{equation}
+
+and 
+
+\begin{equation}
+  d = d_1 + d_2
+\end{equation}
+
+The reflection angles are:
+
+$$ø_1 = tan^{-1}\Big(\frac{h_t}{d_1}\Big), \quad ø_2 = tan^{-1}\Big(\frac{h_r}{d_2}\Big)$$
+
+Since the two angles are equal to each other, it is clear that: 
+
+$$\frac{h_t}{d_1} = \frac{h_r}{d_2}$$
+
+Using (2.22) the above equation will be:
+
+\begin{equation}
+  d_1 \cdot h_r = (d-d_1) \cdot h_t
+\end{equation}
+
+solving for $d_1$ results in:
+
+\begin{equation}
+  d_1 = \frac{d \cdot h_t}{h_r + h_t}
+\end{equation}
+
+Replacing $d_1$ by $d - d_2$ in (2.23) and solving for $d_2$, results in the following equation:
+
+\begin{equation}
+  d_2 = \frac{d \cdot h_r}{h_r + h_t}
+\end{equation}
+
+Thus the specular reflection point between the two antennas can be calculated by knowing the heights of the antennas. From specular geometry the following equations can be derived: 
+
+\begin{equation}
+  s_1 = \sqrt{d_1^2 + h_t^2} = h_t \cdot \sqrt{1 + \frac{d^2}{(h_r + h_t)^2}}
+\end{equation}
+
+\begin{equation}
+  s_2 = \sqrt{d_2^2 + h_r^2} = h_r \cdot \sqrt{1 + \frac{d^2}{(h_r + h_t)^2}}
+\end{equation}
+
+As described in the book \textit{Introduction to RF Propagation - John s. Seybold}\cite{RFpropagation} page 166. The magnitude and phase of the reflected signal $s_2$ are determined by the path-length difference and reflection coefficient of the ground plane. The reflected signal is changed by the reflection coefficient, denoted $\rho$, for both the magnitude and phase parameters. For a smooth, reflective surface, the magnitude of the reflection coefficient is approximately 1, regardless of the polarization and frequency, if grazing angle is mall. See the figures on page 167 to 168 in the book \textit{Introduction to RF Propagation - John s. Seybold}\cite{RFpropagation}. For vertical polarization the phase angle is 180-degrees. For horizontal polarization it is virtually 180-degrees, regardless of frequency and grazing angle. For our test setup the grazing angle is very small, thus the reflection undergoes a 180-degree phase shift at he point of reflection regardless of polarization, this means that $|\rho| = 1$.
+
+For a setup where $d_s > h_t$ and $d_s > h_r$ meaning gazing angle $ø$ is very small, the following approximation can be made:
+
+$$s_1 + s_2 \approx d_s$$
+
+The above equation states that since the reflected path is equal to the direct path, then the waves are exactly in phase, meaning there will be a 6dB increase in the received signal, since doubling the amplitude means quadrupling the power. If the reflected wave is exactly 180-degree out of phase then the signal will cancel completely and no signal will be received.
+
+Over a flat, reflective surface, the magnitude of \textbf{E} field at the receiver can be expressed as: 
+
+\begin{equation}
+  |\textbf{E}| = |E_d| \cdot 2 \cdot sin(\Delta\phi/2)
+\end{equation}
+
+where $\Delta\phi$ is the phase difference due to path-length difference and $E_d$ is the \textbf{E} field due to the direct return only. The phase difference $\Delta\phi$ between the direct and reflected wave is:
+
+\begin{equation}
+  \Delta\phi = \frac{s_1 +s_2 - d_s}{\lambda} \cdot 2 \cdot \pi
+\end{equation}
+
+Substituting (2.21), (2.26) and (2.27) into (2.29) yields:
+
+\begin{equation}
+  \Delta\phi = d\Bigg( \sqrt{1+ \frac{(h_r+h_t)^2}{d^2}} - \sqrt{1+ \frac{(h_t+h_r)^2}{d^2}} \Bigg) \frac{2\pi}{\lambda}
+\end{equation}
+
+$\Delta\phi$ can be derived by using binomial expansion for the square roots.
+
+Binomial expansion is given by: 
+
+$$\sqrt{1+x} = 1+\frac{x}{2}-\frac{x^2}{8}+\frac{x^3}{16}-\frac{x^4}{16}+..$$
+
+In the binomial expansion, it can be observed that if $d>>h_r$ and $d>>h_t$, then:
+
+$$x=\Big(\frac{h_r+h_t}{d}\Big)^2 \approx 0 , \quad x=\Big(\frac{h_r-h_t}{d}\Big)^2 \approx 0$$
+
+Using only the first two terms of the binomial expansion, (2.30) be simplified to:
+
+\begin{equation}
+  \Delta\phi\cong \frac{2h_rh_t2\pi}{d\lambda}
+\end{equation}
+
+The received power is proportional to the magnitude squared of the \textbf{E} field:
+
+$$P_{rx} \propto |\textbf{E}|^2$$
+
+
+Therefore substituting (2.31) into (2.28) using the above equation, yields:
+
+\begin{equation}
+  P_{rx} = 4 \frac{|E_d|^2}{\eta}sin\Big(\frac{2 \pi h_th_r}{d\lambda}\Big)^2
+\end{equation}
+
+From the free-space loss equation (2.13), see section 2.5.1 \textit{Free-space attenuation}, the magnitude squared of the direct path \textbf{E} Field at the receiver, $E_d$, is given by:
+
+\begin{equation}
+  |E_d|^2 = \eta \frac{P_{tx}G_TG_R\lambda^2}{(4\pid)^2} \Rightarrow \frac{|E_d|^2}{\eta} = \frac{P_{tx}G_TG_R\lambda^2}{(4\pid)^2}
+\end{equation}
+
+where $\eta$ is the characteristic impedance of free space. So substituting (2.33) into (2.32) gives:
+
+\begin{equation}
+  P_{rx} = 4 \frac{P_{tx}G_TG_R\lambda^2}{(4\pi d)^2}sin\Big(\frac{2 \pi h_th_r}{d\lambda}\Big)^2
+\end{equation}
+
+Assuming $d>>h_t$, $d>>h_r$ and $d\lambda << h_th_t$, then the following approximation may be made:
+
+$$sin\Big(\frac{2 \pi h_th_r}{d\lambda}\Big)^2=\Big(\frac{2 \pi h_th_r}{d\lambda}\Big)^2$$
+
+Thus:
+
+\begin{equation}
+  P_{rx} = 4 \frac{P_{tx}G_TG_R\lambda^2}{(4\pi d)^2}\Big(\frac{2 \pi h_th_r}{d\lambda}\Big)^2
+\end{equation}
+
+Resulting in the following approximate expression for the path loss on a near-earth propagation path over a flat, smooth, reflecting surface:
+
+\begin{equation}
+  L_{mp}= G_TG_R \frac{(h_th_r)^2}{d^4}
+\end{equation}
+
+Converting (2.34) to dB by assuming the antennas are isotropic with a gain of one, yields:
+
+\begin{equation}
+\begin{split}
+  L_{mp,dB}|_{iso} = 10 \cdot log_{10}\Big(\frac{h_t^2h_r^2}{d^4}\Big) \Rightarrow 20 \cdot log_{10}\Big(\frac{h_th_r}{d^2}\Big) \\ \Rightarrow  20 \cdot (log_{10}\Big(h_th_r\Big) - 2 \cdot log_{10}\Big(d\Big)\Big) \\ \Rightarrow  20 \cdot log_{10}\Big(h_th_r\Big) - 40 \cdot log_{10}\Big(d\Big)
+\end{split}
+\end{equation}
+
+It is worth notifying that this two-ray ground bounce path loss expression (2.35) is independent of the wavelength compared to the standard path-loss formula (2.14). The recommended approach to figure out which one of the two (2.14) and (2.35) formula to use, is to compute both of them plot them in a graph and use whichever one gives the greater loss. 
+
+A helpful tool is to determine the crossover point, which is defined as the distance at which the $1/d^4$ approximation and free-space loss are equal. This crossover point can be used to figure out which one of the above formulas should be used at what distances. The crossover point is found by equating the approximate ground bonce path loss (2.35) and free-space loss (2.14) and solving for d:
+
+$$\frac{(h_th_r)^2}{d^4}=\Big(\frac{\lambda}{4 \pi d}\Big)^2$$
+
+\begin{equation}
+  d_x= \frac{4\pi h_th_r}{\lambda}
+\end{equation}
+
+\subsubsection{Fresnel Zone}
+In any radio wave propagation between a transmitter and a receiver, some amount of the radiated wave propagates off-axis, due to the expansion of the wave in a spherical form. These waves can then deflect off of objects and then travel to the receiver. As explained in the above section 2.5.2.1 \textit{two-ray ground bounce} the direct-path wave and the deflected-path wave may arrive out-of-phase or in-phase causing either destructive or constructive interference. The fresnel zone are prolate ellipsoidal shaped regions in space (n=1,2,3...), see figure 2.8, centered around the line of direct transmission between the transmitter and receiver, path TR on figure 2.8 below. 
+
+The 1st region $n=1$ includes the space in which the LOS signal passes through. If a radio signal of the transmitted signal bounces off an object (the object could be anything: house, car, humans etc) within this region and then arrives at receiving antenna, the phase shift will be less than a quater-length wave or less than 90-degrees, Path TPR. The effect of phase-shift \underline{alone} in this region is minimal, therefore it can potentially result in having a positive impact on the receiver end, as the signal interferes with itself (direct path and bounced path), causing an in-phase interference, where the sum of the amplitude doubles. However, the positive outcome of this deflection also depends on the polarization of the signal relative to he object. %see section about polarization, where is it???????!!!!!!  
+
+The 2nd region $n=2$ surrounds the 1st region but excludes the first region. If an object is located in this region, the signal that bounces of this object towards the receiver, will be shifted more than 90-degrees, but less than 270-degrees, because of the increased path length. This bounced signal will potentially be received out-of-phase, though again it depends on the polarization of the signal.
+
+The 3rd region $n=3$ surrounds the 2nd region and deflected the waves towards the receiver in the same manner as the 1st region, because the wave have shifted more than 270-degrees but less than 450-degrees (ideally 360-degree shift will cause the best interference), therefore the signal may arrive as the same shift as the 1st region. 
+
+The 4th region is the same as the 2nd region, and so on. In fact the fesnel zone consists of infinite regions. The further out in regions the signal get bounced back the less of an effect it has on the receiver end, because of the increased path loss.\cite{FesnelZone}  
+
+\begin{figure}[h]
+%\centering
+\hspace{-3cm}
+\includegraphics[scale=0.6]{figures/FresnelZoneN.PNG}
+\caption{Fresnel zone model}
+\end{figure}
+The theory below is described in the book \textit{Introduction to RF Propagation - John s. Seybold}\cite{RFpropagation} page 175 to 178.
+Consider a point-to-point radio system depicted on figure 2.8. The vector TR is the LOS path, between the transmitter and receiver, therefore the link distance it $d_1 + d_2$. The direct and reflected/diffracted path lengths can be expressed as: 
+
+$$TR=d_1 + d_2$$
+
+$$TPR=\sqrt{d_1^2+h^2}+\sqrt{d_2^2+h^2}$$
+
+So the difference in path length is:
+
+\begin{equation}
+  TPR-TR = \Delta = \sqrt{d_1^2+h^2}+\sqrt{d_2^2+h^2}-d_1-d_2
+\end{equation}
+
+The binomial expansion can be used if $h<<d_1$ and $h<<d_2$:
+
+$$\sqrt{d_1^2+h^2} \cong d_1 \Big(1+\frac{h^2}{2d_1^2} \Big) $$
+
+and
+
+$$\sqrt{d_2^2+h^2} \cong d_2 \Big(1+\frac{h^2}{2d_2^2} \Big) $$
+
+Substituting it in (2.38), yields:
+
+\begin{equation}
+  \Delta=d_1+\frac{h^2}{2d_1}+d_2+\frac{h^2}{2d_2}-d_1-d_2 = \frac{h^2}{2d_1} + \frac{h^2}{2d_2} = \frac{h^2}{2}\Big(\frac{d_1+d_2}{d_1d_2}\Big)
+\end{equation}
+
+The corresponding phase difference is: 
+
+$$\phi = \frac{2\pi \Delta}{\lambda}$$
+
+Substituting (2.39) in the above equation, becomes: 
+
+\begin{equation}
+  \phi = \frac{2\pi}{\lambda} \cdot \frac{h^2}{2}\Big(\frac{d_1+d_2}{d_1d_2}\Big)
+\end{equation}
+
+The case where $\Delta = \frac{n\lambda}{2}$, where n is an integer, can found by letting  $\phi = n\pi$ in (2.40):
+
+\begin{equation}
+  n\lambda=h^2\Big(\frac{d_1+d_2}{d_1d_2}\Big)
+\end{equation}
+
+The destructive reflection/diffraction points can be identified by defining a term $h_n$, where n is the region in Fresnel zone and reorganizing the equation (2.41), which results in:
+
+\begin{equation}
+  n\lambda=h_n^2\Big(\frac{d_1+d_2}{d_1d_2}\Big)\Rightarrow h_n^2= \frac{n\lambda}{\frac{d_1+d_2}{d_1d_2}}=\frac{n\lambda d_1d_2}{d_1+d_2} => h_n = \sqrt{\frac{n\lambda d_1d_2}{d_1+d_2}}
+\end{equation}
+
+The final general equation for calculating the Fresnel zone radius at any point P between the endpoints of the LOS is the following formula: 
+
+\begin{equation}
+h_n = \sqrt{\frac{n\lambda d_1d_2}{d_1+d_2}}
+\end{equation}
+
+where:
+
+\begin{itemize}
+  \item $d_1,d_2>>n\lambda$ and $n \neq 0$
+  \item $h_n$ is the nth Fresnel zone radius.
+  \item $d_1$ is the distance of P from transmitter
+  \item $d_2$ is the distance of P from transceiver
+  \item $\lambda$ is the wavelength of the transmitted signal.
+\end{itemize}
+
+As explained in the beginning of this section the Fresnel zone can be used to determine if the received signal is in-phase or out-of-phase, but the polarization of the transmitted signal can greatly influence how the signal is received. The RF signal can be transmitted in different ways, described in section 2.8.1.5 \textit{Polarization}.
+
+If a signal is vertically polarized and it deflects off a horizontal object, like a flat roof, and then bounces towards the receiving antenna, and if the roof is within the 1st region of the Fresnel zone, the resulting signal will be inverted relative to the original transmitted signal. Hence, even though one would expect a minimal change in phase in the 1st region, the bounced signal will arrive out-of-phase, due to the inverted signal, causing little to no signal at the receiving end. There are a multiple ways to solve this problem. One is to increase the height of the antennas such that the flat roof is in the 2nd Fresnel region, so that the inverted signal will be in-phase at the receiving end, read the beginning of this section about the 2nd Fresnel zone. Another way is to change the polarization of the antennas on both the transmitter and receiver side to to horizontal polarization, but staying in the 1st Fresnel zone. 
+
+If the transmitted signal is circular polarized, then Fresnel zone does not matter, since a deflected circular polarized signal will change its rotational polarization, such that the received signal will be inverted to the receiving antenna, this will result in no signal received, whether is arrives in-phase or out-of-phase does not matter either. 
+
+It is important to state that the Fresnel zone calculation does not return a specific dB loss which then can be used in the Link budget calculation, rather it is used as a rule of thumb having 60\% of the 1st region of the Fresnel zone to be clear is sufficient enough for a good radio link. The 60\% clearance applies to the radius of the ellipsoid, meaning $0.6h_n$ should be cleared. The next section will explain how the Fresnel-Kirchhoff diffraction parameter is used to give an estimate of the loss (in dB) in the Fresnel zone. 
+
+\subsubsection{Single Knife-edge diffraction attenuation}
+Diffraction is the physical phenomenon that occur when a wave encounters an obstacle. It is defined as the bending of waves around the corners of an obstacle, that obscure the line of sight. Diffraction has the effect of filling in shadows, so that some amount of electromagnetic energy will be present in the shadowed region. A short explanation to this phenomenon is in term of Heygen's Principle, which states that each point on a wavefront acts as the source of a secondary "wavelet" and all of these "wavelets" combine to produce a new wavefront in the direction of propagation.\cite{Huygens}. If an object is blocking part of the propagating wavefront, then the "wavelets" near the blockage will travel in direction other than that of the plane wave, which results in diffraction. Regardless of whether the blockage is conductive or not diffraction will still occur.
+
+To accurately model the loss due to diffraction is very challenging for all but the most basic geometries. The easiest geometry to model the diffraction off is the \textit{knife-edge diffraction}, it can be used to provide an estimate of the diffraction loss for a single knife-edge blockage. The electrical field due to the diffracted path is given by the diffraction integral, which is approximated to be, see the book \textit{Mobile Communications Engineering: Theory and Applications} by Dr. William Lee, on page 142:
+
+\begin{equation}
+    L_r = 0 dB, \quad v \leq -1
+\end{equation}
+
+\begin{equation}
+    L_r = 20log_{10}(0.5-0.62v) dB, \quad -1\leq v\leq0
+\end{equation}
+
+\begin{equation}
+    L_r = 20log_{10}(0.5e^{-0.95v}) dB, \quad 0\leq v\leq 1
+\end{equation}
+
+\begin{equation}
+    L_r = 20log_{10}(0.4-\sqrt{0.1184-(0.38-01v)^2}) dB, \quad 1\leq v\leq 2.4
+\end{equation}
+
+\begin{equation}
+    L_r = 20log_{10}\Big(\frac{0.225}{v}\Big) dB, \quad  v \geq 2.4
+\end{equation}
+
+where v is the Fresnel-Kirchhoff diffraction parameter defined as:
+
+\begin{equation}
+    v = h \sqrt{\frac{2(d_1+d_2}{\lambda d_1d_2}}
+\end{equation}
+
+for equation (2.49) if the diffraction point is below the LOS, then h is negative and v will also be negative, vice versa. If diffraction point is located on the LOS, h and v are both equal to zero. The below picture is from an article by the International Telecommunication Union (ITU)\cite{ITU}, which shows the losses due diffraction.
+
+\begin{figure}[h]
+%\centering
+\hspace{0.5cm}
+\includegraphics[scale=0.7]{figures/DiffractionLoss.PNG}
+\caption{Loss due to diffraction. (figure 9 from \cite{ITU-R}, courtesy of ITU)}
+\end{figure}
+
+When $v=0$, the 1st Fresnel zone is 50\% blocked and the received signal loss is 6dB. 
+
+\subsubsection{Single rounded-surface diffraction}
+Sadly, most blockages encountered in the real world are not well-modeled by a knife-edge diffraction model, explained in the above section, because the tips dimensions which are bigger than the wavelength of the transmitted wave. A solution this, is to use the rounded-surface diffraction model, where the diffraction is treated as a cylinder, depicted on figure 2.10 below. 
+
+\begin{figure}[h]
+%\centering
+\hspace{0.5cm}
+\includegraphics[scale=0.7]{figures/RoundedDiffraction.PNG}
+\caption{Geometry for rounded-surface diffraction model\cite{RFpropagation} page 183}
+\end{figure}
+
+The diffraction from a rounded surface is determined by calculating the knife-edge diffraction and then computing the excess diffraction loss $L_{ex}$, due to the rounded surface. The excess diffraction loss is:
+
+\begin{equation}
+    L_{ex} = -11.7 \alpha\sqrt{\frac{\pi r}{\lambda}} dB
+\end{equation}
+
+where:
+
+\begin{equation}
+    \alpha = v\Big(\frac{\lambda(d_1+d_2)}{2d_1d_2}\Big)
+\end{equation}
+
+and r is estimated to be:
+
+\begin{equation}
+    r = \frac{2D_sd_1d_2}{\alpha(d_1^2+d_2^2)}
+\end{equation}
+
+Where $D_s$ is the extent of the diffraction surface. 
+
+\subsubsection{Doppler spread}
+Relative motion between the transmitter and receiver results in a Doppler shift\cite{DopplerShift} on the signal, where the entire spectrum is shifted in frequency. When multipath is combined with relative motion the radio wave may experience positive and negative Doppler shift, smearing or spreading of the signal frequency. This effect is called Doppler spread. The magnitude of the Doppler shift depends on the geometry of the signal path and the reflected signal path for multipath. The  \textit{Coherence Time} is defined as the time duration over which two received signal amplitude will be highly correlated.
+
+\begin{equation}
+    T_c \cong \frac{1}{f_m}
+\end{equation}
+
+where $f_m$ is the maximum Doppler shift:
+
+\begin{equation}
+    f_m = \frac{ v}{c}f_c
+\end{equation}
+
+where v, is the maximum velocity, c is speed of light and $f_c$ is the center frequency of the transmitted signal. If the signal bandwidth of the transmitter is much larger than twice the maximum Doppler shift the Doppler spread effect is negligible, this can be expressed as\cite{RFpropagation} page 199:
+
+\begin{equation}
+    f_{BW} >> 2 \cdot f_m
+\end{equation}
+
+\subsection{Absorption attenuation}
+There are multiple phenomenons that can absorb a radio wave signal, some of them can easily be quantified and tested out, like loss through buildings, walls, windows and other physical objects, while other can only be calculated like atmospheric loss and rain and cloud losses. This section will shortly describe the losses behind these phenomenons compared to different frequencies, since it might be possible that they will influence the Link Budget when range tests are being conducted. 
+
+\subsubsection{Concrete, glass, brick, fiberglass, etc}
+There are different physical objects than can partially or fully block a radio wave. For this thesis, it only makes sense to look into walls and windows, since depending on where it is chosen to test the radio communication system there might be these obstacle standing in the way, therefore it is good a roughly estimate on how much they attenuate the signal. 
+
+Appendix B \textit{Losses through building material} shows a list that has been conducted by a university student, Robert Wilson, at \textit{University of Southern California}. This list depicts all losses tested in a anechoic chamber for common building materials. The paper \cite{Magis} also states what the thickness of these materials are. For example the Fiberglass has a of 89mm and a reflection loss of around -39dB, which is a lot. DanSTAR will use fiberglass for the rocket hull, but the thickness will be no more than 2mm. Assuming the loss is linear with the thickness of the fiberglass, then it is around -1dB loss for 2mm fiberglass.
+
+Another scientific paper has tested the loss through brick walls and windows\cite{ModernBuildings}. This test was conducted at frequencies spanning from 800MHz to 18GHz. In the article at page 5, figure 6, it is clearly possible to see that the higher the frequency the higher is the loss through the objects they have tested, although at some specific frequencies with the test object \textit{Windows MOB} the attenuation dips down again before going up. 
+
+Depending on where the range test is going to be conducted for this thesis, it is important to include the above two articles in the link budget calculation, if it is piratically impossible to avoid the obstacles. 
+
+\subsubsection{Vegetation}
+It may happen that the range test will be conducted in such a way that there are foliage in the LOS path. This section presents a known model, which provide a estimate of the additional attenuation due to foliage that is within the LOS path. There are a variety of different models that depicts the loss from foliage. For this thesis only the most conservative one will be used, \cite{RFpropagation} page 135, shows both \textit{Weissberger's model} and \textit{Early ITU vegetation model}, in the book it can be observed that the \textit{Early ITU vegetation model} is the most conservative one, with the formula:
+
+\begin{equation}
+    L(dB) = 0.2F^{0.3}d_f^{0.6} dB
+\end{equation}
+
+where:
+
+\begin{itemize}
+  \item F is the frequency in Mhz
+  \item $d_f$is the depth of the foliage along the LOS path in meters
+\end{itemize}
+
+\subsubsection{Terrain}
+There are also multiple models that depicts the terrain loss, in this thesis the model form ITU will be used. The ITU terrain model is based on diffraction theory and provides quick means of determining a median path loss. The below figure 2.12, shows three plots of the expected diffraction loss due to terrain roughness vs the normalized terrain clearance. Curve B is the theoretical knife-edge diffraction curve, see section (2.5.2.3) \textit{Single knife-edge diffraction attenuation}. Curve D is the theoretical smooth-earth loss at 6.5 GHz using a 4/3 earth radius. The middle curve labeled $A_d$ is the ITU terrain loss model. Each of these models represents an excess terrain loss, beyond free-space loss, described in section (2.5.1) \textit{Free-space attenuation}. 
+
+The ITU terrain loss model is given by:
+
+\begin{equation}
+    A_d = \frac{-20h}{F_1}+10
+\end{equation}
+
+where $h$ is the height difference in meters between most significant path blockage and the path trajectory. If the blockage is above the LOS path, then $h$ is negative. $F_1$ is the radius of the first Fresnel zone, see section (2.5.2.2) \textit{Fresnel Zone}, which is given by the formula:
+
+\begin{equation}
+    F_1 = 17.3 \sqrt{\frac{d_1d_2}{fd}}
+\end{equation}
+
+where:
+
+\begin{itemize}
+  \item $d-1$ and $d_2$ are the distances from each transceivers to the blockages in kilometers(see figure 2.8)
+  \item d is the distance between the transceivers in Km
+  \item f is the frequency in GHz
+\end{itemize}
+
+Equation (2.57) and (2.58) is from ITU's article \textit{Propagation data and prediction methods required for the design of terrestrial line-of-sight systems}\cite{ITUTerrain} on page 3. The $h/F_1$ is the normalized terrain clearance. This model is considered valid for losses above 15 dB, but can be used for as little as 6dB. The two other curves shown on figure 2.11, represent extremes of clear terrain and very rough terrain, thus the middle curve can be used to good guideline between the two extremes.  
+
+\begin{figure}[h]
+\centering
+%\hspace{0.5cm}
+\includegraphics[scale=0.85]{figures/ITUTerrain.PNG}
+\caption{Additional loss from terrain diffraction vs the normalized clearance model\cite{ITUTerrain} - page 4}
+\end{figure}
+
+\subsubsection{Atmospheric attenuation}
+The atmosphere consists of gases, which absorb Rf waves at various frequencies. The gases of primary concern for microwave frequencies are oxygen and water vapor. Atmospheric attenuation depend upon pressure, temperature and water vapor content. For this reason the effect can very considerably with location, altitude and frequency. Modeling the attenuation of RF signal by atmospheric losses is a well known process that is explained in an article published by ITU, titled \textit{Attenuation by atmospheric gases}\cite{ITUAtmosphere} page 4 and 7. For radio links where the transmitter and receiver are at or near the same altitude, the atmosphere can be treated as constant over the path, thus it makes sense to characterize the absorption as a specific attenuation value having the unit dB/km. This attenuation will bee applied to the total LOS path. The expression for the loss due to atmospheric absorption is: 
+
+\begin{equation}
+    A = \gamma_ad dB
+\end{equation}
+
+where d is the LOS distance between the transmitter and receiver in km and $\gamma_a$ is the specif attenuation of the atmosphere in dB/km. It is a sum of the attenuation of water vapor and oxygen, since these are two biggest factors for system that ranges from 2-40Ghz, the formula is:
+
+\begin{equation}
+    \gamma_a = \gamma_o + \gamma_w
+\end{equation}
+
+While ITU gives formulas for these parameters, they are very long and tedious to evaluate in this thesis. Instead of calculating the attenuation, it is a common practice to use values extracted from a plots like on figure 2.12. This figure shows the absorption in dB/km for a given frequency, at near earth propagation (parallel to earth surface). 
+
+\begin{figure}[h]
+\centering
+%\hspace{0.5cm}
+\includegraphics[scale=0.8]{figures/AbsorbsAtmosphere.PNG}
+\caption{Additional loss due to atmosphere at near earth, courtesy of ITU\cite{ITUAtmosphere} - page 17}
+\end{figure}
+
+Figure 2.13 show the same as figure 2.12, but for a radio waves propagating vertically. This figure will be used in the Link budget, when the rocket is flying upwards and figure 2.12 will be used when the rocket is on the launchpad.
+
+\begin{figure}[H]
+%\centering
+\hspace{-3cm}
+\includegraphics[scale=0.7]{figures/AbsorbsAtmosphereVertical.PNG}
+\caption{Additional loss due to atmosphere at vertical propagation\cite{RFpropagation} - page 253}
+\end{figure}
+
+\newpage
+
+\subsubsection{Rain and cloud attenuation}
+When DanSTAR has to conduct a flight-test of its rocket, the test will certainly be done when it is not raining, since a lot of the ground equipment and the electronics in the rocket can malfunction. When it comes to testing only the telemetry system it will be a bad idea for the author of this report to conduct these tests when it is raining, since water and electronics does not go well together. Therefore, it will only make sense to implement rain attenuation in the link budget, when it seems to be absolutely necessary. A reference to an already well known rain attenuation model, done by the ITU is good enough for the thesis. Following the instruction on \cite{ITURain} on page 15, will return the rain attenuation in dB. Furthermore, the book \textit{Introduction to RF propagation} also has an explanation starting from page 224, which is also based on ITU's rain attenuation model.
+
+When it comes to cloud attenuation, it makes sense to look in to the theory behind calculating the attenuation, since the rocket, on its way up, will go through clouds. ITU provides a recommended model for fog and cloud attenuation, see reference \cite{ITUCloud} page 4 formula (13), which is: 
+
+\begin{equation}
+    A = \frac{LK_t}{sin(\theta)} \quad dB \quad for \ang{90}\geq\theta\geq\ang{5}
+\end{equation}
+
+where:
+
+\begin{itemize}
+  \item $L$ is the total columnar liquid water in $kg/m^2$ estimated to be worst case $1kg/m^2$ based on \cite{ITUCloud} page 6. 
+  \item $K_t$ is the specific attenuation coefficient in dB/km see figure 2.14
+  \item $\theta$ is the elevation angle of the path
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+%\hspace{-3cm}
+\includegraphics[scale=0.7]{figures/Kl.PNG}
+\caption{specific attenuation coefficient\cite{RFpropagation} - page 127}
+\end{figure}
+
+\newpage
+
+\section{Thesis specific losses}
+Beside the losses described in the sections above, there are also thesis specific losses. These losses only occurs, because the transmitting antenna is mounted on a rocket, which can accelerate over 3G, and travel at a speed above 400m/s. Furthermore, since the rocket has fins to aerodynamically stabilize it, the mounting of the fins will never be 100\% symmetric, therefore they will induce a torque around its z-axis, which will make the rocket spin around itself, this phenomenon can introduce a huge loss. The below section will clarify how these losses occurs and also how big of a problem they are.
+
+\subsection{Antenna misalignment attenuation}
+In applications where directional antennas are used, both on the transmitter and receiver side, it is important that the antennas point towards each other. For example in a static setup, where WiFi in a community is being extended from one house to another, the antennas has to point at each other to allow for the best connection strength.  
+
+For this thesis, it is assumed the above to be true for the rocket only when the rocket is on the launch rail, ready to be fired, but as soon as the rocket starts to fly, the system will transitions from a static setup to a dynamic setup where the operator on the ground has to track the rockets movements. Depending on what type of antenna is being used (directional or omnidirectional) in the rocket, there will certainly be antenna alignment losses.
+
+Figure 2.15 depicts the problem, with two directional antennas. For an omnidirectional and a directional antenna setup, the problem will still occur but it will not be as problematic. % for more information about how antennas work see section 2.7 ....   
+
+\begin{figure}[h]
+\centering
+%\hspace{-3cm}
+\includegraphics[scale=1]{figures/AntennasAlignment.PNG}
+\caption{Antenna misalignment loss - in courtesy of John S. Seybold  \cite{RFpropagation} - page 63}
+\end{figure}
+
+It is hard to  quantify the size of the misalignment loss in dB, since it depends on how good the operator is at aiming towards the rocket. If, on the other hand, the on ground system is automatically capable of tracking the rocket, the antennas on the ground will have to be purposely pointing away from the rockets antenna peak beam. This purposely misalignment of the antenna is very small and can be combined with the RSSI value to allow for automatically tracking of the rocket. %where should we write about how this is done? 
+
+\subsection{Polarization mismatch}
+For a static radio communication setup, as long as the antennas on both the transmitter and receiver side are placed with the same polarity, there will be no losses, due to polarization mismatch. For example if a linear antenna (quaterwavve monopol antenna, see section 2.7.2 \textit{Quaterwave monopol}) is horizontally mounted on the rocket, which is stationary on the launch pad, and a linear antenna (yagi antenna, see section 2.7.6 \textit{Yagu-uda and cross yagi-uda}) is horizontally mounted on the ground (mission control), then there will be no loss, since both antennas will be radiating and receiving with the same polarity - horizontally. But it is different when everything becomes dynamics, where the rocket is flying in the air. if it Suddenly starts to tumble (because of aerodynamic reasons), then the linear antenna mounted horizontally on the rocket, might not be horizontally looking anymore from the perspective of the receiver. This will introduce huge losses up to -20 dB. Theoretically it is infinity loss, but in reality the polarity might change because of multipath cases, allowing for some signal to reach the ground antenna with the same polarity or a slant polarity. To avoid the above problem, a helical antenna can be used as ground antenna, which will neglect the problem, since a helical antenna does not care about the polarity. Although using a helical antenna on ground and a linear antenna on the rocket, will introduce a total loss of -3dB. This payoff is much better than losing -20dB, due to linear antennas being used on both sides.   
+
+%%For more theory about polarization please read section ....... to fully understand the scope of the problem. See the tables... 
+
+\subsection{Package loss due to high axial rotational speed of the rocket}
+Another loss that is specific to this thesis, is the phenomenon where the rocket itself is obscuring the transmitted radio signal. As explained above, the rocket will have a tendency to rotate around it z-axis, if the rotational speed of the rocket is greater than speed it takes to transmit a single package of data down to earth, then it is possible to experience losses since the transmitting antenna will rotate to the other side where there is no ground antenna to receive the signal, effectively the rocket will block the transmitted radio wave, due to it standing in the way of itself. On figure 2.16 it is observed that there are 3 antennas, 1 on the ground and 2 on the rocket - a right and a left antenna. The actual rocket will have 3 antennas spaces 120-degrees from each other, but for the sake of simplicity a 2D drawing is enough. The rocket is rotating around itself at a speed that is quite hard to estimate, it can be anywhere from 5Hz to 30Hz. The case is, when the right antenna is transmitting and the rocket is stationary, then everything is good since the receiver antenna is in line-of-sight with the right antenna. The moment the rocket lifts off, the small misalignment (which is mechanically hard to avoid) of the fins of the rocket will induce a torque, that in return will make the rocket rotate. When the rocket turn half revolution the right antenna will then be on the left side an obscured from the hull of the rocket. Depending on what is inside the rocket and what material the hull is made out off the signal loss can be huge. For worst-case scenario, it is assumed to be -20dB, practically meaning the signal will be lost. Once the rocket rotates another half revolution then the obscured antenna will go back to its starting point, where the signal is highest. Now, what is experienced in reality is a sinusoidal wave, where the amplitude of the wave is the value of RSSI, and the frequency of that wave is the rotational speed of the rocket, what is meant here is that we will not experience a sudden drop of -20dB but a gradual drop towards -20dB, depending on the rotational speed. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-3cm}
+\includegraphics[scale=1]{figures/RocketShading.PNG}
+\caption{Markup of Dragonfly, showcasing the mounted antennas on the rocket and the ground antenna}
+\end{figure}
+
+From a simple calculation it is people to figure out what the maximum rotational speed is for fixed sized packet size, before the antenna is on obscured by the rocket, the time it takes to send a package, also called time on-air, is given by the formula:
+
+\begin{equation}
+    T_{OA} = \frac{packet\ size [bit]}{air\ data\ rate [\frac{bit}{s}]}\ [s]
+\end{equation}
+
+Where the packet size is in [bits] and air date rate is in [bit/s]. Both values can be programmed to be a fixed value depending on what the datasheet is saying for a given transceiver. 
+
+The frequency is given by:
+
+\begin{equation}
+    f = \frac{1}{T}\ [Hz]
+\end{equation}
+
+Where $T$ is the period in seconds, denoted s.
+
+Since the transmitter only has a half rotation where it can transmit data before it gets obscured by the rocket, then the goal is to make sure that the following inequality is true:
+
+\begin{equation}
+    \frac{T}{2} \geq T_{OA}
+\end{equation}
+
+What can be deduced from the above equations (2.63) and (2.64) is that to uphold the inequality (2.65), one can lower the packet size or increase the air data rate or decrease the rotational speed of the rocket (measured in Hz). Increasing the air data rate, lowers the sensitivity of the transceiver, which decreases the link margin (see section 2.8.1 \textit{Link budget margin}) this happens because the bandwidth increases to accommodate for the higher data rate, which will allow for more noise into the receiver, reducing the sensitivity margin. Unless DanSTAR build an counter rotational system in the rocket, the axial rotation cannot be controlled therefore this parameter is fixed. The final and easiest variable to change is the packet size, since the downside of it only the need to of transmitting more packages to accommodate for the data produced by the rocket. 
+
+Some transceivers has a function that allow for dynamic package lengths, this can be combined with the navigational system that can calculate the rotational speed while the rocket is flying, using the following equation:
+
+\begin{equation}
+    \omega = \frac{2\pi}{T} = 2 \pi f
+\end{equation}
+
+where $\omega$ is the angular velocity in $[\frac{radians}{s}]$
+
+When combining the above equation with the dynamic package size function, we can create a model in which the package size dynamically changes depending on what the navigational system has calculated the rotational speed of the rocket to be. In this way the computer can figure out, by itself, what the optimal package size should be.
+
+\section{Antenna in general}
+For any type of a point-to-point radio communication system it is important to understand how antennas operate. Antennas are used to radiate and receive electromagnetic energy and they are a essential prerequisite for being able to calculate a good link budget.
+
+This theory section will go through the basic of how antennas work and the different type of antennas that exists, although there are many, only thesis specific antennas will be described.
+
+\subsection{Isotropic antenna}
+An isotropic antenna, is an theoretical ideal antenna that radiates or receives equally in all direction, with a spherical pattern. Isotropic radiators are used as a reference radiators with which other sources are compared against, for example when determining the gain of a practical antenna. Se figure 2.17, depicting the isotropic radiator. Since the isotropic radiator is radiating equally in all direction the directivity of this theoretical antenna is 1 and the efficiency is 100\% meaning the gain is 0 dBi. Since most practical antennas are referenced to an isotropic antenna, the gain of these practical antennas are in the unit of dBi. Some manufactures reference them to a dipole antenna where the unit then becomes dBd. see section 2.1.3 \textit{what is dB/dBi/dBd/dBW/dBm?}.  
+
+\begin{figure}[h]
+\centering
+%\hspace{-3cm}
+\includegraphics[scale=1.3]{figures/Isotropic.png}
+\caption{Isotropic radiator - a point in space radiating equally in all direction in a spherical pattern}
+\end{figure}
+
+\subsection{Directivity, efficiency and gain}
+Any practical antenna will exhibit some directivity in its radiation patters, even the simplest types such as dipole antennas. figure 2.18 is a simple picture that explains the concept of antenna directivity. The balloon 2.18(A) that is blown up to it usual - close to - spherical shape, represents the "reference" isotropic antenna. Squeezing the balloon in the middle 2.18(B) produces a dipole-like pattern (see section 2.6.2 \textit{Dipole}), a figure 8 pattern, where the peak level is at the top and bottom, lager than the isotropic reference balloon. Also see figure 2.3, further up in section 2.1.3 \textit{what is dB/dBi/dBd/dBW/dBm?}. Next, squeezing the balloon close to the bottom in figure 2.18(C) produces a pattern with even more gain in the top compared to the reference, this could be a high gain antenna, such as a yagi or a helical antenna. The directivity of an antenna is defined as the ratio of the peak power density at distance, d, to the average power density at d, as seen below:  
+
+\begin{equation}
+    D = \frac{P}{\frac{P_T}{4 \pi d^2}} = \frac{P}{P_{av}} 
+\end{equation}
+
+where:
+
+\begin{itemize}
+  \item $D$ is directivity.
+  \item $P$ is power density at its maximum point on the surface of the sphere.
+  \item $P_T$ is the power applied to the antenna terminals.
+  \item $4 \pi d^2$ is the surface area of a sphere with radius d.
+  \item $P_{av}$ is average power density, given by $\frac{P_T}{4 \pi d}$.
+\end{itemize}
+
+As stated above the directivity of an isotropic antenna is 1, when the antenna losses (or in other words the efficiency) are included in the directivity, then we can calculate the gain of the antenna, with the formula:
+
+\begin{equation}
+    G = \epsilon_r D = \frac{P_r}{P_i}\cdot\frac{P}{P_{av}} \quad dBi
+\end{equation}
+
+where $\epsilon_r$ is antenna efficiency, which can be written as $P_r$ power radiated over $P_i$ power input.
+
+What is important to state here, is that the gain of a given antenna only has the antenna efficiency included in the calculation, as equation (2.68) shows. It does not include the impedance mismatch loss, see section 2.5.7 \textit{Impedance matching loss}.  
+
+
+\begin{figure}[h]
+\centering
+%\hspace{-3cm}
+\includegraphics[scale=0.8]{figures/BalloonDirectivity.PNG}
+\caption{Demonstration of antenna patter gain with balloons - courtesy to the ARRL book, see reference: \cite{ARRL} - chapter 2 page 10}
+\end{figure}
+
+\subsection{E-plane and H-plane}
+
+\subsection{Radiation pattern}
+\subsection{Field region}
+\subsection{Beam-width}
+\subsection{Anechoic chamber}
+\subsection{Polarization}
+\subsection{Impedance matching loss}
+\subsection{VSWR}
+\subsection{Matching networks}
+\subsubsection{Baluns}
+\subsubsection{Pi-filter}
+\subsubsection{Loading coil}
+\section{Different type of Antennas}
+\subsection{Quaterwave monopol}
+\subsection{Dipole}
+\subsection{Helical}
+\subsection{Patch}
+\subsection{Yagi-uda and cross yagi-uda}
+
+\section{Detailed Link Budget}
+\subsection{Link budget margin}
+\begin{figure}[h]
+\centering
+\hspace*{-2cm}
+\includegraphics[scale=1.1]{figures/link_budget.pdf}
+\caption{Link budget}
+\end{figure}
+
+The link budget is a method used to determine the necessary parameters for a successful transmission of a radio wave from a transmitter to a receiver.  
+
+The general overview of any point-to-point radio communication system, is always the same. There is a sender (Tx) and a receiver (Rx), now a days the sender and receiver is build into one system, called a transceiver. Some transceivers has internal Power Amplifiers (PA) and internal Low Noise Amplifiers (LNA). The internal PA amplifies the signal when the transceiver is in transmitting mode, and the LNA filters the signal when the transceiver is in the receiving mode. If the internal PA/LNA of the transceiver is not powerful enough for the estimated link budget, one can add an independent external front-end chip that has both a PA/LNA, to increase the link budget margin. Beside these two chips, a balun and a band filter is needed to match both chip to each other at a load of 50ohm and to attenuate unwanted frequencies - a more in-depth explanation of the hardware is discussed in section 5.1 \textit{PCB design}. All of these components will play a huge role in calculating the link budget, in section 3.1 \textit{Link budget}. 
+
+Figure 2.4 depicts the overall link budget for 
+
+In this project we are both using the internal PA and LNA of the transceiver nrf24L01+\cite{nrf24l01+}, but because the internal PA, of the transceiver, is not powerful enough we will use an external PA/LNA chip, the rfx2401c\cite{RFX2401C}. In-between these modules, balun and band filters can be used to match the signal between both chips and to filter - or more precisely to attenuated - unwanted frequencies.
+
+These components will play a role in calculating the total link budget described in the section below. The Tx and Rx can be seen in figure 2.1, although the figure assumes the total sum of the PA and LNA in the Tx and Rx boxes used in the system. In the final report, a more detailed figure will be illustrated, which will show each components and its relative dBm, for now only a general overview is shown. The P\textsubscript{Tx} and P\textsubscript{Rx} is the PA and LNA in the transceivers as explained above. L\textsubscript{Tx} and L\textsubscript{Rx} is the cable losses, while the G\textsubscript{Tx} and G\textsubscript{Rx} is the gains from the antenna. The EIRP is the Effective Isotropic Radiated Power which is the sum of all gains and losses from the PA to the antenna of the TX. 
+L\textsubscript{Channel} is the losses experienced when the signal propagates through any medium: Free space, water, in space etc. Out of all these gains and losses the L\textsubscript{channel} is the hardest one to calculate, since it consist of multiple phenomenons, such as: free-space loss, rain loss, cloud loss (because of clouds we get losses), atmospheric losses, multipath loss polarization mismatch and many more. It is important, to know which one of these, one should be aware of, since they all play a different role at different frequencies. Once one has summed up all the gains and losses, all the way from the Tx to Rx side, a margin analysis should be made to determine if the signal can reach a predefined rage. On figure 2.1, it is seen (to the right) a margin line which is, in this case, higher than the Rx sensitivity. The Rx sensitivity can be calculated, but almost every time the sensitivity is stated in the datasheet of the transceiver, see nrf24L01+\cite{nrf24l01+} page 8 under \textit{transceiver}. If the margin is higher than the sensitivity, then we know that system can handle the range that is calculated from the free-space loss formula. Although, the margin is higher than the sensitivity, it should be known that the calculation is only a theoretical guideline for how good the range is going to be. This means that we need a good oversized margin to be sure that the signal can reach a predefined range. There is no rule of thumb, that states how big the margin should be, it is usually axiom set by experience in RF technology and from empirical knowledge.
+
+The link budget, see figure 2.2 below, is a smart overview of all the calculation made - based on the theory section, on other scientific papers and datasheets - to showcase losses and gains of each components and sub-systems. The figure 2.2, already depicts that the choices taken by the author of this thesis, will theoretically result in a successful communication of a rage up to 9144 meter. Although, the margin is quite low it is, as explained above, a self defined value or an axiom, which will defined based on set of criterias, which are yet not defined. The calculation of these link budget will be explain the the final report. 
+
+
+
+%probably not important, since a prototype is enough for this bachelor, so write only about the schematics compared to insertion loss for the link budget.
+\section{PCB design}
+
+\section{Framing and Modulation (MultiCeiver\texttrademark and Shockburst\texttrademark)}
+
+
+
+
