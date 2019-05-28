@@ -889,6 +889,8 @@ What is important to state here, is that the gain of a given antenna only has th
 \caption{Demonstration of antenna patter gain with balloons - courtesy to the ARRL book, see reference: \cite{ARRL} - chapter 2 page 10}
 \end{figure}
 
+\newpage
+
 \subsection{E-plane and H-plane}
 For a linearly polarized waveguide antennas, two reference planes exists, a E-plane and a H-plane. These two planes can be used to characterize the radiation of an antenna, see section 2.5.4 \textit{Radiation pattern}.
 
@@ -898,15 +900,106 @@ For the same type linearly polarized antenna, the H-plane is the magnetic field 
 
 \begin{figure}[h]
 %\centering
-\hspace{-1cm}
-\includegraphics[scale=0.8]{figures/EH_Plane.png}
+\hspace{-0.5cm}
+\includegraphics[scale=0.7]{figures/EH_Plane.png}
 \caption{The E and H-plane depicted on a sleeved dipole antenna \cite{EH-plane}}
 \end{figure}
 
 \subsection{Radiation pattern}
-\subsection{Polarization}
+The radiation pattern of an antenna defines the variation of the power radiated by an antenna as a function of the direction away from the antenna, by other words it is a graphical depiction of the gain of the antenna versus angle. The radiation pattern is always described for the far field region of the antenna, see section 2.5.6 \textit{field region}, where the gain is a function of the azimuth and elevation angles only. Figure 2.20 shows this graphical view of the radiation pattern for a dipole antenna, where the gain is plotted in dB.Figure 2.21 show the gain of a 2-dimensional cut for both the horizontal and vertical plane. 
+
+The radiation pattern on the left is the azimuth plot. it is a function of the azimuth angle for a fixed polar angle (90-degrees off the z-axis,which is parallel with the antenna on figure 2.20). Since the radiation pattern in figure 2.20 is symmetrical around the z-axis, this plot appears as a constant in figure 2.21a
+
+The radiation pattern on the right, figure 2.21b, is the elevation plot, which represent the plot of the radiation pattern as a function of the angle measured off the z-axis (for a fixed azimuth angle). The gain becomes maximum when the angle is perpendicular to the antenna, that is 90 and 180 degrees.
+
+Figure 2.20 and 2.21 was simulated in the program 4nec2\cite{4nec2}, see section 3 \textit{Simulation}. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.5]{figures/DipoleAntennaRad.PNG}
+\caption{A 3-dimensional depiction of the radiation pattern for a dipole antenna}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.49\linewidth}
+    \includegraphics[width=\linewidth]{figures/HorizontalRad.PNG}   \caption{Total gain for Horizontal plane (azimuth) of a dipole antenna }
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\linewidth}
+    \includegraphics[width=\linewidth]{figures/VerticalRad.PNG}
+    \caption{Total gain for vertical plane (elevation) of a dipole antenna}
+  \end{subfigure}
+  \caption{A 2-dimensional cut of the radiation pattern for a dipole antenna}
+\end{figure}
+
+Figure 2.20 shows that the dipole antenna is a omnidirectional antenna, meaning it is radiating equally in all direction in the horizontal plane, whereas figure 2.22 and 2.23 shows the radiation pattern of a helix antenna, where the radiation is focused towards a point. What can also be seen on figure 2.22 and 2.23 is the side loops around the main loop (the single peak direction), this means that not all of the energy is emitted "through" the main loop, but some goes to the side loop, which make the antenna less effective, see section 2.6.3 \textit{Helical} for more information about directed antennas. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.45]{figures/HelixRad.PNG}
+\caption{Radiation pattern for a helix antenna }
+\end{figure}
+
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.7]{figures/HelixVerticalrad.PNG}
+\caption{A 2-dimensional cut of the radiation pattern for a dipole antenna }
+\end{figure}
+
+\newpage
 
 \subsection{Field region}
+The antenna radiation field is divided into 4 principle regions, where the characteristics of the radiated wave are different. While these regions are not firm boundaries, they provide some insight to the actual radiated field as a function distance from the antenna. Figure 2.24 depicts these regions.
+
+\begin{figure}[h]
+%\centering
+\hspace{-1cm}
+\includegraphics[scale=0.25]{figures/FieldRegions.png}
+\caption{Field regions}
+\end{figure}
+
+\subsubsection{Far-field region}
+The far-field region is the most important region, as this determine the antenna's radiation pattern, described in the section above. Antennas are use to communicate wirelessly from long distances, so this is the region of operation for most antennas. The far-field region is far from the antenna, as one might suspect. In this region, the radiation pattern does not change shape with distance (although the fields still die off as $\frac{1}{r}$). This region is dominated by the radiated fields, with E- and H-planes being orthogonal to each other. The far-field region is defined for distances $r$, such that 3 condition must be satisfied:
+
+\begin{equation}
+    r > \frac{2D^2}{\lambda}
+\end{equation}
+
+\begin{equation}
+    r >> D
+\end{equation}
+
+\begin{equation}
+   r >> \lambda
+\end{equation}
+
+where $D$ is the largest linear dimension of the antenna, and $\lambda$ is the wavelength. The first and second equation ensure that the power radiated in a given direction from distinct parts of the antenna are approximately parallel. This makes the far-field region behave like plane wave. The third condition is due to the antenna having reactive fields (see reactive near-field below) that have E-fields and H-fields die off with distances as $\frac{1}{r^2}$ and $\frac{1}{r^3}$. This is due to the fact that the magnetic field strength is proportional to the inverse-cube of the distance $r$, and electric field strength is proportional to inverse-square of distance $r$, thus the third condition ensures that these near field are gone, such that only the radiating field is dominant, which fall off with distance as $\frac{1}{r}$\cite{AntennaThoryFieldRegion}. 
+
+\subsubsection{Transition zone}
+The transition zone is between the near and far field regions and extends over the distance from one to two wavelength from the antenna. In this region, near-field dies out and ceases to be important, thus leaving the far-field effects to be dominant. 
+
+\subsubsection{Radiating near-field}
+The radiating near-field region is also called the Fresnel region, since it is between the reactive near-field region and the far-field region. It is defined as:
+
+\begin{equation}
+    0.62 \cdot \sqrt{\frac{D^3}{\lambda}} < r < \frac{2D^2}{\lambda}
+\end{equation}
+
+Unlike far-field region the shape in the radiating near-field 
+
+\subsubsection{Reactive near-field}
+
+\begin{equation}
+   r < 0.62 \cdot \sqrt{\frac{D^3}{\lambda}}
+\end{equation}
+
+\subsection{Polarization}
+
+
+
 \subsection{Beam-width}
 \subsection{Anechoic chamber}
 
