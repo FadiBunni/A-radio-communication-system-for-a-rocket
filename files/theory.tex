@@ -698,7 +698,7 @@ where $h$ is the height difference in meters between most significant path block
 where:
 
 \begin{itemize}
-  \item $d-1$ and $d_2$ are the distances from each transceivers to the blockages in kilometers(see figure 2.8)
+  \item $d_1$ and $d_2$ are the distances from each transceivers to the blockages in kilometers(see figure 2.8)
   \item d is the distance between the transceivers in Km
   \item f is the frequency in GHz
 \end{itemize}
@@ -800,7 +800,7 @@ Another loss that is specific to this thesis, is the phenomenon where the rocket
 
 \begin{figure}[h]
 \centering
-%\hspace{-3cm}
+%\hspace{-1cm}
 \includegraphics[scale=1]{figures/RocketShading.PNG}
 \caption{Markup of Dragonfly, showcasing the mounted antennas on the rocket and the ground antenna}
 \end{figure}
@@ -918,7 +918,7 @@ Figure 2.20 and 2.21 was simulated in the program 4nec2\cite{4nec2}, see section
 \centering
 %\hspace{-1cm}
 \includegraphics[scale=0.5]{figures/DipoleAntennaRad.PNG}
-\caption{A 3-dimensional depiction of the radiation pattern for a dipole antenna}
+\caption{A 3-dimensional depiction of the radiation pattern for a dipole antenna in free-space}
 \end{figure}
 
 \begin{figure}[h!]
@@ -933,13 +933,13 @@ Figure 2.20 and 2.21 was simulated in the program 4nec2\cite{4nec2}, see section
   \caption{A 2-dimensional cut of the radiation pattern for a dipole antenna}
 \end{figure}
 
-Figure 2.20 shows that the dipole antenna is a omnidirectional antenna, meaning it is radiating equally in all direction in the horizontal plane, whereas figure 2.22 and 2.23 shows the radiation pattern of a helix antenna, where the radiation is focused towards a point. What can also be seen on figure 2.22 and 2.23 is the side loops around the main loop (the single peak direction), this means that not all of the energy is emitted "through" the main loop, but some goes to the side loop, which make the antenna less effective, see section 2.6.3 \textit{Helical} for more information about directed antennas. 
+Figure 2.20 shows that the dipole antenna is a omnidirectional antenna, meaning it is radiating equally in all direction in the horizontal plane, whereas figure 2.22 and 2.23 shows the radiation pattern of a helix antenna, where the radiation is focused towards a point. What can also be seen on figure 2.22 and 2.23 is the side loops around the main loop (the single peak direction), this means that not all of the energy is emitted "through" the main loop, but some goes to the side loop, which make the antenna less effective. Furthermore, the helical antenna is simulated with real ground plane, acting as a reflector, whereas figure 2.20 is in free-space, see section 2.6.3 \textit{Helical} for more information about directed antennas. 
 
 \begin{figure}[h]
 \centering
 %\hspace{-1cm}
 \includegraphics[scale=0.45]{figures/HelixRad.PNG}
-\caption{Radiation pattern for a helix antenna }
+\caption{Radiation pattern for a helix antenna - real ground plane }
 \end{figure}
 
 \begin{figure}[h]
@@ -956,13 +956,13 @@ The antenna radiation field is divided into 4 principle regions, where the chara
 
 \begin{figure}[h]
 %\centering
-\hspace{-1cm}
+\hspace{-1.5cm}
 \includegraphics[scale=0.25]{figures/FieldRegions.png}
 \caption{Field regions}
 \end{figure}
 
 \subsubsection{Far-field region}
-The far-field region is the most important region, as this determine the antenna's radiation pattern, described in the section above. Antennas are use to communicate wirelessly from long distances, so this is the region of operation for most antennas. The far-field region is far from the antenna, as one might suspect. In this region, the radiation pattern does not change shape with distance (although the fields still die off as $\frac{1}{r}$). This region is dominated by the radiated fields, with E- and H-planes being orthogonal to each other. The far-field region is defined for distances $r$, such that 3 condition must be satisfied:
+The far-field region is the most important region, as this determine the antenna's radiation pattern, described in the section above. Antennas are use to communicate wirelessly from long distances, so this is the region of operation for most antennas. The far-field region is far from the antenna, as one might suspect. In this region, the radiation pattern does not change shape with distance (although the fields still die off as $\frac{1}{r}$). This region is dominated by the radiated fields, with E- and H-planes being orthogonal to each other and in phase. The far-field region is defined for distances $r$, such that 3 condition must be satisfied:
 
 \begin{equation}
     r > \frac{2D^2}{\lambda}
@@ -982,26 +982,82 @@ where $D$ is the largest linear dimension of the antenna, and $\lambda$ is the w
 The transition zone is between the near and far field regions and extends over the distance from one to two wavelength from the antenna. In this region, near-field dies out and ceases to be important, thus leaving the far-field effects to be dominant. 
 
 \subsubsection{Radiating near-field}
-The radiating near-field region is also called the Fresnel region, since it is between the reactive near-field region and the far-field region. It is defined as:
+The radiating near-field region is also called the Fresnel region, since it is between the reactive near-field region and the far-field region and defined as:
 
 \begin{equation}
     0.62 \cdot \sqrt{\frac{D^3}{\lambda}} < r < \frac{2D^2}{\lambda}
 \end{equation}
 
-Unlike far-field region the shape in the radiating near-field 
+Unlike far-field region the shape of the radiation pattern in the radiating near-field may vary with distance. Depending on the value $r$ and $\lambda$ this field may or may not exists, that is why this region is sometimes a part of the transition zone.   
 
 \subsubsection{Reactive near-field}
+In the close vicinity of the antenna, the reactive near field is the most dominant factor. In this region the fields are predominately reactive fields, which means E- and H-plane are orthogonal to each other but are 90 degrees out of phase. In general any objects within this region will result in coupling with the antenna and distortion of the ultimate far-field antenna pattern. This phenomenon is used in the music instrument \textit{Theremin}\cite{Theremin}. Below is the condition for the reactive near-field region.
 
 \begin{equation}
    r < 0.62 \cdot \sqrt{\frac{D^3}{\lambda}}
 \end{equation}
 
 \subsection{Polarization}
+To avoid making this section too heavy and tedious to read through it is best to minimize any electromagnetism theory, and rather using graphical visualization to explain the theory behind polarization. For this a software program called Emanim\cite{EMANIM} is recommended to download and try out. All the figures below, will come from this software. If the reader wants the detailed theory, it is advised to read section 3.5 \textit{Antenna Polarization} in the book \textit{Introduction to RF Propagation} by John S. Seybold - page from 55 to 62.\cite{RFpropagation}.
+
+Polarization is one of the fundamental characteristics of any antenna. Polarization is defined in the far-field region, see section 2.5.5.1 \textit{Far-field region}, of the antenna and is the orientation of the plane, by which the electrical field (E-plane) portion of the propagated wave is derived from. In the far-field region, the electrical field (E-plane), magnetic field (H-plane) and propagation direction vectors are all mutually orthogonal and in phase. This permits a complete characterization of a wave by describing the electrical field vector and the direction of propagation.
+
+Most antennas and electromagnetic waves have either linear polarization (vertical or horizontal) or circular polarization, which can be right-hand or left-hand or elliptical Polarization. 
+
+\subsubsection{Linear polarization}
+A linear polarized antenna can both be in the vertical or horizontal position, relative to ground. An antenna is said to be linear polarized when the E-field is either oscillating forth and back in the x-axis (horizontal position) or in y-axis(vertical position). See figure 2.25 and 2.26 for vertical and horizontal polarization. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-1.5cm}
+\includegraphics[scale=0.25]{figures/VerticalPolarization.PNG}
+\caption{Vertical polarization}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+%\hspace{-1.5cm}
+\includegraphics[scale=0.25]{figures/HorizontalPolarization.PNG}
+\caption{Horizontal polarization}
+\end{figure}
+
+\newpage
+
+\subsubsection{Circular polarization}
+When the x and y components of the electrical field is oscillating forth and back in their x- and y-axis while being 90 degrees out of phase and having the equal magnitude, the E-field will rotate in a circle, see figure 2.27. The have circular polarization, the following criteria  must be met:
+
+\begin{itemize}
+  \item The E-field must have two orthogonal components.
+  \item The E-field's orthogonal components must have equal magnitude.
+  \item The orthogonal components must be 90 degrees out of phase.
+\end{itemize}
+
+Circular polarization can a occur in tow forms, \textbf{Right hand circularly polarized} (RHCP) and \textbf{Left hand circularly polarized} (LHCP). This is important to note, since the transmitter and receiver must have the same polarization in order to avoid huge losses. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-1.5cm}
+\includegraphics[scale=0.3]{figures/DetailedRightHandPolarization.PNG}
+\caption{Circular polarization, where x (red line) and y (green line) component of the electrical field are oscillating forth and back, with equal magnitude to create the circular pattern (blue line)}
+\end{figure}
+
+\subsubsection{Elliptical polarization}
+For elliptical polarization, the only difference between this type of polarization and circular polarization is the magnitude factor, where the x and y components has different magnitudes. This can be seen on figure 2.28, the magnitude of the y component is greater than the x component, thus resulting in a elliptical pattern.
+
+\begin{figure}[h]
+\centering
+%\hspace{-1.5cm}
+\includegraphics[scale=0.3]{figures/ellipticalPolarization.PNG}
+\caption{Elliptical polarization, where x (red line) and y (green line) component of the electrical field are oscillating forth and back, with different magnitudes to create the Elliptical pattern (blue line)}
+\end{figure}
+
+\subsubsection{Polarization losses}
+
+%the losses are...
 
 
-
-\subsection{Beam-width}
-\subsection{Anechoic chamber}
+\subsection{Beam-width} %add it to radiation pattern
+\subsection{Anechoic chamber} % describe what it is in the pathloss chanel only, and remove it form here
 
 \subsection{Impedance matching loss}
 \subsection{VSWR}
@@ -1041,7 +1097,7 @@ The link budget, see figure 2.2 below, is a smart overview of all the calculatio
 
 
 %probably not important, since a prototype is enough for this bachelor, so write only about the schematics compared to insertion loss for the link budget.
-\section{PCB design}
+\section{RF PCB design rules}
 
 \section{Framing and Modulation (MultiCeiver\texttrademark and Shockburst\texttrademark)}
 
