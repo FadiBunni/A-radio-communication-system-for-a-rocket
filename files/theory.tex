@@ -660,7 +660,7 @@ There are multiple phenomenons that can absorb a radio wave signal, some of them
 \subsubsection{Concrete, glass, brick, fiberglass, etc}
 There are different physical objects than can partially or fully block a radio wave. For this thesis, it only makes sense to look into walls and windows, since depending on where it is chosen to test the radio communication system there might be these obstacle standing in the way, therefore it is good a roughly estimate on how much they attenuate the signal. 
 
-Appendix B \textit{Losses through building material} shows a list that has been conducted by a university student, Robert Wilson, at \textit{University of Southern California}. This list depicts all losses tested in a anechoic chamber for common building materials. The paper \cite{Magis} also states what the thickness of these materials are. For example the Fiberglass has a of 89mm and a reflection loss of around -39dB, which is a lot. DanSTAR will use fiberglass for the rocket hull, but the thickness will be no more than 2mm. Assuming the loss is linear with the thickness of the fiberglass, then it is around -1dB loss for 2mm fiberglass.
+Appendix B \textit{Losses through building material} shows a list that has been conducted by a university student, Robert Wilson, at \textit{University of Southern California}. This list depicts all losses tested in a anechoic chamber (it is a room designed to completely absorb reflections from electromagnetic waves) for common building materials. The paper \cite{Magis} also states what the thickness of these materials are. For example the Fiberglass has a of 89mm and a reflection loss of around -39dB, which is a lot. DanSTAR will use fiberglass for the rocket hull, but the thickness will be no more than 2mm. Assuming the loss is linear with the thickness of the fiberglass, then it is around -1dB loss for 2mm fiberglass.
 
 Another scientific paper has tested the loss through brick walls and windows\cite{ModernBuildings}. This test was conducted at frequencies spanning from 800MHz to 18GHz. In the article at page 5, figure 6, it is clearly possible to see that the higher the frequency the higher is the loss through the objects they have tested, although at some specific frequencies with the test object \textit{Windows MOB} the attenuation dips down again before going up. 
 
@@ -791,7 +791,7 @@ Figure 2.15 depicts the problem, with two directional antennas. For an omnidirec
 It is hard to  quantify the size of the misalignment loss in dB, since it depends on how good the operator is at aiming towards the rocket. If, on the other hand, the on ground system is automatically capable of tracking the rocket, the antennas on the ground will have to be purposely pointing away from the rockets antenna peak beam. This purposely misalignment of the antenna is very small and can be combined with the RSSI value to allow for automatically tracking of the rocket. %where should we write about how this is done? 
 
 \subsection{Polarization mismatch}
-For a static radio communication setup, as long as the antennas on both the transmitter and receiver side are placed with the same polarity, there will be no losses, due to polarization mismatch. For example if a linear antenna (quaterwavve monopol antenna, see section 2.7.2 \textit{Quaterwave monopol}) is horizontally mounted on the rocket, which is stationary on the launch pad, and a linear antenna (yagi antenna, see section 2.7.6 \textit{Yagu-uda and cross yagi-uda}) is horizontally mounted on the ground (mission control), then there will be no loss, since both antennas will be radiating and receiving with the same polarity - horizontally. But it is different when everything becomes dynamics, where the rocket is flying in the air. if it Suddenly starts to tumble (because of aerodynamic reasons), then the linear antenna mounted horizontally on the rocket, might not be horizontally looking anymore from the perspective of the receiver. This will introduce huge losses up to -20 dB. Theoretically it is infinity loss, but in reality the polarity might change because of multipath cases, allowing for some signal to reach the ground antenna with the same polarity or a slant polarity. To avoid the above problem, a helical antenna can be used as ground antenna, which will neglect the problem, since a helical antenna does not care about the polarity. Although using a helical antenna on ground and a linear antenna on the rocket, will introduce a total loss of -3dB. This payoff is much better than losing -20dB, due to linear antennas being used on both sides.   
+For a static radio communication setup, as long as the antennas on both the transmitter and receiver side are placed with the same polarity, there will be no losses, due to polarization mismatch. For example if a linear antenna (quaterwavve monopol antenna, see section 2.7.2 \textit{Quaterwave monopol}) is horizontally mounted on the rocket, which is stationary on the launch pad, and a linear antenna (yagi antenna, see section 2.7.6 \textit{Yagi-uda and cross yagi-uda}) is horizontally mounted on the ground (mission control), then there will be no loss, since both antennas will be radiating and receiving with the same polarity - horizontally. But it is different when everything becomes dynamics, where the rocket is flying in the air. if it Suddenly starts to tumble (because of aerodynamic reasons), then the linear antenna mounted horizontally on the rocket, might not be horizontally looking anymore from the perspective of the receiver. This will introduce huge losses up to -20 dB. Theoretically it is infinity loss, but in reality the polarity might change because of multipath cases, allowing for some signal to reach the ground antenna with the same polarity or a slant polarity. To avoid the above problem, a helical antenna can be used as ground antenna, which will neglect the problem, since a helical antenna does not care about the polarity. Although using a helical antenna on ground and a linear antenna on the rocket, will introduce a total loss of -3dB. This payoff is much better than losing -20dB, due to linear antennas being used on both sides.   
 
 %%For more theory about polarization please read section ....... to fully understand the scope of the problem. See the tables... 
 
@@ -933,7 +933,7 @@ Figure 2.20 and 2.21 was simulated in the program 4nec2\cite{4nec2}, see section
   \caption{A 2-dimensional cut of the radiation pattern for a dipole antenna}
 \end{figure}
 
-Figure 2.20 shows that the dipole antenna is a omnidirectional antenna, meaning it is radiating equally in all direction in the horizontal plane, whereas figure 2.22 and 2.23 shows the radiation pattern of a helix antenna, where the radiation is focused towards a point. What can also be seen on figure 2.22 and 2.23 is the side loops around the main loop (the single peak direction), this means that not all of the energy is emitted "through" the main loop, but some goes to the side loop, which make the antenna less effective. Furthermore, the helical antenna is simulated with real ground plane, acting as a reflector, whereas figure 2.20 is in free-space, see section 2.6.3 \textit{Helical} for more information about directed antennas. 
+Figure 2.20 shows that the dipole antenna is a omnidirectional antenna, meaning it is radiating equally in all direction in the horizontal plane, whereas figure 2.22 and 2.23 shows the radiation pattern of a helix antenna, where the radiation is focused towards a point. What can also be seen on figure 2.22 and 2.23 is the side lobes around the main beam, this means that not all of the energy is emitted "through" the main beam, but some goes to the side lobe, which make the antenna less effective (see next subsections). Furthermore, the helical antenna is simulated with real ground plane, acting as a reflector, whereas figure 2.20 is in free-space, see section 2.6.3 \textit{Helical} for more information about directed antennas. 
 
 \begin{figure}[h]
 \centering
@@ -949,7 +949,7 @@ Figure 2.20 shows that the dipole antenna is a omnidirectional antenna, meaning 
 \caption{A 2-dimensional cut of the radiation pattern for a dipole antenna }
 \end{figure}
 
-\newpage
+Figure 2.23 also show the type of lobes that exists for a directive antenna. There are 2 important lobes, the main lobe and the side lobe. Furthermore, there is the Half-power beam width, this is where the angular separation, in which the magnitude of the radiation pattern decreases by 50\% (or -3dB) from the peak of the main beam. On figure 2.23 it can be seen that the pattern decreases to -3dB at -10 degrees and 10 degrees, hence the is $HPBW = |-10|+10 =20 degrees$, this information can be used determine how much the receiver end can diverge away from the transmitter end, before the loss is greater than -3dB. 
 
 \subsection{Field region}
 The antenna radiation field is divided into 4 principle regions, where the characteristics of the radiated wave are different. While these regions are not firm boundaries, they provide some insight to the actual radiated field as a function distance from the antenna. Figure 2.24 depicts these regions.
@@ -1021,8 +1021,6 @@ A linear polarized antenna can both be in the vertical or horizontal position, r
 \caption{Horizontal polarization}
 \end{figure}
 
-\newpage
-
 \subsubsection{Circular polarization}
 When the x and y components of the electrical field is oscillating forth and back in their x- and y-axis while being 90 degrees out of phase and having the equal magnitude, the E-field will rotate in a circle, see figure 2.27. The have circular polarization, the following criteria  must be met:
 
@@ -1051,29 +1049,306 @@ For elliptical polarization, the only difference between this type of polarizati
 \caption{Elliptical polarization, where x (red line) and y (green line) component of the electrical field are oscillating forth and back, with different magnitudes to create the Elliptical pattern (blue line)}
 \end{figure}
 
+\newpage
+
 \subsubsection{Polarization losses}
+\begin{figure}[h]
+%\centering
+\hspace{-2.5cm}
+\includegraphics[scale=0.5]{figures/PolarizationLoss.PNG}
+\caption{Polarization losses - courtesy of Granite Island Group \cite{gig}}
+\end{figure}
 
-%the losses are...
+Polarization losses occurs when the transmitting and receiving antennas are in a different orientation relative to each other. For a linearly polarized antenna, for example, if the receiving antenna is horizontally polarized and the receiving antenna is vertically polarized, then from the receiving antenna point of view the propagating radio wave will look like a dot in space, which can not be modulated into a meaningful digital signal. If both the transmitter and receiver is right hand circular polarized, then there will be no loss, but if they are opposite of each other, then there will be be huge losses. Another case, is when a linear antenna is transmitting to a circular polarized antenna, this will work but there will be a general loss of 3dB, the good thing about this setup is that the linear antenna can physically rotate without causing huge losses in connection, like the case where both linear antenna is being used on the transmitter and on the receiver. In this thesis, the last case makes the most sense to use, where a linear antenna is mounted on the rocket, and a circular antenna is used on the ground. The reason for this is that most circular polarized antenna are too big to fit inside the rocket, therefore using linear polarized antenna in the rocket is the only option. There will be a general loss of 3dB, but it is better than having two linear polarized antenna, where the consequences are sometimes huge losses, because the rocket can start to rotate and tumble in the air such that the antennas becomes misaligned, Figure 2.29, depicts the losses when using different polarization setup.  
+
+\subsection{Antenna Impedance}
+An antenna presents a load impedance or driving point impedance to what whatever system is connected to it terminals. This driving point impedance of an antenna is important in that a good impedance match between the circuit (such as the transceiver) and the antenna is required for maximum power transfer to the antenna. The maximum power transfer occurs when the circuit and antenna impedance are matched. When the antenna and circuit impedance are not matched, the result is reduced antenna efficient because part of the signal is reflected back to the source, due to standing waves along the transmission line, see next section. The reflection coefficient can be determined from the circuit and antenna impedances, and is given by: 
+
+\begin{equation}
+   \Gamma = \frac{Z_1-Z_0}{Z_1+Z_0}
+\end{equation}
+
+where $Z_1$ and $Z_2$ is the impedances from the circuit and antenna and where $\Gamma$ is a complex number that describes both the magnitude and the phase shift of the reflection. The simplest cases with $\Gamma$ measured at the load are: 
+
+\begin{itemize}
+  \item $\Gamma = -1$: complete negative reflection, when the line is short-circuited.
+  \item $\Gamma = 0$: no reflection, when the line is perfectly matched.
+   \item $\Gamma = 1$: complete positive reflection, when the line is open-circuited.
+\end{itemize}
+
+If there is a cable between the antenna and the transceiver, the mismatch creates a voltage standing wave ratio (VSWR) on the cable. The effect of a VSWR on a cable will increase the effect of the cable loss. To compute the VSWR we can use the formula or see this reference \cite{AntennaThoryVSWRCalculator}:
+
+\begin{equation}
+   VSWR= \frac{1+|\Gamma|}{1-|\Gamma|}
+\end{equation}
+
+Equation (2.75)  is usually given over a bandwidth, so that it is possible to know how much power is reflected by the antenna over a frequency range. To get the return loss $S11$, formula (2.75) can be inverted to: 
+
+\begin{equation}
+   |\Gamma|_{s11}= \frac{VSWR-1}{VSWR+1}
+\end{equation}
+
+The reflected power back towards the transceiver is given in percentage:
+
+\begin{equation}
+   RP = 100|\Gamma|^2
+\end{equation}
+
+And in dB:
+
+\begin{equation}
+   RP_{dB} = 10log_{10}(|\Gamma|^2) = 20log_{10}(|\Gamma|)
+\end{equation}
+
+The amount of power delivered to the antenna is written as $|\tau|$ and is also known as mismatch loss:
+
+\begin{equation}
+   DP = |\tau|^2 = 1-|\Gamma|^2
+\end{equation}
+
+in dB:
+
+\begin{equation}
+   ML_{dB} = 10log_{10}(DP) = 10log_{10}(|\tau|^2) = 20log_{10}(|\tau|)
+\end{equation}
+
+So is a VSWR of 3 bad? or how bad is VSWR of 12? There are no specific rules on that, generally the unwritten rule states no higher than a VSWR of 1.7, below is a figure depicting the relationship between VSWR, reflection coefficient $\Gamma$ (s11), total reflected power in percentage and in dB.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+VSWR & $\Gamma$(s11) & Reflected Power(\%) & Reflected Power(dB) \\\hline
+1.0  & 0.000          & 0.00  & -Infinity     \\ \hline
+1.5  & 0.200          & 4.0   & -14.0         \\ \hline
+2.0  & 0.333          & 11.1  & -9.55         \\ \hline
+2.5  & 0.429          & 18.4  & -7.36         \\ \hline
+3.0  & 0.500          & 25.0  & -6.00         \\ \hline
+3.5  & 0.556          & 30.9  & -5.10         \\ \hline
+4.0  & 0.600          & 36.0  & -4.44         \\ \hline
+5.0  & 0.667          & 44.0  & -3.52         \\ \hline
+6.0  & 0.714          & 51.0  & -2.92         \\ \hline
+7.0  & 0.750          & 56.3  & -2.50         \\ \hline
+8.0  & 0.778          & 60.5  & -2.18         \\ \hline
+9.0  & 0.800          & 64.0  & -1.94         \\ \hline
+10.0 & 0.818          & 66.9  & -1.74         \\ \hline
+15.0 & 0.875          & 76.6  & -1.16         \\ \hline
+20.0 & 0.905          & 81.9  & -0.87         \\ \hline
+50.0 & 0.961          & 92.3  & -0.35         \\ \hline
+\end{tabular}
+\caption{The relationship between VSWR, $\Gamma$(s11), reflected power in percentage and reflected power in (dB)}
+\end{table}
+\subsubsection{Vector impedance analyzer (VIA)}
+ Unlike an Vector Network Analyzer, which is big and expensive capable of showing more advanced parameters like the VSWR, s11 and a Smith chart (see next section) and transmission losses, a Vector Impedance Analyzer is smaller and cheaper and also capable of showing the VSWR and s11, which are the most important parameters, since everything else, needed in this thesis, can be calculated from these two parameters. Therefore a VIA will be used to characterize the antennas. Below, on figure 2.30, it can be seen the VIA that is used in this thesis.
+ 
+\begin{figure}[h]
+\centering
+%\hspace{-2.5cm}
+\includegraphics[scale=0.7]{figures/VIA.PNG}
+\caption{A vector impedance analyzer (VIA)}
+\end{figure}
+
+\subsection{Impedance matching and Smith Chart}
+Impedance matching, or Antenna matching is the practice of designing the input impedance of an electrical load or the output impedance of its corresponding signal source to minimize signal reflection from the load. An impedance vector consists of a real part (resistance, R) and an imaginary part (reactance, X), and can be expressed using the rectangular-coordinate form:
+
+\begin{equation}
+   Z = R + jX
+\end{equation}
+
+The maximum power transferred from the load to the source happens when the load impedance equals to the complex conjugate of the source impedance $Z_l = Z_g^*$, please see this reference\cite{ImpedanceMatching}, which describes why this is the case. In order to accomplish this a matching network is inserted between the load and source:
+
+\begin{figure}[h]
+%\centering
+\hspace{-1.5cm}
+\includegraphics[scale=0.6]{figures/MatchingNetwork.PNG}
+\caption{Matching network inserted between the load and source}
+\end{figure}
+
+The sole purpose of this matching network is to "transform" the load impedance into an input impedance this \textit{is conjugate matched} to the source, i.e:
+\begin{equation}
+   Z_{in} = \frac{V_{in}}{I_{in}}=Z_g^*
+\end{equation}
+
+For more information about impedance matching, these two references are excellent to read, the first being \textit{Chapter 5 - impedance matching and tuning} by Jim Stiles\cite{ImpedanceMatching1} and the second \textit{Impedance matching} by Iulian Rosu, YO3DAC\cite{ImpedanceMatching2}.
+
+The unwritten rule for most transceivers is that the have a input impedance of 50ohm, based on the theory above, the used antennas also needs to have a impedance of 50ohm, to obtain maximum power transfer from the transceiver to the antennas, and vice versa . In reality this is not the case, for example for a dipole antenna the impedance is $73\Omega$, for a \textit{folded} dipole antenna it is 4 times more than the normal dipole antenna, around $300\Omega$. Depending on what type of load that is used, there are different types of matching networks.The following subsection, describes those that might be used in this thesis, depending on the type of antenna and circuit that is going to be designed.   
+
+In order to impedance match an antenna with a transceiver, or anything else where RF is being transmitted through, a Smith Chart can be used to visualize what type of matching network is needed. Figure 2.32 show a picture of a smith chart, the overall goal is to aim for the center where $Z=1$, in order to do that we can use inductors and capacitors in either a Pi or Tee configuration, to move around the circle and reach the center. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-2.5cm}
+\includegraphics[scale=0.4]{figures/SmithChart.png}
+\caption{Smith chart\cite{SmithChart}}
+\end{figure}
+
+Figure 2.33 shows the influence a Pi and T network has on the impedance vector A and B. On A it can be seen how the shunt L (inductor) "pushes" A up to the center line, then the series C (capacitor) moves the line down again, and finally the last shunt L, moves the line to the center. For further information on Pi and Tee networks, see section 2.5.8.3 \textit{Tee and Pi networks}.  
+
+\begin{figure}[h]
+\centering
+%\hspace{-2.5cm}
+\includegraphics[scale=0.7]{figures/PiTeeSmithChart.PNG}
+\caption{Smith chart\cite{SmithChart} with a pi and tee network, showcasing how they influence the impedance}
+\end{figure}
 
 
-\subsection{Beam-width} %add it to radiation pattern
-\subsection{Anechoic chamber} % describe what it is in the pathloss chanel only, and remove it form here
+\subsubsection{Transmission lines}
+The transmission line solution (or a matching stub) is used for rather big antennas, such as dipole, yagi-uda, helical antenna. Basically, a matching stub is a piece of a coaxial cable with appropriated calculation in impedance (Z), overall length etc., which acts as a "Imepdance transformer" between 2 known but unequal impedances $(Z_1,Z_2)$. With the quaterwave formula, it is possible to calculate the intermediate $Z_0$ of a "Quarter Wave" $\frac{\lambda}{4}$ coaxial piece, in order to be able to match 2 different impedances. 
 
-\subsection{Impedance matching loss}
-\subsection{VSWR}
-\subsection{Matching networks}
-\subsubsection{Baluns}
-\subsubsection{Pi-filter}
-\subsubsection{Loading coil}
+\begin{equation}
+   Z_0 = \sqrt{Z_{in}Z_{L}}
+\end{equation}
+
+\begin{figure}[h]
+\centering
+%\hspace{-2.5cm}
+\includegraphics[scale=0.7]{figures/TransmissionLine.PNG}
+\caption{Matching stub between to loads}
+\end{figure}
+
+The downside of a $\frac{\lambda}{4}$ is that it provides a perfect match at only one frequency. This type of matching network is mostly used for yagi antennas, and cross yagi antennas, see section 2.6.5 \textit{yagi-uda and cross yagi-uda}, but it can also be used for other purposes that needs a coaxial matching, for further information about how to match a yagi and crosyagi antenna, read this reference \cite{YagiMatching}. 
+
+\subsubsection{Microstrip line}
+On a RF PCB there will certainly be RF transmission lines (also called microstrip line) going from the antenna connector to the amplifier and from the amplifierr to the tranceiver. This microstrip line has to have an impedance matching the transceiver, of 50ohm. There exits many different microstrip lines, which will not be covered in this thesis, but only the one that is going to be used, which is the simplest version, called \textit{microstrip}. Figure 2.33 show the microstrip line that is used in this thesis, what is important here is that the line must be calculated to have an impedance of 50ohm. The parameters that are important is: Trace thickness T, substrate height H, trace width W and substrate dielectric $\varepsilon_r$ (not seen on the figure). It does not make sense to explain the math behind how to calculate the impedance to be 50ohm, since most online calculators do a great job of that. In this thesis an online calculator will be used for figuring out the exact impedance needed for the microstrip line, see reference for the calculator\cite{MicrostripCalcu}. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-2.5cm}
+\includegraphics[scale=0.7]{figures/Microstrip.PNG}
+\caption{A microstrip line}
+\end{figure}
+
+\subsubsection{Tee and Pi networks}
+In this thesis a Pi or a Tee network might be used for each transceiver to match the impedance of the antenna with the transceivers. The pi or tee networks consists of inductors and capacitors soldered on the transmission line one the PCB, shorted to ground. Figure 2.34 shows the 4 different typologies, used to match a transmission line, where C is a capacitor and L is an inductor. See also the smith chart in section, 2.5.8 \textit{impedance matching and Smith Chart}.  
+
+\begin{figure}[h]
+\centering
+%\hspace{-2.5cm}
+\includegraphics[scale=0.70]{figures/PiTee.PNG}
+\caption{Low- and high-pass Pi and Tee networks}
+\end{figure}
+
+For further information on how to calculate the parameters of the components and power loss through a Pi/Tee network, it is highly advised to read a text written by a radio amateur, Gary with an amateur licence name of ZL1AN, see reference \cite{PiTeeNetwork}, especially section 1.4 \textit{Pi Matching Networks} and example 1.2, in section 1.4.1.
+
 \section{Different type of Antennas}
+There many different types of antennas in the RF world, this thesis will focus only on those antennas that make sense to use for the telemetry system. There are always pros and cons between choosing a given antenna in favour for an other, these pros and cons is defined by different parameters, such as: Antenna radiation pattern, physical look (size and weight), gain, impedance, beam width and how easy they are to produce and mount either on the rocket or on the ground. The following sub-section will clarify these antennas and their parameters.
+
+\subsection{Half-wave Dipole}
+As the name suggest, a center fed half-wave dipole antenna has a total length of $\frac{\lambda}{2}$ where each side elements are $\frac{\lambda}{4}$ long, see figure 2.37. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-2.5cm}
+\includegraphics[scale=0.6]{figures/Dipole.PNG}
+\caption{Half-wave dipole antenna}
+\end{figure}
+
+Since this antenna has been measured many times inside an anechoic chamber, it is therefore used as a reference for other antennas, when it comes to the gain parameter (in dBd = decibel dipole), see section 2.1.3 \textit{What is dB/dBi/dBd/dBW/dBm?}. This antenna is also the building block for many other antennas, such as beam antenna and yagi-uda antennas. In free space - when the antenna is remote from everything else - the theoretical impedance of a physically half-wave long dipole antenna, is $z=73+j42ohm$. The antenna exhibits both resistance and reactance, as can be seen with the imaginary part of the complex number $+j42$, this means that a matching network is needed to decrease the real part of the complex number to 50 ohm, but at the same time removing the imaginary, this is how it is done to achieve the best matching, as stated in section 2.5.8 \textit{impedance matching and smith chart}, especially reference\cite{ImpedanceMatching}. This antenna has a gain of 2.15 dBi and a radiation pattern seen on figure 2.20 and 2.21 (further up). From figure 2.21b it can bee observed that the Half-power beam width is around 80 degrees. 
+
+\subsection{Sleeved Dipole}
+A sleeved dipole, is like half-wave dipole, but made in such a way that one of the $\frac{\lambda}{4}$ elements are "cased" on top of the coax cable, while the other side is exposed, as see on figure 2.38a and 2.38b, both sides a equally long, but the radius of the aluminum casing is larger than the radius of the exposed coaxial cable, by changing he radius of the aluminum casing one can achieve an impedance of 50ohm at a given operating frequency. The center feed point is in the middle, between the metal casing(aluminum) and the exposed coaxial core (white). The pros of this antenna compared to the half-wave dipole antenna, is the way it is constructed, this allows for easier mounting on the rockets hull and that the antenna is already matched to 50ohm. The downside of this antenna, the radiation pattern is probably the same as a half-wave dipole, since the thickness of the aluminum casing will effect how the radiation pattern looks like. Other than the impedance, the rest of the parameters should be fairly the same as a half-wave dipole antenna. 
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.65\linewidth}
+    \includegraphics[width=\linewidth]{figures/SleeveDipole.jpg}   
+    \caption{Sleeved dipole}
+    \end{subfigure}
+  \begin{subfigure}[b]{0.65\linewidth}
+    \includegraphics[width=\linewidth]{figures/SleeveDipoleOpen.jpg}
+    \caption{Sleeved dipole open}
+  \end{subfigure}
+  \caption{A Sleeved dipole antenna, usually bought from china}
+\end{figure}
+
+\subsection{Folded Dipole}
+A folded dipole is usually used as the driven element on a yagi-uda antenna, the reason for using a folded dipole and not just a normal half-wave dipole, has to do with the impedance. The folded dipole, has a impedance of around $300\Omega$, this can be used in a positive way, since the parasitic (directors) elements on a yagi-uda antenna, see section 2.6.8 \textit{Yagi-uda and cross yagi-uda}, decreases the impedance, meaning if one choose to use a normal half-wave dipole, depending on amount of directors, the impedance of the yagi-uda antenna will probably fall below $50\Omega$, thus using a folded dipole, increases the impedance, and allows for more directors to be used to increase the directivity of a yagi-uda antenna. Furthermore, the folded dipole has a wider bandwidth than a normal half-wave dipole. Figure 2.39 shows an example of a folded dipole. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-2.5cm}
+\includegraphics[scale=0.9]{figures/FoldedDipole.jpg}
+\caption{Folded Dipole}
+\end{figure}
+
 \subsection{Quaterwave monopol}
-\subsection{Dipole}
+A quaterwave monopol antenna has a length of $\frac{\lambda}{4}$, and usually is above some kind of a ground plane, either the earth itself or a metal ground plane, with the same radius as the chosen wavelength. As the name states, the monopol antenna only have one "pole" compared to a dipole, which has both elements sticking from the center. A monopol antenna is fed at the end of the wire (closest to ground), but the ground plane acts as a reflector/mirror, thus allowing it to behave as a dipole antenna, but less effective. Because of this, the radiation pattern only exits above the ground, meaning only half of the dipole. Figure 2.40, show the gain for a quaterwave monopol antenna, but also the radiation pattern, as described above it is only half of the sphere, therefore the energy is directed to the other half meaning the gain of a quaterwave monopol antenna is $G=2.15+3dB=5.15$ for a perfect ground plane, but in reality such a ground plane does not exits, thus the gain is usually closer to a dipole antenna. The impedance of this type of antenna in free space is around $Z=36.5+j21.25$\cite{ImpedanceMonopol}, this is close to $50\Omega$ one way to solve this problem is to build a ground plane for the antenna, made out of 4 to 5 radials, acting as ground plane, then bend them approximately 35-45 degrees downwards to increase the impedance to $50\Omega$, see figure 2.41. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-2.5cm}
+\includegraphics[scale=0.50]{figures/quaterwaveMonoplAntenna.PNG}
+\caption{Gain and radiation pattern for a quaterwave monopol antenna}
+\end{figure}
+
+\begin{figure}[h]
+%\centering
+\hspace{-1cm}
+\includegraphics[scale=0.55]{figures/QuaterWaveMonopolAntennaRadials.PNG}
+\caption{a 2-dimensional visualization of two quaterwave monopol antenna with radials perpendicular to the antenna and radials bent 35-45 degrees}
+\end{figure}
+
 \subsection{Helical}
+
+%Physicall look 
+%Radiation pattern
+%Type of mode
+%half-beam power Beam width
+%Gain 
+
+
 \subsection{Patch}
+
+
 \subsection{Yagi-uda and cross yagi-uda}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Detailed Link Budget}
 \subsection{Link budget margin}
+%what is it and to to define a good margin?
+
+
+
+
+
 \begin{figure}[h]
 \centering
 \hspace*{-2cm}
@@ -1094,10 +1369,8 @@ L\textsubscript{Channel} is the losses experienced when the signal propagates th
 
 The link budget, see figure 2.2 below, is a smart overview of all the calculation made - based on the theory section, on other scientific papers and datasheets - to showcase losses and gains of each components and sub-systems. The figure 2.2, already depicts that the choices taken by the author of this thesis, will theoretically result in a successful communication of a rage up to 9144 meter. Although, the margin is quite low it is, as explained above, a self defined value or an axiom, which will defined based on set of criterias, which are yet not defined. The calculation of these link budget will be explain the the final report. 
 
-
-
 %probably not important, since a prototype is enough for this bachelor, so write only about the schematics compared to insertion loss for the link budget.
-\section{RF PCB design rules}
+\section{RF PCB design rule}
 
 \section{Framing and Modulation (MultiCeiver\texttrademark and Shockburst\texttrademark)}
 
