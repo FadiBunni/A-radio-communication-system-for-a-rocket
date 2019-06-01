@@ -1231,9 +1231,9 @@ In this thesis a Pi or a Tee network might be used for each transceiver to match
 For further information on how to calculate the parameters of the components and power loss through a Pi/Tee network, it is highly advised to read a text written by a radio amateur, Gary with an amateur licence name of ZL1AN, see reference \cite{PiTeeNetwork}, especially section 1.4 \textit{Pi Matching Networks} and example 1.2, in section 1.4.1.
 
 \section{Different type of Antennas}
-There many different types of antennas in the RF world, this thesis will focus only on those antennas that make sense to use for the telemetry system. There are always pros and cons between choosing a given antenna in favour for an other, these pros and cons is defined by different parameters, such as: Antenna radiation pattern, physical look (size and weight), gain, impedance, beam width and how easy they are to produce and mount either on the rocket or on the ground. The following sub-section will clarify these antennas and their parameters.
+There many different types of antennas in the RF world, this thesis will focus only on those antennas that make sense to use for the telemetry system. There are always pros and cons between choosing a given antenna in favour for an other, these pros and cons is defined by different parameters, such as: Antenna radiation pattern, physical look (size and weight), gain, impedance, polarization, beam width and how easy they are to produce and mount either on the rocket or on the ground. The following sub-section will clarify these antennas and their parameters.
 
-\subsection{Half-wave Dipole}
+\subsection{Half-wave Dipole antenna}
 As the name suggest, a center fed half-wave dipole antenna has a total length of $\frac{\lambda}{2}$ where each side elements are $\frac{\lambda}{4}$ long, see figure 2.37. 
 
 \begin{figure}[h]
@@ -1243,9 +1243,9 @@ As the name suggest, a center fed half-wave dipole antenna has a total length of
 \caption{Half-wave dipole antenna}
 \end{figure}
 
-Since this antenna has been measured many times inside an anechoic chamber, it is therefore used as a reference for other antennas, when it comes to the gain parameter (in dBd = decibel dipole), see section 2.1.3 \textit{What is dB/dBi/dBd/dBW/dBm?}. This antenna is also the building block for many other antennas, such as beam antenna and yagi-uda antennas. In free space - when the antenna is remote from everything else - the theoretical impedance of a physically half-wave long dipole antenna, is $z=73+j42ohm$. The antenna exhibits both resistance and reactance, as can be seen with the imaginary part of the complex number $+j42$, this means that a matching network is needed to decrease the real part of the complex number to 50 ohm, but at the same time removing the imaginary, this is how it is done to achieve the best matching, as stated in section 2.5.8 \textit{impedance matching and smith chart}, especially reference\cite{ImpedanceMatching}. This antenna has a gain of 2.15 dBi and a radiation pattern seen on figure 2.20 and 2.21 (further up). From figure 2.21b it can bee observed that the Half-power beam width is around 80 degrees. 
+Since this antenna has been measured many times inside an anechoic chamber, it is therefore used as a reference for other antennas, when it comes to the gain parameter (in dBd = decibel dipole), see section 2.1.3 \textit{What is dB/dBi/dBd/dBW/dBm?}. This antenna is also the building block for many other antennas, such as beam antenna and yagi-uda antennas. In free space - when the antenna is remote from everything else - the theoretical impedance of a physically half-wave long dipole antenna, is $z=73+j42ohm$. The antenna exhibits both resistance and reactance, as can be seen with the imaginary part of the complex number $+j42$, this means that a matching network is needed to decrease the real part of the complex number to 50 ohm, but at the same time removing the imaginary, this is how it is done to achieve the best matching, as stated in section 2.5.8 \textit{impedance matching and smith chart}, especially reference\cite{ImpedanceMatching}. This antenna is linear polarized, it has a gain of 2.15 dBi and a radiation pattern that can be observed on figure 2.20 and 2.21 (further up). From figure 2.21b it can bee observed that the Half-power beam width is around 80 degrees. 
 
-\subsection{Sleeved Dipole}
+\subsection{Sleeved Dipole antenna}
 A sleeved dipole, is like half-wave dipole, but made in such a way that one of the $\frac{\lambda}{4}$ elements are "cased" on top of the coax cable, while the other side is exposed, as see on figure 2.38a and 2.38b, both sides a equally long, but the radius of the aluminum casing is larger than the radius of the exposed coaxial cable, by changing he radius of the aluminum casing one can achieve an impedance of 50ohm at a given operating frequency. The center feed point is in the middle, between the metal casing(aluminum) and the exposed coaxial core (white). The pros of this antenna compared to the half-wave dipole antenna, is the way it is constructed, this allows for easier mounting on the rockets hull and that the antenna is already matched to 50ohm. The downside of this antenna, the radiation pattern is probably the same as a half-wave dipole, since the thickness of the aluminum casing will effect how the radiation pattern looks like. Other than the impedance, the rest of the parameters should be fairly the same as a half-wave dipole antenna. 
 
 \begin{figure}[h!]
@@ -1261,8 +1261,8 @@ A sleeved dipole, is like half-wave dipole, but made in such a way that one of t
   \caption{A Sleeved dipole antenna, usually bought from china}
 \end{figure}
 
-\subsection{Folded Dipole}
-A folded dipole is usually used as the driven element on a yagi-uda antenna, the reason for using a folded dipole and not just a normal half-wave dipole, has to do with the impedance. The folded dipole, has a impedance of around $300\Omega$, this can be used in a positive way, since the parasitic (directors) elements on a yagi-uda antenna, see section 2.6.8 \textit{Yagi-uda and cross yagi-uda}, decreases the impedance, meaning if one choose to use a normal half-wave dipole, depending on amount of directors, the impedance of the yagi-uda antenna will probably fall below $50\Omega$, thus using a folded dipole, increases the impedance, and allows for more directors to be used to increase the directivity of a yagi-uda antenna. Furthermore, the folded dipole has a wider bandwidth than a normal half-wave dipole. Figure 2.39 shows an example of a folded dipole. 
+\subsection{Folded dipole antenna}
+A folded dipole is usually used as the driven element on a yagi-uda antenna, the reason for using a folded dipole and not just a normal half-wave dipole, has to do with the impedance. The folded dipole, has a impedance of around $300\Omega$, this can be used in a positive way, since the parasitic (directors) elements on a yagi-uda antenna, see section 2.6.8 \textit{Yagi-uda and cross yagi-uda}, decreases the impedance, meaning if one choose to use a normal half-wave dipole, depending on amount of directors, the impedance of the yagi-uda antenna will probably fall below $50\Omega$, thus using a folded dipole, increases the impedance, and allows for more directors to be used to increase the directivity of a yagi-uda antenna. Furthermore, the folded dipole has a wider bandwidth than a normal half-wave dipole. Figure 2.39 shows an example of a folded dipole, beside this the rest of the parameters is quite the same as a dipole antenna. 
 
 \begin{figure}[h]
 \centering
@@ -1271,8 +1271,8 @@ A folded dipole is usually used as the driven element on a yagi-uda antenna, the
 \caption{Folded Dipole}
 \end{figure}
 
-\subsection{Quaterwave monopol}
-A quaterwave monopol antenna has a length of $\frac{\lambda}{4}$, and usually is above some kind of a ground plane, either the earth itself or a metal ground plane, with the same radius as the chosen wavelength. As the name states, the monopol antenna only have one "pole" compared to a dipole, which has both elements sticking from the center. A monopol antenna is fed at the end of the wire (closest to ground), but the ground plane acts as a reflector/mirror, thus allowing it to behave as a dipole antenna, but less effective. Because of this, the radiation pattern only exits above the ground, meaning only half of the dipole. Figure 2.40, show the gain for a quaterwave monopol antenna, but also the radiation pattern, as described above it is only half of the sphere, therefore the energy is directed to the other half meaning the gain of a quaterwave monopol antenna is $G=2.15+3dB=5.15$ for a perfect ground plane, but in reality such a ground plane does not exits, thus the gain is usually closer to a dipole antenna. The impedance of this type of antenna in free space is around $Z=36.5+j21.25$\cite{ImpedanceMonopol}, this is close to $50\Omega$ one way to solve this problem is to build a ground plane for the antenna, made out of 4 to 5 radials, acting as ground plane, then bend them approximately 35-45 degrees downwards to increase the impedance to $50\Omega$, see figure 2.41. 
+\subsection{Quaterwave monopol antenna}
+A quaterwave monopol antenna has a length of $\frac{\lambda}{4}$, and usually is above some kind of a ground plane, either the earth itself or a metal ground plane, with the same radius as the chosen wavelength. This antenna is also linear polarized, and as the name states, the monopol antenna only have one "pole" compared to a dipole, which has both elements sticking from the center. A monopol antenna is fed at the end of the wire (closest to ground), but the ground plane acts as a reflector/mirror, thus allowing it to behave as a dipole antenna, but less effective. Because of this, the radiation pattern only exits above the ground, meaning only half of the dipole. Figure 2.40, show the gain for a quaterwave monopol antenna, but also the radiation pattern, as described above it is only half of the sphere, therefore the energy is directed to the other half meaning the gain of a quaterwave monopol antenna is $G=2.15+3dB=5.15$ for a perfect ground plane, but in reality such a ground plane does not exits, thus the gain is usually closer to a dipole antenna. The impedance of this type of antenna in free space is around $Z=36.5+j21.25$\cite{ImpedanceMonopol}, this is close to $50\Omega$ one way to solve this problem is to build a ground plane for the antenna, made out of 4 to 5 radials, acting as ground plane, then bend them approximately 35-45 degrees downwards to increase the impedance to $50\Omega$, see figure 2.41. 
 
 \begin{figure}[h]
 \centering
@@ -1288,25 +1288,135 @@ A quaterwave monopol antenna has a length of $\frac{\lambda}{4}$, and usually is
 \caption{a 2-dimensional visualization of two quaterwave monopol antenna with radials perpendicular to the antenna and radials bent 35-45 degrees}
 \end{figure}
 
-\subsection{Helical}
+\subsection{Helical antenna}
+A typical helical antenna consists of a single conductor wound into a coil that is attached to a pipe made of a non-conducting material, such as plastic. The pipe is attached to a conducting ground plane, made of aluminum or copper. The coil goes trough the ground plane, without touching it, and is soldered to a SMA connector, where the antenna is fed. See figure 2.42. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.6]{figures/HelixAntenna.jpg}
+\caption{A simple helical antenna\cite{HelicalAntenna}}
+\end{figure}
+
+A helical antenna can operate in 3 different modes: normal mode, axial mode and conical mode. The first mode make the antenna radiate like dipole antenna, where the radiation pattern is onidirectional. The axial mode, makes the antenna directional like a yagi-uda or any other high gain antenna, it is also the only shape where it is circular polarized (RHCP or LHCP depending on which direction the coil is wraped). The conical mode makes the antenna radiate in a v-shape. See figure 2.43. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=1.3]{figures/HelicalMode.png}
+\caption{helical antenna modes\cite{HelicalMode}}
+\end{figure}
+
+For any of the specific modes, there are common parameters used to define the what mode a helical antenna is in. These parameters are also used when simulating and constructing the antenna. See references, \cite{ARRL} page 19-7 to 19-8, \cite{HelicalModeMath} slide 2 and 3, for information about where the below parameters comes from:
+
+\begin{itemize}
+  \item $\lambda$ is the wavelength, in meters.    
+  \item $D$ is the diameter of the helix, in meters.
+  \item $d$ wire diameter, in meters.
+  \item $C$ is the circumference of the helix, which equals to $\pi D$, in meters.
+  \item $N$ is the number of turns.
+  \item $\alpha$ is the pitch angle, given by $\tan^{-1}\Big(\frac{S}{\pi D}\Big)=\tan^{-1}\Big(\frac{S}{C}\Big)$, in degrees.
+  \item $S$ is the gap spacing in-between turns, which equals to $C \tan(a)$, in meters.
+  \item $L$ is length of one turn, given by $\sqrt{S^2+C^2}$, in meters.
+  \item $A$ is axial length, given by $NS$, in meters.
+  \item $NL$ is total length of wire, in meters.
+  \item $R$ is the diameter of the ground plane, given as .
+  \item $S_g$ is spacing form ground plate to the beginning of the helix's first turn, in meters.
+\end{itemize}
+
+It is easier to visualize some of the parameter on figure 2.44.
+
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.5]{figures/TriangleMath.PNG}
+\caption{Simplification of the parameters of a helical antenna}
+\end{figure}
+
+On the ground a directive circular polarized antenna is need to track the rocket, therefore the best helical mode is the axial mode. For this thesis only the theory behind the axial mode will be shown. In order to make a helical antenna radiate in the axial mode the following condition must be met:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Parameter                          & Range                                                   \\ \hline
+Cirumference (meters)              & $\frac{3}{4}\lambda \leq C \geq \frac{4}{3}\lambda$     \\ \hline
+Pitch Angle (degrees)              & $\ang{12} < \alpha < 16 $                               \\ \hline
+Number of Turns (unitless)         & $N > 3$                                                 \\ \hline
+Wire Diameter (meters)             & $.005 < \frac{d}{\lambda} < 0.05$                        \\ \hline
+Ground Plane Diameter (meters)     & $0.8\lambda \leq R \geq 1.1\lambda$                     \\ \hline
+Spacing to the first turn (meters) & $S_g \approx .12\lambda$                                \\ \hline
+\end{tabular}
+\caption{Condition that must be met in order to have helical antenna radiating in axial mode}
+\end{table}
+
+The impedance of a helical antenna in axial mode is: 
+
+\begin{equation}
+   Z_0 = 140\frac{C}{\lambda}
+\end{equation}
+
+To calculate the gain of a helical antenna, two equation can be used, one is from the ARRL book\cite{ARRL} page 19-8 and the other is from Wikipedia\cite{HelicalAntennaWiki}, the result of these two formulas is close to each other, but both with be used, for reference sake.  
+
+\begin{equation}
+   GARRL_{dBi} = 11.8+10log_{10}\Big(\Big(\frac{C}{\lambda}\Big)^2\Big(\frac{NS}{\lambda}\Big)\Big)
+\end{equation}
+
+\begin{equation}
+   GWIKI_{dBi} = 10log_{10}\Big(15\Big(\frac{C}{\lambda}\Big)^2\Big(\frac{NS}{\lambda}\Big)\Big)
+\end{equation}
+
+The beam-width of the helical antenna (in degrees) at half-power points, see section 2.5.4 \textit{Radiation pattern}, is given by (\cite{ARRL} page 19-8):
+
+\begin{equation}
+   HPBW \approx \frac{52}{\frac{C}{\lambda}\sqrt{\frac{NS}{\lambda}}}
+\end{equation}
+
+As it can be seen above the half-power beam width, is mostly depended on the number of coil turns N.
+The impedance of a helical antenna in axial mode, is around 110 to 130Ohm, this is too high for matching with a transceiver, therefore a matching network is needed to combat this problem. There are many different type of matching networks for a helical antenna. They all have their pros and cons, some of them are easy to build and implement, while others are harder to build, but does not distorted the bandwidth of the antenna. In this thesis, the easiest matching network to build and implement will be chosen, since the narrow bandwidth is not a problem for the use case in this thesis. On the internet their exists a forum where helical antennas are being discussed, a solution to how to build and tune a helical is proposed, It is highly recommend to check out the reference \cite{RCGroups}, see thread \#7, for the type of possible matching networks. For this thesis the first \textit{The Hecker transformer} has been chosen, since it is the easiest to build and implement. It is basically a triangle made out of a conducting metal, aluminum or copper, that is soldered to the coil and wraps around for a approximately a half turn. This metal piece can reduce the impedance closer to the desired 50Ohm, see figure 2.45.  
+
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.8]{figures/FormerHelical.jpg}
+\caption{The Hecker transformer used to lower the impedance of a helical antenna}
+\end{figure}
+
+\subsection{Microstrip Patch antenna}
+A microstrip antenna, or commonly referred to as \textbf{patch antenna}, is an antenna printed on a circuit board. This type of antenna is relatively small (depending on the frequency) and is so versatile that it is hard to state exactly what the parameters are of a general patch antenna. For the most part, they are directive, either linear or circular polarized, thin and weighing close to nothing. It is out of the scope of the this thesis to explain the theory behind how to produce one of these, therefore It is much easier to buy a standard patch antenna operating at 2.4-2.5Ghz (same frequency as the transceiver) and then test them. The pros of this antenna, is that it can be fitted inside the rocket, without the need of having something sticking out from the rocket. Because it is directive the gain will certainly better than a dipole or quaterwave monopol antenna. The cons are that the field-of-view is narrower for this type of antenna (because of higher gain) means that the antenna needs to be mounted in a special way such that it is aiming correctly towards the ground.  
+
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.5]{figures/PatchAntenna.jpg}
+\caption{Patch antenna, in this case it is an array patch antenna, since there are 4 of the driven elements\cite{PatchAntenna}}
+\end{figure}
+
+\subsection{Yagi-uda and cross yagi-uda antennas}
+The Yagi-uda antenna is one of the most brilliant antennas designed, it can be seen on nearly every roof tops, pointing towards the source. A yagi-uda antenna is a high gain antenna operating in the HF to UHF bands (about 3Mhz to 3Ghz). The antenna consists of 5 basic parts: a reflector, a driven element usually it is a folded dipole, multiple directors to direct he RF wave straight forward, a center rod for all the elements to be attached to and finally a matching network for the driven element.
+
+The Reflector reflects the RF wave back to the dipole, to decrease backwards side lobes and increase the gain of the forward beam. The driven element can either be a dipole or a folded dipole, remember in section, 2.6.3 \textit{Folded dipole antenna}, it is explained that the impedance of a yagi-uda is dependent on how many directors is used, since increasing the amount of directors will the gain but also decrease the impedance. If a normal dipole with the impedance of $73\Omega$ is used then only a few directors can be added before the impedance is reduced to $50\Omega$, thus the antenna will not be as directive at theoretically possible. That is why a folded dipole is used, since it has a impedance of around $300\Omega$ many more directors can then be added before reaching $50\Omega$, thus further increasing the gain. 
+
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.5]{figures/yagi-uda.png}
+\caption{A yagi-uda antenna, with 1 reflector, 1 driven element a folded dipole and multiple directors\cite{YagiUda}}
+\end{figure}
+
+%%reflector reflect the signal 
+%% driven element creates the RF wave and receives
+%% directors direct the RF wave and increases the gain, more director higher gain lower field of view. 
+%% matching stub is used to balance the folded dipole to 50 ohm. 
+%% for this thesis this antenna will be used as a reference to the home-build helical antenna, most yagi antennas can be bought quite cheaply. 
+
+
 
 %Physicall look 
 %Radiation pattern
 %Type of mode
 %half-beam power Beam width
 %Gain 
-
-
-\subsection{Patch}
-
-
-\subsection{Yagi-uda and cross yagi-uda}
-
-
-
-
-
-
 
 
 
