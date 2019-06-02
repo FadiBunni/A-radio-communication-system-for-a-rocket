@@ -211,7 +211,7 @@ The radio spectrum extends from 3Hz to 3THz. In between this spectrum sub-band h
 \caption{Radio spectrum and sub-bands\cite{FrequencyBand}}
 \end{figure}
 
-\section{The basics of radio channel losses}
+\section{Radio channel losses and other losses}
 It is important for a communication system to be designed for the intended environment and to predict with relative certainty, the performance of the system prior to fabrication and implementation. Insufficient planning can result in over-design and wanted resources or under-design and poor performance. Before planning the communication system, it is important to understand the essential parameters of each sub-link. Some of these parameters are given or chosen during the design process, while others has to be calculated, these include: Free-space attenuation, Multipath attenuation, Fresnel zone, Atmospheric attenuation, Rain attenuation, cloud attenuation and others. Figure 2.6 showcases some of these phenomenons, especially free-space and multipath attenuation. 
 
 \begin{figure}[h]
@@ -291,14 +291,14 @@ From 0dB to 3dB is in linear form a doubling factor, whereas from 0dB to 6dB, as
 
 %% Write that in the section "calculation" we will go through this more in detail
 
-\subsubsection{Received signal strength indicator}
-Received signal strength indicator (RSSI), is the power (measured in dbm) received at the receiver end. RSSI can be deduced from Friss transmission equation, by simply solving for $P_{Rx}$, which yields the formula:
+\subsubsection{Received signal level}
+Received signal level (RSL), is the power (measured in dbm) received at the receiver end. RSL can be deduced from Friss transmission equation, by simply solving for $P_{Rx}$, which yields the formula:
 
 \begin{equation}
     P_{Rx} = P_{Tx} \cdot G_T \cdot G_R \Big( \frac{\lambda}{4 \cdot \pi \cdot d} \Big)^2
 \end{equation}
 
-The above equation can be used to figure out how good the received signal is, but also use the RSSI to track object. This can be done by pointing the receiver antenna towards the transmitter antenna, and if any RSSI is observed then one can confirm that the antennas are pointing towards each other. It is important to know that with this method mulitpath signals and other phenomenons are not excluded, which is why this method require a clear LOS path between the transmitter and receiver. Furthermore, the above equation does not include losses from PCB design or components, like band filters, balun and Low-noise amplifiers (LNA).    
+The above equation can be used to figure out how good the received signal is, but also use the RSL to track object. This can be done by pointing the receiver antenna towards the transmitter antenna, and if any RSSI is observed then one can confirm that the antennas are pointing towards each other. It is important to know that with this method mulitpath signals and other phenomenons are not excluded, which is why this method require a clear LOS path between the transmitter and receiver. Furthermore, the above equation does not include losses from PCB design or components, like band filters, balun and Low-noise amplifiers (LNA). The receives signal strength identification (RSSI) will include the losses of the components, since this value is read from the transceiver, which is placed after the losses of band filter and baluns.    
 
 \subsection{Multipath attenuation}
 The above section 2.5.1 \textit{free-space attenuation} applies to the fact that the radio wave
@@ -769,7 +769,27 @@ where:
 \caption{specific attenuation coefficient\cite{RFpropagation} - page 127}
 \end{figure}
 
-\newpage
+\subsection{Coaxial Cable losses}
+A coaxial cable cunducts electrical signal using an inner conductor, usually made of copper, surrounded by an insulating layer, which is enclosed by a metallic shield. The coaxial cable is protected by a outer insulating jacket. The advantage of a coaxial cable is that the signal is restricted by the dielectric layer, with little leakage outside the shield. This property of the coaxial cable makes it a excellent choice for RF signal that cannot tolerate interference from the environment\cite{CoaxialCable}, see figure 2.15. A Coaxial cable, can come with different materials resulting in different properties. Some cables are simi-rigid, witch means they are hard to bend, but once bent they will contain their shape, these cables usually have lower losses, other cables are thinner easier to bend, but the losses a higher. Most coaxial cables has an impedance of either $50\Omega$ or $75\Omega$ and the losses (in dB) pr unit length is varies from cable to cable, Wikipedia has a good list of coaxial cables, depicting parameters such as: impedance, dielectrics, size, shielding and losses (in dB) pr unit length (dB/100feet), see reference \cite{CoaxialCable}, section \textit{Standards}
+
+\begin{figure}[h!]
+\centering
+%\hspace{-3cm}
+\includegraphics[scale=0.15]{figures/CoaxialCable.png}
+\caption{Coaxial cable\cite{CoaxialCable}}
+\end{figure}
+
+\subsection{Connector losses}
+In this thesis mainly SMA connectors will be used. Like a coaxial cable, the SMA connector has a inner core usually gold plated, surrounded by a dielectric material, contained inside a metal housing that is gold plated. The metal housing is the outer conductor, see figure 2.16. 
+
+\begin{figure}[h!]
+\centering
+%\hspace{-3cm}
+\includegraphics[scale=0.6]{figures/SMAConnector.jpg}
+\caption{SMA connector{SMAConnector}}
+\end{figure}
+
+There are many types and shapes for a SMA connectors, this reference \cite{SMAConnectorLosses} (page 102) shows the losses for a given type of a SMA connector. However, what needs to be noted is that the datasheet is from a company \textit{Tyco Electroncs} this means the results can only guaranteed if one buys SMA connectors from them. 
 
 \section{Thesis specific losses}
 Beside the losses described in the sections above, there are also thesis specific losses. These losses only occurs, because the transmitting antenna is mounted on a rocket, which can accelerate over 3G, and travel at a speed above 400m/s. Furthermore, since the rocket has fins to aerodynamically stabilize it, the mounting of the fins will never be 100\% symmetric, therefore they will induce a torque around its z-axis, which will make the rocket spin around itself, this phenomenon can introduce a huge loss. The below section will clarify how these losses occurs and also how big of a problem they are.
@@ -1408,61 +1428,152 @@ Another type of a yagi-uda antenna is the cross-yagi-uda antenna. This antenna c
 \begin{figure}[h]
 \centering
 %\hspace{-1cm}
-\includegraphics[scale=0.9]{figures/PhaseStub.PNG}
+\includegraphics[scale=0.8]{figures/PhaseStub.PNG}
 \caption{Phase stub solution for circular polarization\cite{YagiMatching}}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 %\hspace{-1cm}
-\includegraphics[scale=0.9]{figures/CrossYagi.PNG}
+\includegraphics[scale=0.8]{figures/CrossYagi.PNG}
 \caption{Cross-yagi-uda antenna with a physical solution to induce circular polarization\cite{YagiMatching}}
 \end{figure}
 
 \newpage
 
 \section{Detailed Link Budget}
-\subsection{Link budget margin}
-%% DU HAR 3 timer! 
+The link budget is a compilation of all the gains and losses in a radio communication system. By assuming the transmit power is in dBm with all the relevant gains and losses in dB and subtracting the required received signal (RSL, in dBm), the link margin is obtained. The link margin provides a measure of robustness for radio link. The beauty of a link margin is that, the better one understands the gains and losses in the link budget, by simulating and modeling the circumstances, the smaller the link margin can be and still achieve a robust radio connection. An experienced RF designer will be able to come up with a very precise link budget and a good estimate of what the link margin should be, mainly based on experience. What makes it so hard is that some of the losses in a link budget are based on availability requirements, and therefore the actual losses are not always present. Availability requirements, are losses that might or might not exists on the day of testing, such as rain, clouds, multipath losses and Fresnel zone. They all depends on the day, where the test setup set placed and how the environment is between the transmitter and receiver. For example, a link budget has been made for a given scenario that scenario changes because of unexpected reasons, this could be that the military changes their minds on where the ground mission control should be stationed to track the rocket, thus the tracking system has to be moved a significant distance, to a terrain with unfavorable conditions. This example, is an argument for having a conservative link margin, but what should this margin be? 6, 10, 15 or even higher? The author of this thesis has asked experienced RF designers and members of \textit{Copenhagen Suborbitals}\cite{CopenhagenSuborbitals} (a non-profit amateur rocket club), where the conclusion was that the margin should be no lower than 15 dB, for this case scenario. Any lower than \textit{15dB} a robust connection at distance of 9km cannot be guaranteed, but it will still be possible to receive data.
 
-%what is it and to to define a good margin?
-
-%Two case scenario one on the ground one in the air 
-
-% PTx
-% LTx
-% GTX
-% EIRP
-% ALL channel losses 
-% RSL
-% RSSI
-
-
-
+The link budget consist of 4 subcategories, these are: transmitter side, channel losses, other losses and receiver side. Figure 2.50 shows an overview a link budget, with all the losses and gains, it can also be observed that there are keyword, such as EIRP, RSL and RSSI, these will be clarified in the following subsections: 
 
 \begin{figure}[h]
 \centering
-\hspace*{-2cm}
-\includegraphics[scale=1.1]{figures/link_budget.pdf}
-\caption{Link budget}
+\hspace*{-2.3cm}
+\includegraphics[scale=0.70]{figures/LinkBudgetOverview.PNG}
+\caption{Overview of a link budget}
 \end{figure}
 
-The link budget is a method used to determine the necessary parameters for a successful transmission of a radio wave from a transmitter to a receiver.  
+\subsection{Transmitter side}
+The transmitter side usually consists of 4 physical parts, the PCB (the source of the RF signal), SMA connectors, coaxial cable and finally the antenna. The total sum of all the losses and gains from these 4 physical part, will result in the Effective Isotropic Radiated Power (EIRP), in detail the formula is:
 
-The general overview of any point-to-point radio communication system, is always the same. There is a sender (Tx) and a receiver (Rx), now a days the sender and receiver is build into one system, called a transceiver. Some transceivers has internal Power Amplifiers (PA) and internal Low Noise Amplifiers (LNA). The internal PA amplifies the signal when the transceiver is in transmitting mode, and the LNA filters the signal when the transceiver is in the receiving mode. If the internal PA/LNA of the transceiver is not powerful enough for the estimated link budget, one can add an independent external front-end chip that has both a PA/LNA, to increase the link budget margin. Beside these two chips, a balun and a band filter is needed to match both chip to each other at a load of 50ohm and to attenuate unwanted frequencies - a more in-depth explanation of the hardware is discussed in section 5.1 \textit{PCB design}. All of these components will play a huge role in calculating the link budget, in section 3.1 \textit{Link budget}. 
+\begin{equation}
+   P_{EIRP} = P_t+L_{balun}+P_{PAE}+L_{filter}+L_{match}+L_{con}+L_{cab}+G_{t} \quad [dB]
+\end{equation}
 
-Figure 2.4 depicts the overall link budget for 
+where:
 
-In this project we are both using the internal PA and LNA of the transceiver nrf24L01+\cite{nrf24l01+}, but because the internal PA, of the transceiver, is not powerful enough we will use an external PA/LNA chip, the rfx2401c\cite{RFX2401C}. In-between these modules, balun and band filters can be used to match the signal between both chips and to filter - or more precisely to attenuated - unwanted frequencies.
+\begin{itemize}
+    \item $P_t$ is the gain from the transceiver output power.
+    \item $L_{balun}$ is the insertion loss of the balun, between the transceiver and power amplifier.
+    \item $P_{PAE}$ is the gain from the external power amplifier.
+    \item $L_{filter}$ is the insertion loss of the band filter.
+    \item $L{match}$ is the matching loss between the antenna and the transceiver (PCB).
+    \item $L_{con}$ is the losses from SMA connectors (Tx side).
+    \item $L_{cab}$ is the loss due to the length of the coaxial cable (Tx side).
+    \item $G_{t}$ is the gain from the antenna.
+\end{itemize}
 
-These components will play a role in calculating the total link budget described in the section below. The Tx and Rx can be seen in figure 2.1, although the figure assumes the total sum of the PA and LNA in the Tx and Rx boxes used in the system. In the final report, a more detailed figure will be illustrated, which will show each components and its relative dBm, for now only a general overview is shown. The P\textsubscript{Tx} and P\textsubscript{Rx} is the PA and LNA in the transceivers as explained above. L\textsubscript{Tx} and L\textsubscript{Rx} is the cable losses, while the G\textsubscript{Tx} and G\textsubscript{Rx} is the gains from the antenna. The EIRP is the Effective Isotropic Radiated Power which is the sum of all gains and losses from the PA to the antenna of the TX. 
-L\textsubscript{Channel} is the losses experienced when the signal propagates through any medium: Free space, water, in space etc. Out of all these gains and losses the L\textsubscript{channel} is the hardest one to calculate, since it consist of multiple phenomenons, such as: free-space loss, rain loss, cloud loss (because of clouds we get losses), atmospheric losses, multipath loss polarization mismatch and many more. It is important, to know which one of these, one should be aware of, since they all play a different role at different frequencies. Once one has summed up all the gains and losses, all the way from the Tx to Rx side, a margin analysis should be made to determine if the signal can reach a predefined rage. On figure 2.1, it is seen (to the right) a margin line which is, in this case, higher than the Rx sensitivity. The Rx sensitivity can be calculated, but almost every time the sensitivity is stated in the datasheet of the transceiver, see nrf24L01+\cite{nrf24l01+} page 8 under \textit{transceiver}. If the margin is higher than the sensitivity, then we know that system can handle the range that is calculated from the free-space loss formula. Although, the margin is higher than the sensitivity, it should be known that the calculation is only a theoretical guideline for how good the range is going to be. This means that we need a good oversized margin to be sure that the signal can reach a predefined range. There is no rule of thumb, that states how big the margin should be, it is usually axiom set by experience in RF technology and from empirical knowledge.
+From $P_t$ to $L_{filter}$ is actually the PCB that generates the RF source. Beside the losses from the balun and band filter, other losses can be occur, due to bad PCB design, these type of losses is hard to estimate, in this thesis they will be neglected.
 
-The link budget, see figure 2.2 below, is a smart overview of all the calculation made - based on the theory section, on other scientific papers and datasheets - to showcase losses and gains of each components and sub-systems. The figure 2.2, already depicts that the choices taken by the author of this thesis, will theoretically result in a successful communication of a rage up to 9144 meter. Although, the margin is quite low it is, as explained above, a self defined value or an axiom, which will defined based on set of criterias, which are yet not defined. The calculation of these link budget will be explain the the final report. 
+\subsection{Channel losses}
+The channel loss is the hardest gain/loss to estimate, since it includes so many parameters that individually are hard to estimate, but mixed together even harder to estimate, they are all described from section 2.3.1 to 2.3.3, the formula is 
+
+\begin{equation}
+   L_{Chan} = L_{fs}+L_{prop}+L_{mp} \quad [dB]
+\end{equation}
+
+Where:
+
+\begin{itemize}
+    \item $L_{fs}$ is the loss from Free-space attenuation.
+    \item $L_{prop}$ is the propagation losses from: rain, clouds and atmospheric attenuation.
+    \item $L_{mp}$ is the losses from multipath attenuation, Fresnel zone, diffraction, doppler spread.
+\end{itemize}
+
+It is very important to note that the Free-space attenuation $L_{fs}$ might be replaced with the Two-ray ground bounce multipath $L_{gbm}$, as stated in in section 2.3.2.1 \textit{Two-ray ground bounce multipath} see last paragraph about the \textit{crossover point}. If this is the case the formula will look like this:
+
+\begin{equation}
+   L_{Chan} = L_{gbm}+L_{prop}+L_{mp} \quad [dB]
+\end{equation}
+
+\subsection{Other losses}
+Other losses is basically the thesis specific losses, explained in section 2.4 \textit{Thesis specific losses}, but it could be other losses that have not been covered in this thesis.
+
+\begin{equation}
+   L_{Other} = L_{ama}+L_{pol}+L_{rocket} \quad [dB]
+\end{equation}
+
+\begin{itemize}
+    \item $L_{ama}$ is the loss from antenna misalignment, between the transmitter and receiver.
+    \item $L_{pol}$ is polarization mismatch losses.
+    \item $L_{rocket}$ is the loss occurring when the rocket itself blocks the transmitted RF signal. 
+\end{itemize}
+
+\subsection{Receiver side}
+For the receiver side, there are two keywords Received Signal Level (RSL) and Received Signal Strength Identification (RSSI) to explain, see figure 2.52. In this thesis the RSL is defined as: 
+
+\begin{equation}
+   P_{RSL} = P_{EIRP}+L_{Chan}+L_{Other}+G_{r}+L_{cab}+L_{con}+L_{match} \quad [dB]
+\end{equation}
+
+where:
+
+\begin{itemize}
+    \item $P_{EIRP}$ is described above.
+    \item $L_{Chan}$ is described above.
+    \item $G_{r}$ is the gain from the receiver antenna.
+    \item $L_{cab}$ is the loss due to the length of the coaxial cable (Rx side).
+    \item $L_{con}$ is the losses from SMA connectors (Rx side).
+    \item $L_{match}$ is the matching loss between the antenna and the transceiver (PCB).
+\end{itemize}
+
+In this thesis RSSI is defined as: 
+
+\begin{equation}
+   P_{RSSI} = P_{RSL}+L_{filter}+P_{LNAE}+L_{balun} \quad [dB]
+\end{equation}
+
+where:
+
+\begin{itemize}
+    \item $P_{RSL}$ is described above.
+    \item $L_{filter}$ is the insertion loss of the band filter.
+    \item $L_{LNAE}$ is the gain from the external Low noise amplifier.
+    \item $L_{balun}$ is the insertion loss of the balun, between the transceiver and power amplifier.
+\end{itemize}
+
+Some transceiver (not the one used in this thesis) has an internal RSSi measurement unit, which either can be before the transceiver's internal LNA or after. If the RSSI unit is before the internal LNA, then the internal LNA needs to be added to the formula (2.93), unless the datasheet states that the LNA is a part of the RSSI value. 
+
+The link margin is defined by 
+
+\begin{equation}
+   LM = P_{RSSI}+P_{RS} \quad [dB]
+\end{equation}
+
+where:
+
+\begin{itemize}
+    \item $L_{RSSI}$ is described above.
+    \item $P_{RS}$ is the gain form the transceiver sensitivity, can be acquired from the datasheet.
+\end{itemize}
+
+\section{RF PCB design rules}
+To fully explain the theory behind designing a RF Printed Circuit Board (PCB), will be out of the scope of this thesis. What makes sense, is to shortly look at the design rules that helps reduces any losses from the PCB itself. A good PCB design is equally important as a good link budget.  
+
+The first version of the PCB designed for this thesis, is a 4 layer PCB. The 4 layer setup allows for more possibilities than a standard 2 layer board, see figure 2.53. The layers are in the following order: copper 1 (1oz), dielectric layer (4.29), copper 2 (1oz), dielectric layer (3.96), copper 3 (1oz), dielectric layer (4.29), copper 4 (1oz). The 4 layer design, allows for wires to be routed in the middle layers, reducing design complexity, furthermore, the 4 layer design has a dialectic material that is thinner and with a constant that is lower than for a 2 layer design, this means the wire thickens for microstrip impedance matching decreases significantly. See the figure B.1 and B.2 in appendix B, they show the huge difference in the width required for a transmission line, for a 4 layer vs 2 layer PCB's.   
+
+\begin{figure}[h]
+\centering
+%\hspace*{-2.3cm}
+\includegraphics[scale=0.8]{figures/PCB4.PNG}
+\caption{4 layer pcb from PCBWay \cite{PCB}}
+\end{figure}
+
+Beside the above positive thing about a 4 layer PCB for RF design, there are some general rules to follow when designing a RF PCB board. Figure C.1 on appendix C, is a very good rule of thumb to follow.   
+
 
 %probably not important, since a prototype is enough for this bachelor, so write only about the schematics compared to insertion loss for the link budget.
-\section{RF PCB design rule}
-%% DU HAR 1 timer!
+
 \section{Framing and Modulation (MultiCeiver\texttrademark and Shockburst\texttrademark)}
 %% DU HAR 2 timer!
 
