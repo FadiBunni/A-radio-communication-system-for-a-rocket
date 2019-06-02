@@ -879,8 +879,7 @@ As stated above the directivity of an isotropic antenna is 1, when the antenna l
 
 where $\epsilon_r$ is antenna efficiency, which can be written as $P_r$ power radiated over $P_i$ power input.
 
-What is important to state here, is that the gain of a given antenna only has the antenna efficiency included in the calculation, as equation (2.68) shows. It does not include the impedance mismatch loss, see section 2.5.7 \textit{Impedance matching loss}.  
-
+What is important to state here, is that the gain of a given antenna only has the antenna efficiency included in the calculation, as equation (2.68) shows. It does not include the impedance mismatch loss, see section 2.5.7 \textit{Impedance matching loss}. Furthermore, the higher the gain the lower the field-of-view of the antenna is. This again can be visualized with the balloon analogy. Imagine if the balloon was squeezed with multiple hands, from the sides and behind it will only be able to expand forward this creates a much thinner main lobe, thus the gain will be increased tremendously but the field-of-view will be significantly reduced, since the main lobe is so thin. See also section 2.5.4 \textit{Radiation pattern}.   
 
 \begin{figure}[h]
 \centering
@@ -981,7 +980,7 @@ where $D$ is the largest linear dimension of the antenna, and $\lambda$ is the w
 \subsubsection{Transition zone}
 The transition zone is between the near and far field regions and extends over the distance from one to two wavelength from the antenna. In this region, near-field dies out and ceases to be important, thus leaving the far-field effects to be dominant. 
 
-\subsubsection{Radiating near-field}
+\subsubsection{Radiating near-field region}
 The radiating near-field region is also called the Fresnel region, since it is between the reactive near-field region and the far-field region and defined as:
 
 \begin{equation}
@@ -990,7 +989,7 @@ The radiating near-field region is also called the Fresnel region, since it is b
 
 Unlike far-field region the shape of the radiation pattern in the radiating near-field may vary with distance. Depending on the value $r$ and $\lambda$ this field may or may not exists, that is why this region is sometimes a part of the transition zone.   
 
-\subsubsection{Reactive near-field}
+\subsubsection{Reactive near-field region}
 In the close vicinity of the antenna, the reactive near field is the most dominant factor. In this region the fields are predominately reactive fields, which means E- and H-plane are orthogonal to each other but are 90 degrees out of phase. In general any objects within this region will result in coupling with the antenna and distortion of the ultimate far-field antenna pattern. This phenomenon is used in the music instrument \textit{Theremin}\cite{Theremin}. Below is the condition for the reactive near-field region.
 
 \begin{equation}
@@ -1392,10 +1391,10 @@ A microstrip antenna, or commonly referred to as \textbf{patch antenna}, is an a
 \caption{Patch antenna, in this case it is an array patch antenna, since there are 4 of the driven elements\cite{PatchAntenna}}
 \end{figure}
 
-\subsection{Yagi-uda and cross yagi-uda antennas}
-The Yagi-uda antenna is one of the most brilliant antennas designed, it can be seen on nearly every roof tops, pointing towards the source. A yagi-uda antenna is a high gain antenna operating in the HF to UHF bands (about 3Mhz to 3Ghz). The antenna consists of 5 basic parts: a reflector, a driven element usually it is a folded dipole, multiple directors to direct he RF wave straight forward, a center rod for all the elements to be attached to and finally a matching network for the driven element.
+\subsection{Yagi-uda and cross-yagi-uda antennas}
+The Yagi-uda antenna is one of the most brilliant antennas designed, it can be seen on nearly every rooftops, pointing towards the RF source. A yagi-uda antenna is a high gain antenna operating in the HF to UHF bands about 3Mhz to 3Ghz, and is linear polarized. The antenna consists of 5 basic parts: a reflector, a driven element usually it is a folded dipole, multiple directors to direct he RF wave straight forward, a center rod for all the elements to be attached to and finally a matching network for the driven element.
 
-The Reflector reflects the RF wave back to the dipole, to decrease backwards side lobes and increase the gain of the forward beam. The driven element can either be a dipole or a folded dipole, remember in section, 2.6.3 \textit{Folded dipole antenna}, it is explained that the impedance of a yagi-uda is dependent on how many directors is used, since increasing the amount of directors will the gain but also decrease the impedance. If a normal dipole with the impedance of $73\Omega$ is used then only a few directors can be added before the impedance is reduced to $50\Omega$, thus the antenna will not be as directive at theoretically possible. That is why a folded dipole is used, since it has a impedance of around $300\Omega$ many more directors can then be added before reaching $50\Omega$, thus further increasing the gain. 
+The Reflector reflects the RF wave back to the dipole, to decrease backwards side lobes and increase the gain of the forward beam. The driven element can either be a dipole or a folded dipole, remember in section, 2.6.3 \textit{Folded dipole antenna}, it is explained that the impedance of a yagi-uda is dependent on how many directors is used, since increasing the amount of directors will the gain but also decrease the impedance. If a normal dipole with the impedance of $73\Omega$ is used then only a few directors can be added before the impedance is reduced to $50\Omega$, thus the antenna will not be as directive as theoretically possible. That is why a folded dipole is used, since it has a impedance of around $300\Omega$ many more directors can then be added before reaching $50\Omega$, thus further increasing the gain. The directors, will focus the RF wave in one direction to increase the gain, they are not connected to the driven element in way (folded dipole), only mounted on the center pole. The directors are also called parasitic elements, since they influence the dipole radiation pattern, see section 2.5.5.4 \textit{Reative near-field region}. Even though one can use the directors to lower the impedance to $50\Omega$, one may not want to do this, since the drawbacks will be a very narrow field-of-view, meaning one has to point very precise in order to avoid antenna misalignment, As explained in section 2.4.1 \textit{Antenna misalignment attenuation} and 2.5.2 \textit{Directivity, efficiency and gain}. To avoid this problem a matching stub can be used, which is explained in section 2.5.8.1 \textit{Transmission lines}, on how to add a matching stub to a yagi-uda antenna, please read this reference \cite{YagiMatching}. For this thesis the yagi-uda antenna will not be build but bought and used as a reference to the helical antenna, they are inexpensive to buy and work brilliantly out of the box.  
 
 \begin{figure}[h]
 \centering
@@ -1404,57 +1403,39 @@ The Reflector reflects the RF wave back to the dipole, to decrease backwards sid
 \caption{A yagi-uda antenna, with 1 reflector, 1 driven element a folded dipole and multiple directors\cite{YagiUda}}
 \end{figure}
 
-%%reflector reflect the signal 
-%% driven element creates the RF wave and receives
-%% directors direct the RF wave and increases the gain, more director higher gain lower field of view. 
-%% matching stub is used to balance the folded dipole to 50 ohm. 
-%% for this thesis this antenna will be used as a reference to the home-build helical antenna, most yagi antennas can be bought quite cheaply. 
+Another type of a yagi-uda antenna is the cross-yagi-uda antenna. This antenna consists of two similar yagi-uda antenna, attached perpendicular to each other. A cross-yagi-uda antenna is a high gain circular polarized antenna, just like the helical antenna. The circular polarization can be achieved in two ways, either by creating a phasing stub (made out of coaxial cable), to delay one of the yagi antenna by 90 degrees to induce a rotation in the RF field or the rotation can be induced simply by shifting one of the yagi antenna by distance of $\frac{\lambda}{4}$, see figure 2.48 and 2.49. The pros of this type of antenna, is that once it is build and with a clever matching setup, it can be used in linear polarized mode (either vertically or horizontally), or in circular polarized mode, by merging both antenna together. The cons of both yagi-uda an especially cross-yagi-uda is the complexity of constructing one, compared to constructing a helical antenna. 
 
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.9]{figures/PhaseStub.PNG}
+\caption{Phase stub solution for circular polarization\cite{YagiMatching}}
+\end{figure}
 
+\begin{figure}[h]
+\centering
+%\hspace{-1cm}
+\includegraphics[scale=0.9]{figures/CrossYagi.PNG}
+\caption{Cross-yagi-uda antenna with a physical solution to induce circular polarization\cite{YagiMatching}}
+\end{figure}
 
-%Physicall look 
-%Radiation pattern
-%Type of mode
-%half-beam power Beam width
-%Gain 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\newpage
 
 \section{Detailed Link Budget}
 \subsection{Link budget margin}
+%% DU HAR 3 timer! 
+
 %what is it and to to define a good margin?
 
+%Two case scenario one on the ground one in the air 
+
+% PTx
+% LTx
+% GTX
+% EIRP
+% ALL channel losses 
+% RSL
+% RSSI
 
 
 
@@ -1481,9 +1462,8 @@ The link budget, see figure 2.2 below, is a smart overview of all the calculatio
 
 %probably not important, since a prototype is enough for this bachelor, so write only about the schematics compared to insertion loss for the link budget.
 \section{RF PCB design rule}
-
+%% DU HAR 1 timer!
 \section{Framing and Modulation (MultiCeiver\texttrademark and Shockburst\texttrademark)}
-
-
+%% DU HAR 2 timer!
 
 
