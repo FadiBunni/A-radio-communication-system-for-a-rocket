@@ -1,0 +1,52 @@
+\chapter{Calculation for helical antenna}
+\begin{lstlisting}[language=Matlab]
+format longG
+% axial mode: helical antenna for 2.45ghz
+
+freq = 2450000000; %Mhz
+c = physconst('LightSpeed');
+lambda = c/freq % in meter (m);
+
+N = 25 %number of turns;
+
+C=1.05*lambda   % Circumference in meters (must be chosen by the builder of the antenna)
+((3*lambda)/4) <= C, C <= ((4*lambda)/3) %C has to be between 3?/4 and 4?/3 for axial mode helical antenna
+
+D = C/pi  % diameter in meters (m)
+
+% fractional bandwidth f1 lower and f2 upper frequency fc=(f1+f2)/2 - read: http://www.antenna-theory.com/antennas/travelling/helix.php 
+
+f1 = c/(1.33*C) %lower frequency
+f2 = c/(0.75*C) %upper frequency
+fc = (f1+f2)/2  
+
+FBW = (f2-f1)/fc*100 %wideband of this antenna in percentage
+
+R = lambda % diameter of ground plane, in meters (m)
+0.8*lambda <= R, R <= 1.1*lambda % the diameter of the ground plane has to follow the two conditions. 
+
+% Has to bee between 12-16 degrees see ARRL book page 19-7, we will use
+% 14 degrees
+
+alpha = deg2rad(14);
+
+S = atan(alpha)*C % vertical separation between turn for meters (m) alpha = tan(S/C)
+
+S_g = 0.12*lambda % distance between ground plane to the beginning of the helix's first turn, in meters (m)
+
+%SC = S/C %% from ARRL book page 19-7
+
+L = sqrt(S^2+C^2) % wire length for each S section (loops) in meters (m)
+
+NL = N*L  %total length for wire needed, in meters (m)
+
+totLength = S*N % total length of antenna in meters (m) (axial length)
+
+HPBW = 52/((C/lambda)*sqrt((N*S)/lambda))
+
+Z0 = 140*(C/lambda) % terminal impedance from ARRL book page 19-8
+
+GARRL = 11.8 + 10*log10((C/lambda)^2*(N*S/lambda)) % gain of the helical antenna in dBi from ARRL book page 19-8
+
+GWIKI = 10*log10(15*(C/lambda)^2*(N*S/lambda)) % gain of the helical antenna in dBi from wikipedia: https://en.wikipedia.org/wiki/Helical_antenna
+\end{lstlisting}

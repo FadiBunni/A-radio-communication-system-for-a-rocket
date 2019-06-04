@@ -786,7 +786,7 @@ Figure 2.14 depicts the problem, with two directional antennas. For an omnidirec
 It is hard to  quantify the size of the misalignment loss in dB, since it depends on how good the operator is at aiming towards the rocket. If, on the other hand, the on ground system is automatically capable of tracking the rocket, the antennas on the ground will have to be purposely pointing away from the rockets antenna peak beam. This purposely misalignment of the antenna is very small and can be combined with the RSSI value to allow for automatically tracking of the rocket. %where should we write about how this is done? I dont know yet
 
 \subsection{Polarization mismatch}
-For a static radio communication setup, as long as the antennas on both the transmitter and receiver side are placed with the same polarity, there will be no losses, due to polarization mismatch. For example if a linear antenna (quaterwavve monopol antenna, see section 2.6.4 \textit{Quaterwave monopol antenna}) is horizontally mounted on the rocket, which is stationary on the launch pad, and a linear antenna (yagi antenna, see section 2.6.7 \textit{Yagi-uda and cross-yagi-uda antennas}) is horizontally mounted on the ground (mission control), then there will be no loss, since both antennas will be radiating and receiving with the same polarity - horizontally. But it is different when everything becomes dynamics, where the rocket is flying in the air. if it suddenly starts to tumble (because of aerodynamic reasons), then the linear antenna mounted horizontally on the rocket, might not be horizontally looking anymore from the perspective of the receiver. This will introduce huge losses up to -20 dB. Theoretically it is infinity loss, but in reality the polarity might change because of multipath cases, allowing for some signal to reach the ground antenna with the same polarity or a slant polarity. To avoid the above problem, a helical antenna can be used as ground antenna, which will neglect the problem, since a helical antenna does not care about the polarity. Although using a helical antenna on ground and a linear antenna on the rocket, will always introduce a total loss of -3dB. This payoff is much better than losing up to -20dB randomly, due to linear antennas being used on both sides. For more theory about polarization please read section, 2.5.6 \textit{Polarization} to fully understand the scope of the problem. See figure 2.28 
+For a static radio communication setup, as long as the antennas on both the transmitter and receiver side are placed with the same polarity, there will be no losses, due to polarization mismatch. For example if a linear antenna (quarter-wave monopol antenna, see section 2.6.4 \textit{quarter-wave monopol antenna}) is horizontally mounted on the rocket, which is stationary on the launch pad, and a linear antenna (yagi antenna, see section 2.6.7 \textit{Yagi-uda and cross-yagi-uda antennas}) is horizontally mounted on the ground (mission control), then there will be no loss, since both antennas will be radiating and receiving with the same polarity - horizontally. But it is different when everything becomes dynamics, where the rocket is flying in the air. if it suddenly starts to tumble (because of aerodynamic reasons), then the linear antenna mounted horizontally on the rocket, might not be horizontally looking anymore from the perspective of the receiver. This will introduce huge losses up to -20 dB. Theoretically it is infinity loss, but in reality the polarity might change because of multipath cases, allowing for some signal to reach the ground antenna with the same polarity or a slant polarity. To avoid the above problem, a helical antenna can be used as ground antenna, which will neglect the problem, since a helical antenna does not care about the polarity. Although using a helical antenna on ground and a linear antenna on the rocket, will always introduce a total loss of -3dB. This payoff is much better than losing up to -20dB randomly, due to linear antennas being used on both sides. For more theory about polarization please read section, 2.5.6 \textit{Polarization} to fully understand the scope of the problem. See figure 2.28 
 
 \subsection{Package loss due to high axial rotational speed of the rocket}
 Another loss that is specific to this thesis, is the phenomenon where the rocket itself is obscuring the transmitted radio signal. As explained above, the rocket will have a tendency to rotate around it z-axis, if the rotational speed of the rocket is greater than speed it takes to transmit a single package of data down to earth, then it is possible to experience losses since the transmitting antenna will rotate to the other side where there is no ground antenna to receive the signal, effectively the rocket will block the transmitted radio wave, due to it standing in the way of itself. 
@@ -1187,7 +1187,7 @@ Figure 2.32 shows the influence a Pi and T network has on the impedance vector A
 The unwritten rule for most transceivers is that the have a input impedance of $50\Omega$, based on the theory above, the used antennas also needs to have a impedance of $50\Omega$, to obtain maximum power transfer from the transceiver to the antennas, and vice versa . In reality this is not the case, for example for a dipole antenna the impedance is $73\Omega$, for a \textit{folded} dipole antenna it is 4 times more than the normal dipole antenna, around $300\Omega$. Depending on what type of load that is used, there are different types of matching networks. The following subsection, describes those that might be used in this thesis, depending on the type of antenna and circuit that is going to be designed.
 
 \subsubsection{Transmission lines}
-The transmission line solution (or a matching stub) is used for rather big antennas, such as dipole, yagi-uda, helical antenna, see figure 2.33. Basically, a matching stub is a piece of a coaxial cable with appropriated calculation in impedance (Z), overall length, which acts as a "Impedance transformer" between 2 known but unequal impedances $(Z_1,Z_2)$. With the quaterwave formula, it is possible to calculate the intermediate $Z_0$ of a "Quarter Wave" $\frac{\lambda}{4}$ coaxial piece, in order to be able to match 2 different impedances. 
+The transmission line solution (or a matching stub) is used for rather big antennas, such as dipole, yagi-uda, helical antenna, see figure 2.33. Basically, a matching stub is a piece of a coaxial cable with appropriated calculation in impedance (Z), overall length, which acts as a "Impedance transformer" between 2 known but unequal impedances $(Z_1,Z_2)$. With the quarter-wave formula, it is possible to calculate the intermediate $Z_0$ of a "Quarter Wave" $\frac{\lambda}{4}$ coaxial piece, in order to be able to match 2 different impedances. 
 
 \begin{equation}
    Z_0 = \sqrt{Z_{in}Z_{L}}
@@ -1265,21 +1265,21 @@ A folded dipole is usually used as the driven element on a yagi-uda antenna, the
 \caption{Folded Dipole}
 \end{figure}
 
-\subsection{Quaterwave monopol antenna}
-A quaterwave monopol antenna has a length of $\frac{\lambda}{4}$, and usually is above some kind of a ground plane, either the earth itself or a metal ground plane, with the same radius as the chosen wavelength. This antenna is also linear polarized, and as the name states, the monopol antenna only have one "pole" compared to a dipole, which has both elements sticking from the center. A monopol antenna is fed at the end of the wire (closest to ground), but the ground plane acts as a reflector/mirror, thus allowing it to behave as a dipole antenna, but less effective. Because of this, the radiation pattern only exits above the ground, meaning only half of the dipole. Figure 2.39, show the gain for a quaterwave monopol antenna, but also the radiation pattern, as described above it is only half of the sphere, therefore the energy is directed to the other half meaning the gain of a quaterwave monopol antenna is $G=2.15+3dB=5.15$ for a perfect ground plane, but in reality such a ground plane does not exits, thus the gain is usually closer to a dipole antenna. The impedance of this type of antenna in free space is around $Z=36.5+j21.25$\cite{ImpedanceMonopol}, this is close to $50\Omega$ one way to solve this problem is to build a ground plane for the antenna, made out of 4 to 5 radials, acting as ground plane, then bend them approximately 35-45 degrees downwards to increase the impedance to $50\Omega$, see figure 2.40. 
+\subsection{Quarter-wave monopol antenna}
+A quarter-wave monopol antenna has a length of $\frac{\lambda}{4}$, and usually is above some kind of a ground plane, either the earth itself or a metal ground plane, with the same radius as the chosen wavelength. This antenna is also linear polarized, and as the name states, the monopol antenna only have one "pole" compared to a dipole, which has both elements sticking from the center. A monopol antenna is fed at the end of the wire (closest to ground), but the ground plane acts as a reflector/mirror, thus allowing it to behave as a dipole antenna, but less effective. Because of this, the radiation pattern only exits above the ground, meaning only half of the dipole. Figure 2.39, show the gain for a quarter-wave monopol antenna, but also the radiation pattern, as described above it is only half of the sphere, therefore the energy is directed to the other half meaning the gain of a quarter-wave monopol antenna is $G=2.15+3dB=5.15$ for a perfect ground plane, but in reality such a ground plane does not exits, thus the gain is usually closer to a dipole antenna. The impedance of this type of antenna in free space is around $Z=36.5+j21.25$\cite{ImpedanceMonopol}, this is close to $50\Omega$ one way to solve this problem is to build a ground plane for the antenna, made out of 4 to 5 radials, acting as ground plane, then bend them approximately 30-40 degrees\cite{ARRL} page 4-9, downwards to increase the impedance to $50\Omega$, see figure 2.40. 
 
 \begin{figure}[h]
 \centering
 %\hspace{-2.5cm}
 \includegraphics[scale=0.50]{figures/quaterwaveMonoplAntenna.PNG}
-\caption{Gain and radiation pattern for a quaterwave monopol antenna}
+\caption{Gain and radiation pattern for a quarter-wave monopol antenna}
 \end{figure}
 
 \begin{figure}[h]
 %\centering
 \hspace{-1cm}
 \includegraphics[scale=0.55]{figures/QuaterWaveMonopolAntennaRadials.PNG}
-\caption{a 2-dimensional visualization of two quaterwave monopol antenna with radials perpendicular to the antenna and radials bent 35-45 degrees}
+\caption{a 2-dimensional visualization of two quarter-wave monopol antenna with radials perpendicular to the antenna and radials bent 35-45 degrees}
 \end{figure}
 
 \newpage
@@ -1368,6 +1368,22 @@ The beam-width of the helical antenna (in degrees) at half-power points, see sec
    HPBW \approx \frac{52}{\frac{C}{\lambda}\sqrt{\frac{NS}{\lambda}}}
 \end{equation}
 
+The fractional bandwidth, in percentage is given by:
+
+\begin{equation}
+   FBW =\frac{f_2-f_1}{f_c}*100 
+\end{equation}
+
+where:
+
+\begin{itemize}
+  \item $f_1$ is the lower frequency and given by $\frac{c}{\frac{4}{3}C}$, c i speed of light [m/s] and C is circumference in meters.
+  \item $f_2$ is the upper frequency, given by $\frac{c}{\frac{3}{4}C}$.
+  \item $f_c$ is the center frequency, given by $\frac{f_1+f_2}{2}$ 
+\end{itemize}
+
+A helical antenna is a wideband antenna, generally around 56\%,\cite{AntennaTheoryBandwidth}.
+
 As it can be seen above the half-power beam width, is mostly depended on the number of coil turns N. The impedance of a helical antenna in axial mode, is around 110 to 130Ohm, this is too high for matching with a transceiver, therefore a matching network is needed to combat this problem. There are many different type of matching networks for a helical antenna. They all have their pros and cons, some of them are easy to build and implement, while others are harder to build, but does not distorted the bandwidth of the antenna. In this thesis, the easiest matching network to build and implement will be chosen, since the narrow bandwidth is not a problem for the use case in this thesis. On the internet their exists a forum where helical antennas are being discussed, a solution to how to build and tune a helical is proposed, It is highly recommend to check out the reference \cite{RCGroups}, see thread \#7, for the type of possible matching networks. For this thesis the first \textit{The Hecker transformer} has been chosen, since it is the easiest to build and implement. It is basically a triangle made out of a conducting metal, aluminum or copper, that is soldered to the coil and wraps around for a approximately a half turn. This metal piece can reduce the impedance closer to the desired $50\Omega$, see figure 2.44.  
 
 \begin{figure}[h]
@@ -1377,8 +1393,10 @@ As it can be seen above the half-power beam width, is mostly depended on the num
 \caption{The Hecker transformer used to lower the impedance of a helical antenna}
 \end{figure}
 
+\newpage
+
 \subsection{Microstrip patch antenna}
-A microstrip antenna, or commonly referred to as \textbf{patch antenna}, is an antenna printed on a circuit board, see figure 2.45. This type of antenna is relatively small (depending on the frequency) and is so versatile that it is hard to state exactly what the parameters are of a general patch antenna. For the most part, they are directive, either linear or circular polarized, thin and weighing close to nothing. It is out of the scope of the this thesis to explain the theory behind how to produce one of these, therefore It is much easier to buy a standard patch antenna operating at 2.4-2.5Ghz (same frequency as the transceiver) and then test them. The pros of this antenna, is that it can be fitted inside the rocket, without the need of having something sticking out from the rocket. Because it is directive the gain will certainly better than a dipole or quaterwave monopol antenna. The cons are that the field-of-view is narrower for this type of antenna (because of higher gain) means that the antenna needs to be mounted in a special way such that it is aiming correctly towards the ground.  
+A microstrip antenna, or commonly referred to as \textbf{patch antenna}, is an antenna printed on a circuit board, see figure 2.45. This type of antenna is relatively small (depending on the frequency) and is so versatile that it is hard to state exactly what the parameters are of a general patch antenna. For the most part, they are directive, either linear or circular polarized, thin and weighing close to nothing. It is out of the scope of the this thesis to explain the theory behind how to produce one of these, therefore It is much easier to buy a standard patch antenna operating at 2.4-2.5Ghz (same frequency as the transceiver) and then test them. The pros of this antenna, is that it can be fitted inside the rocket, without the need of having something sticking out from the rocket. Because it is directive the gain will certainly better than a dipole or quarter-wave monopol antenna. The cons are that the field-of-view is narrower for this type of antenna (because of higher gain) means that the antenna needs to be mounted in a special way such that it is aiming correctly towards the ground.  
 
 \begin{figure}[h]
 \centering
@@ -1395,7 +1413,7 @@ The Reflector reflects the RF wave back to the dipole, to decrease backwards sid
 \begin{figure}[h]
 \centering
 %\hspace{-1cm}
-\includegraphics[scale=0.5]{figures/yagi-uda.png}
+\includegraphics[scale=0.45]{figures/yagi-uda.png}
 \caption{A yagi-uda antenna, with 1 reflector, 1 driven element a folded dipole and multiple directors\cite{YagiUda}}
 \end{figure}
 
@@ -1411,7 +1429,7 @@ Another type of a yagi-uda antenna is the cross-yagi-uda antenna. This antenna c
 \begin{figure}[h]
 \centering
 %\hspace{-1cm}
-\includegraphics[scale=0.8]{figures/CrossYagi.PNG}
+\includegraphics[scale=0.75]{figures/CrossYagi.PNG}
 \caption{Cross-yagi-uda antenna with a physical solution to induce circular polarization\cite{YagiMatching}}
 \end{figure}
 
@@ -1424,10 +1442,12 @@ The link budget consist of 4 subcategories, these are: transmitter side, channel
 
 \begin{figure}[h]
 \centering
-\hspace*{-2.3cm}
+\hspace*{-2cm}
 \includegraphics[scale=0.70]{figures/LinkBudgetOverview.PNG}
 \caption{Overview of a link budget}
 \end{figure}
+
+\newpage
 
 \subsection{Transmitter side}
 The transmitter side usually consists of 4 physical parts, the PCB (the source of the RF signal), SMA connectors, coaxial cable and finally the antenna. The total sum of all the losses and gains from these 4 physical part, will result in the Effective Isotropic Radiated Power (EIRP), in detail the formula is:
@@ -1545,7 +1565,7 @@ The first version of the PCB designed for this thesis, is a 4 layer PCB. The 4 l
 \caption{4 layer pcb from PCBWay \cite{PCB}}
 \end{figure}
 
-Beside the above positive thing about a 4 layer PCB for RF design, there are some general rules to follow when designing a RF PCB board. Figure C.1 on appendix C, is a excellent guideline to follow.   
+Beside the above positive thing about a 4 layer PCB for RF design, there are some general rules to follow when designing a RF PCB board. Figure C.1 in appendix C, is a excellent guideline to follow.   
 
 %\section{Framing and Modulation (MultiCeiver\texttrademark and Shockburst\texttrademark)}
 %% IS THIS IMPORTANT?????????
